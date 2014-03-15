@@ -1,0 +1,28 @@
+{
+    "layout" : {
+        "routes" : [
+            {
+                "name" : "home.view",
+                "page" : "one-column",
+                "blocks" : [
+                    {
+                        "name" : "page-header",
+                        "view" : "home.page-header",
+                        "children" : []
+                    },
+                    {
+                        "name" : "page-content-main",
+                        "view" : "home.page-content-main",
+                        "children" : [
+                            {
+                                "name" : "welcome",
+                                "view" : "home.welcome",
+                                "children" : []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

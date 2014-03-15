@@ -1,0 +1,15 @@
+/nbproject/
+/src/app/user/Core/*
+!/src/app/user/Core/.gitkeep
+/src/app/user/Entity/*
+!/src/app/user/Entity/.gitkeep
+/src/app/user/Handler/*
+!/src/app/user/Handler/.gitkeep
+/src/config/user/*.json
+/vendor/
+/src/vendor/
+/src/public/bootstrapper.php
+/src/public/skin/css/*.css
+/src/var/*
+!/src/var/.gitkeep
+

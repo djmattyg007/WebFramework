@@ -1,0 +1,132 @@
+{
+    "layout" : {
+        "base" : {
+            "blocks" : [
+                {
+                    "name" : "head",
+                    "view" : "base.blocks.head",
+                    "children" : [
+                        {
+                            "name" : "meta",
+                            "view" : "base.blocks.head.meta",
+                            "children" : []
+                        },
+                        {
+                            "name" : "includes",
+                            "view" : "base.blocks.head.includes",
+                            "children" : []
+                        }
+                    ]
+                },
+                {
+                    "name" : "header",
+                    "view" : "base.blocks.header",
+                    "children" : [
+                        {
+                            "name" : "navbar",
+                            "view" : "base.blocks.header.navbar",
+                            "children" : []
+                        }
+                    ]
+                },
+                {
+                    "name" : "footer",
+                    "view" : "base.blocks.footer",
+                    "children" : [
+                        {
+                            "name" : "includes",
+                            "view" : "base.blocks.footer.includes",
+                            "children" : []
+                        }
+                    ]
+                }
+            ],
+            "pages" : [
+                {
+                    "name" : "one-column",
+                    "view" : "base.pages.one-column",
+                    "blocks" : [
+                        { "name" : "head" },
+                        { "name" : "header" },
+                        { "name" : "page-header" },
+                        { "name" : "page-content-main" },
+                        { "name" : "page-footer" },
+                        { "name" : "footer" }
+                    ]
+                },
+                {
+                    "name" : "two-columns-left",
+                    "view" : "base.pages.two-columns-left",
+                    "blocks" : [
+                        { "name" : "head" },
+                        { "name" : "header" },
+                        { "name" : "page-header" },
+                        { "name" : "page-content-left" },
+                        { "name" : "page-content-main" },
+                        { "name" : "page-footer" },
+                        { "name" : "footer" }
+                    ]
+                },
+                {
+                    "name" : "two-columns-even",
+                    "view" : "base.pages.two-columns-even",
+                    "blocks" : [
+                        { "name" : "head" },
+                        { "name" : "header" },
+                        { "name" : "page-header" },
+                        { "name" : "page-content-left" },
+                        { "name" : "page-content-right" },
+                        { "name" : "page-footer" },
+                        { "name" : "footer" }
+                    ]
+                },
+                {
+                    "name" : "two-columns-right",
+                    "view" : "base.pages.two-columns-right",
+                    "blocks" : [
+                        { "name" : "head" },
+                        { "name" : "header" },
+                        { "name" : "page-header" },
+                        { "name" : "page-content-main" },
+                        { "name" : "page-content-right" },
+                        { "name" : "page-footer" },
+                        { "name" : "footer" }
+                    ]
+                },
+                {
+                    "name" : "three-columns",
+                    "view" : "base.pages.three-columns",
+                    "blocks" : [
+                        { "name" : "head" },
+                        { "name" : "header" },
+                        { "name" : "page-header" },
+                        { "name" : "page-content-left" },
+                        { "name" : "page-content-main" },
+                        { "name" : "page-content-right" },
+                        { "name" : "page-footer" },
+                        { "name" : "footer" }
+                    ]
+                }
+            ]
+        },
+        "routes" : [
+            {
+                "name" : "404",
+                "view" : "core.404",
+                "page" : "one-column",
+                "blocks" : [
+                    {
+                        "name" : "page-header",
+                        "view" : "core.404.page-header",
+                        "children" : []
+                    },
+                    {
+                        "name" : "page-content-main",
+                        "view" : "core.404.page-content-main",
+                        "children" : []
+                    }
+                ]
+            }
+        ]
+    }
+}

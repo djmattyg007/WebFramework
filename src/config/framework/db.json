@@ -1,0 +1,10 @@
+{
+    "db" : {
+        "active" : false,
+        "type" : "mysql",
+        "database" : "mydb",
+        "hostname" : "host",
+        "username" : "user",
+        "password" : "pass"
+    }
+}

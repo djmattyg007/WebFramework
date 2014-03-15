@@ -1,0 +1,25 @@
+{
+    "autoload" : [
+        {
+            "name" : "user",
+            "directory" : "app/user",
+            "prefix" : "MattyG\\Framework"
+        },
+        {
+            "name" : "framework",
+            "directory" : "app/framework",
+            "prefix" : "MattyG\\Framework"
+        },
+        {
+            "name" : "MattyG.Http",
+            "directory" : "vendor/mattyg/http/src",
+            "prefix" : "MattyG\\Http"
+        },
+        {
+            "name" : "Aura.Sql_Query",
+            "directory" : "vendor/aura/sql-query/src",
+            "prefix" : "Aura\\Sql_Query"
+        }
+    ]
+}
+

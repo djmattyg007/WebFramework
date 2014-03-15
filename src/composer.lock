@@ -1,0 +1,134 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "b9584af702340c9a0b17796615acbb42",
+    "packages": [
+        {
+            "name": "aura/sql-query",
+            "version": "dev-develop-2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Sql_Query.git",
+                "reference": "4b805eee4b55eef181f52af00273c11239c79f43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/4b805eee4b55eef181f52af00273c11239c79f43",
+                "reference": "4b805eee4b55eef181f52af00273c11239c79f43",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "aura/sql": "Provides an extension to the native PDO along with a profiler and connection locator. Use version dev-develop-2"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library"
+                },
+                "branch-alias": {
+                    "dev-develop-2": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Sql_Query\\": "src/"
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Sql_Query Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Sql_Query/contributors"
+                }
+            ],
+            "description": "Object-oriented query builders for MySQL, Postgres, SQLite, and SQLServer; can be used with any database connection library.",
+            "homepage": "https://github.com/auraphp/Aura.Sql_Query/releases",
+            "keywords": [
+                "delete",
+                "insert",
+                "mysql",
+                "pdo",
+                "pgsql",
+                "postgres",
+                "postgresql",
+                "query",
+                "select",
+                "sql server",
+                "sqlite",
+                "sqlserver",
+                "update"
+            ],
+            "time": "2014-01-31 20:55:54"
+        },
+        {
+            "name": "mattyg/http",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/djmattyg007/MattyG.Http.git",
+                "reference": "0a35033e629efe31e3d73b069f2058be130b983c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/djmattyg007/MattyG.Http/zipball/0a35033e629efe31e3d73b069f2058be130b983c",
+                "reference": "0a35033e629efe31e3d73b069f2058be130b983c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MattyG\\Http\\": "src/"
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Gamble",
+                    "homepage": "http://www.matthewgamble.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A pair of generic classes related to working with data over the HTTP protocol.",
+            "homepage": "https://github.com/djmattyg007/MattyG.Http",
+            "keywords": [
+                "get",
+                "http",
+                "post",
+                "request",
+                "response",
+                "server"
+            ],
+            "time": "2014-03-16 00:00:00"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "aura/sql-query": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

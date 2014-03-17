@@ -124,6 +124,21 @@ class Cache
     }
 
     /**
+     * Returns the (potential) filename of the specified cache object.
+     *
+     * @param string $objectId
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    protected function getCacheObjectFilename($objectId)
+    {
+        if (!is_string($objectId)) {
+            throw new \InvalidArgumentException("Invalid object ID supplied.");
+        }
+        return $this->getObjectsDirectory() . sha1($objectId);
+    }
+
+    /**
      * Save data to the cache.
      * The data is not actually persisted to disk until the end of the request.
      *

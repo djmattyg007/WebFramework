@@ -4,7 +4,7 @@ namespace MattyG\Framework\Core;
 
 class Config
 {
-    const CACHE_CONFIG_ENTRY_NAME = "config";
+    const CONFIG_CACHE_ENTRY_NAME = "config";
 
     /**
      * @var string
@@ -134,7 +134,7 @@ class Config
         if (!$this->cache) {
             return;
         }
-        $this->cache->saveData(self::CACHE_CONFIG_ENTRY_NAME, json_encode($this->configTree), array("tag1", "tag2"), (time() + 300));
+        $this->cache->saveData(self::CONFIG_CACHE_ENTRY_NAME, json_encode($this->configTree), (time() + 300));
     }
 
     /**
@@ -147,7 +147,7 @@ class Config
         if (!$this->cache) {
             return null;
         }
-        return json_decode($this->cache->loadData(self::CACHE_CONFIG_ENTRY_NAME, null), true);
+        return json_decode($this->cache->loadData(self::CONFIG_CACHE_ENTRY_NAME, null), true);
     }
 
 

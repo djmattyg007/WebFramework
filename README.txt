@@ -29,6 +29,7 @@ still missing or still need work:
   present.
 - Cache. Currently there is no way to programmatically evict entries from the
   cache, and expiry times for cache entries are not actually used.
+- Translation. Currently all strings are hard-coded to English.
 
 
 Contributions

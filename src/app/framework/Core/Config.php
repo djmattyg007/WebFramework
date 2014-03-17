@@ -153,9 +153,17 @@ class Config
 
     /** Initialise configuration **/
 
-    protected function initialiseConfigTree()
+    /**
+     * Initialise the configuration tree.
+     * Optionally checks to see if the configuration tree is in the cache
+     * first, and if so, uses that rather than regenerate the tree.
+     *
+     * @param bool $useCache
+     * @return void
+     */
+    protected function initialiseConfigTree($useCache = true)
     {
-        if ($configCache = $this->getConfigCache()) {
+        if ($useCache === true && ($configCache = $this->getConfigCache())) {
             $this->configTree = $configCache;
             return;
         }

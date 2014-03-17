@@ -44,6 +44,9 @@ class View
     }
 
     /**
+     * If set to true, output buffering will not be used when rendering this
+     * view. If false (the default), output buffering will be used.
+     *
      * @param bool $directOutput
      * @return View
      */
@@ -54,6 +57,9 @@ class View
     }
 
     /**
+     * Check whether or not output buffering should be used when rendering this
+     * view.
+     *
      * @return bool
      */
     public function getDirectOutput()
@@ -162,4 +168,3 @@ class View
         }
     }
 }
-

@@ -113,11 +113,22 @@ class Config
         return $currentConfig;
     }
 
+    /**
+     * Returns the main directory that all configuration files must be
+     * contained within.
+     *
+     * @return string
+     */
     public function getConfigDirectory()
     {
         return $this->configDirectory;
     }
 
+    /**
+     * Save the current configuration tree into the cache.
+     *
+     * @return void
+     */
     protected function saveConfigCache()
     {
         if (!$this->cache) {
@@ -126,6 +137,11 @@ class Config
         $this->cache->saveData(self::CACHE_CONFIG_ENTRY_NAME, json_encode($this->configTree), array("tag1", "tag2"), (time() + 300));
     }
 
+    /**
+     * Attempt to grab the configuration tree from the cache.
+     *
+     * @return mixed|null
+     */
     protected function getConfigCache()
     {
         if (!$this->cache) {
@@ -151,6 +167,10 @@ class Config
     }
 
     /**
+     * Take in a pool (by default, either "framework" or "user", work out which
+     * directory their configuration files are in and process all configuration
+     * files inside that directory.
+     *
      * @param string $pool
      * @throws \RuntimeException
      */
@@ -164,6 +184,10 @@ class Config
     }
 
     /**
+     * Read all JSON configuration files from the given directory and process
+     * them. Subdirectories will be traversed into if they match the name of a
+     * JSON file.
+     *
      * @param string $path Should always have a trailing slash.
      * @throws \RuntimeException
      */
@@ -197,6 +221,9 @@ class Config
     }
 
     /**
+     * Process the config array, filling up the tree array, overriding values
+     * if necessary.
+     *
      * @param array $tree
      * @param array $config
      */
@@ -221,4 +248,3 @@ class Config
         }
     }
 }
-

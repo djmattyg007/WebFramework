@@ -39,6 +39,12 @@ class DB
     }
 
     /**
+     * Parse the DSN supplied to the constructor and perform any necessary
+     * tasks based on what's found.
+     * At the moment, the only thing that happens is initialising an Aura
+     * SQL_Query Query Factory object for those database drivers that can use
+     * it.
+     *
      * @param string $dsn
      */
     protected function checkDSN($dsn)
@@ -61,6 +67,15 @@ class DB
         }
     }
 
+    /**
+     * @param string $type
+     * @param string $dbname
+     * @param string $hostname
+     * @param string $username
+     * @param string $password
+     * @param array $driverOptions
+     * @return DB|null
+     */
     public static function loader($type, $dbname, $hostname, $username, $password, array $driverOptions = array())
     {
         switch ($type)
@@ -174,7 +189,7 @@ class DB
     }
 
     /**
-     * @return Aura\Sql_Query\Common\SelectInterface
+     * @return \Aura\Sql_Query\Common\SelectInterface
      */
     public function newSelectQuery()
     {
@@ -182,7 +197,7 @@ class DB
     }
 
     /**
-     * @return Aura\Sql_Query\Common\InsertInterface
+     * @return \Aura\Sql_Query\Common\InsertInterface
      */
     public function newInsertQuery()
     {
@@ -190,7 +205,7 @@ class DB
     }
 
     /**
-     * @return Aura\Sql_Query\Common\UpdateInterface
+     * @return \Aura\Sql_Query\Common\UpdateInterface
      */
     public function newUpdateQuery()
     {
@@ -198,11 +213,10 @@ class DB
     }
 
     /**
-     * @return Aura\Sql_Query\Common\DeleteInterface
+     * @return \Aura\Sql_Query\Common\DeleteInterface
      */
     public function newDeleteQuery()
     {
         return $this->queryFactory->newDelete();
     }
 }
-

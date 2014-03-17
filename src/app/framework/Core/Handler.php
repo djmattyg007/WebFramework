@@ -49,6 +49,8 @@ abstract class Handler
     }
 
     /**
+     * Perform a task or tasks before the controller action is dispatched.
+     *
      * @return Handler
      */
     protected function preDispatch()
@@ -57,6 +59,8 @@ abstract class Handler
     }
 
     /**
+     * Perform a task or tasks after the controller action has been dispatched.
+     *
      * @return Handler
      */
     protected function postDispatch()
@@ -79,6 +83,9 @@ abstract class Handler
     }
 
     /**
+     * Prepare the layout for the current controller action, and return a View
+     * object for the root page for the loaded layout.
+     *
      * @return View
      */
     protected function prepareLayout()

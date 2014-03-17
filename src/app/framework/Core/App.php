@@ -21,16 +21,25 @@ class App
     );
 
     /**
+     * The base directory of the application, which should contain the config,
+     * public, var and views directories.
+     *
      * @var string
      */
     protected $baseDirectory;
 
     /**
+     * The code pools in use by the application. By default, this will contain
+     * "framework" and "user", and it should be in that order.
+     *
      * @var array
      */
     protected $pools;
 
     /**
+     * Contains the App object's reference to an instance of the Cache class.
+     * Typically, this will be to use the file-based cache in the Core package.
+     *
      * @var Cache
      */
     protected $cache;
@@ -51,19 +60,20 @@ class App
     protected $viewFactory;
 
     /**
-     * @param string $baseDirectory
-     * @param array $pools
-     * @param bool $initialise
-     * @throws InvalidArgumentException
+     * @param string $baseDirectory The base directory of the application.
+     * @param array $pools The code pools in use by the application.
+     * @param bool $initialise Whether or not to initialise the dependencies
+     *      automatically. If false, you can set them manually later.
+     * @throws \InvalidArgumentException
      */
     public function __construct($baseDirectory, array $pools, $initialise = true)
     {
         if (!is_string($baseDirectory)) {
-            throw new InvalidArgumentException("Invalid parameter supplied for where to find base directory.");
+            throw new \InvalidArgumentException("Invalid parameter supplied for where to find base directory.");
         }
         $baseDirectory = realpath($baseDirectory);
         if (!file_exists($baseDirectory)) {
-            throw new InvalidArgumentException("Base directory does not exist.");
+            throw new \InvalidArgumentException("Base directory does not exist.");
         }
         $this->baseDirectory = rtrim($baseDirectory, "/") . "/";
 
@@ -81,6 +91,8 @@ class App
     }
 
     /**
+     * Allows you to set the Cache dependency after construction of the App
+     * object.
      *
      * @param Cache $cache
      * @return App
@@ -100,6 +112,9 @@ class App
     }
 
     /**
+     * Allows you to set the Config dependency after construction of the App
+     * object.
+     *
      * @param Config $config
      * @return App
      */
@@ -118,6 +133,9 @@ class App
     }
 
     /**
+     * Allows you to set the database dependency after construction of the App
+     * object.
+     *
      * @param DB $db
      * @return App
      */
@@ -136,6 +154,9 @@ class App
     }
 
     /**
+     * Allows you to set the View Factory dependency after construction of the
+     * App object.
+     *
      * @param ViewFactory $viewFactory
      * @return App
      */
@@ -154,6 +175,8 @@ class App
     }
 
     /**
+     * Returns the base directory of the application.
+     *
      * @return string
      */
     public function getBaseDirectory()
@@ -162,6 +185,8 @@ class App
     }
 
     /**
+     * Returns the directory containing all configuration for the application.
+     *
      * @return string
      */
     public function getConfigDirectory()
@@ -170,6 +195,8 @@ class App
     }
 
     /**
+     * Returns the directory containing all views in the application.
+     *
      * @return string
      */
     public function getViewsDirectory()
@@ -178,6 +205,9 @@ class App
     }
 
     /**
+     * Returns the directory designed to contain free writeable storage for the
+     * application.
+     *
      * @return string
      */
     public function getVarDirectory()
@@ -186,6 +216,8 @@ class App
     }
 
     /**
+     * Route, dispatch and send!
+     *
      * @param Request $request
      * @param Response $response
      */

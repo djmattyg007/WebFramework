@@ -5,6 +5,8 @@ namespace MattyG\Framework\Core;
 class ViewFactory
 {
     /**
+     * The directory that contains all views in the application.
+     *
      * @var string
      */
     protected $viewDirectory;
@@ -25,6 +27,9 @@ class ViewFactory
     }
 
     /**
+     * Convert a view name of the format "path.to.view" to a filename with an
+     * absolute path.
+     *
      * @param string $pageView
      * @return string
      */
@@ -35,6 +40,9 @@ class ViewFactory
     }
 
     /**
+     * Construct a new View object based off of a view name and some
+     * information about its child views.
+     *
      * @param array $pageName
      * @param bool $directOutput
      * @return View
@@ -46,6 +54,13 @@ class ViewFactory
         return new View($viewFile, $this, $children, $directOutput);
     }
 
+    /**
+     * Build an array of block names.
+     * TODO: Investigate whether or not array_column is usable here.
+     *
+     * @param array $blocks
+     * @return array
+     */
     public function buildBlocks(array $blocks)
     {
         $returnBlocks = array();
@@ -56,6 +71,10 @@ class ViewFactory
     }
 
     /**
+     * Construct a new View object for a full page.
+     * The page must be defined in layout/base/pages in the configuration
+     * hierarchy.
+     *
      * @param string $routeName
      * @param string $pageName
      * @param bool $directOutput

@@ -34,11 +34,17 @@ class Autoloader
         $this->loadPrefixes($pools);
     }
 
+    /**
+     * Add this autoloader to the PHP autoloader queue.
+     */
     public function registerAutoloader()
     {
         spl_autoload_register(array($this, "autoload"), true);
     }
 
+    /**
+     * Remove this autoloader from the PHP autoloader queue.
+     */
     public function unregisterAutoloader()
     {
         spl_autoload_unregister(array($this, "autoload"));
@@ -106,6 +112,8 @@ class Autoloader
     }
 
     /**
+     * Load in a file containing the requested class.
+     *
      * @param string $className
      * @return bool
      */
@@ -119,6 +127,9 @@ class Autoloader
     }
 
     /**
+     * Turn a fully-qualified class name into a filename by cycling through all
+     * of the supplied prefixes in turn.
+     *
      * @param string $className
      * @return string|null
      */
@@ -136,4 +147,3 @@ class Autoloader
         return null;
     }
 }
-

@@ -9,6 +9,9 @@ class Cache
     const CACHE_INFO_FILENAME = "cacheinfo.json";
 
     /**
+     * The directory used for the cache. It should be fully writeable by the
+     * webserver.
+     *
      * @var string
      */
     protected $configDirectory;
@@ -34,8 +37,10 @@ class Cache
     protected $changed;
 
     /**
-     * @param type $varDirectory
-     * @param type $strict
+     * @param string $varDirectory A directory that the web server is free to
+     *      write whatever it wants to.
+     * @param bool $strict Whether or not an exception should be thrown when a
+     *      problem is encountered.
      */
     public function __construct($varDirectory, $strict = false)
     {
@@ -59,7 +64,12 @@ class Cache
     }
 
     /**
-     * @param bool $reload
+     * Load the cache information from disk. Does not load the actual cache
+     * into memory, just details of the cache.
+     *
+     * @param bool $reload If the cache information is in memory and this is
+     *      set to true, the cache information will be reloaded. If it is not
+     *      already in memory, this will be ignored.
      * @return void
      */
     protected function loadCacheInformation($reload = false)
@@ -94,6 +104,8 @@ class Cache
     }
 
     /**
+     * Returns the directory used for the cache.
+     *
      * @return string
      */
     protected function getCacheDirectory()
@@ -102,6 +114,8 @@ class Cache
     }
 
     /**
+     * Returns the directory used to store objects in the cache.
+     *
      * @return string
      */
     protected function getObjectsDirectory()
@@ -111,17 +125,22 @@ class Cache
 
     /**
      * Save data to the cache.
+     * The data is not actually persisted to disk until the end of the request.
      *
      * @param string $objectId
      * @param mixed $object
      * @param int $expiry Date (in Unix timestamp form) to remove the object from the cache.
-     * @param bool $persistImmediately
+     * @param bool $persistImmediately Whether or not this data should be
+     *      persisted to disk immediately.
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function saveData($objectId, $object, $expiry = null, $persistImmediately = false)
     {
         if (!is_string($objectId)) {
             throw new \InvalidArgumentException("Invalid object ID supplied.");
         }
+        // If the expiry date has already passed, don't bother with it.
         if (!is_int($expiry) || $expiry < time()) {
             $expiry = null;
         }
@@ -140,6 +159,8 @@ class Cache
     }
 
     /**
+     * Persist a cache object to disk.
+     *
      * @param string $hash
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
@@ -154,7 +175,7 @@ class Cache
         }
         $fileName = $this->getObjectsDirectory() . $hash;
         if (file_exists($fileName) && !is_writeable($fileName)) {
-            throw new \RuntimeException("Unable to save data for cache object $objectId.");
+            throw new \RuntimeException("Unable to overwrite existing cache data for object $objectId.");
         }
         $check = file_put_contents($fileName, serialize($this->cacheObjects[$hash]), LOCK_EX);
         if ($check === false && $this->strict) {
@@ -163,6 +184,9 @@ class Cache
     }
 
     /**
+     * Mark a cache object as having changed, informing the cache system that
+     * its contents must be (re-)written to disk.
+     *
      * @param string $objectId
      */
     protected function markAsChanged($objectId)
@@ -179,7 +203,14 @@ class Cache
     }
 
     /**
-     * @param string $objectId
+     * Grab a piece of data from the cache.
+     * If the data has not been loaded into memory yet, it is grabbed
+     * immediately.
+     *
+     * @param string $objectId The identifier of the cache object being
+     *      requested.
+     * @param mixed $default If the requested cache object does not exist,
+     *      return this value instead.
      * @return mixed
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
@@ -204,6 +235,8 @@ class Cache
     }
 
     /**
+     * Loads a cache object from the cache storage.
+     *
      * @param string $hash
      * @return mixed
      * @throws \InvalidArgumentException
@@ -247,6 +280,10 @@ class Cache
         //TODO: finish this
     }
 
+    /**
+     * Cache data is persisted to disk when the cache object is destroyed.
+     * Typically, this will happen at the end of the request.
+     */
     public function __destruct()
     {
         foreach ($this->changed as $change) {

@@ -14,7 +14,7 @@ class Cache
      *
      * @var string
      */
-    protected $configDirectory;
+    protected $cacheDirectory;
 
     /**
      * @var bool

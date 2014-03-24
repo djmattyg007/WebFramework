@@ -2,6 +2,7 @@
 
 namespace MattyG\Framework\Core;
 
+use \MattyG\Framework\Core\View\Manager as ViewManager;
 use \MattyG\Http\Request as Request;
 use \MattyG\Http\Response as Response;
 
@@ -13,9 +14,9 @@ abstract class Handler
     protected $config;
 
     /**
-     * @var ViewFactory
+     * @var MattyG\Framework\Core\View\Manager
      */
-    protected $viewFactory;
+    protected $viewManager;
 
     /**
      * @var Request
@@ -34,15 +35,15 @@ abstract class Handler
 
     /**
      * @param Config $config
-     * @param ViewFactory $viewFactory
+     * @param MattyG\Framework\Core\View\Manager $viewManager
      * @param Request $request
      * @param Response $response
      * @param string $routeName
      */
-    public function __construct(Config $config, ViewFactory $viewFactory, Request $request, Response $response, $routeName)
+    public function __construct(Config $config, ViewManager $viewManager, Request $request, Response $response, $routeName)
     {
         $this->config = $config;
-        $this->viewFactory = $viewFactory;
+        $this->viewManager = $viewManager;
         $this->request = $request;
         $this->response = $response;
         $this->routeName = $routeName;
@@ -90,7 +91,7 @@ abstract class Handler
      */
     protected function prepareLayout()
     {
-        return $this->viewFactory->newRootView($this->routeName);
+        return $this->viewManager->newRootView($this->routeName);
     }
 }
 

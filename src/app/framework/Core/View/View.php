@@ -1,6 +1,6 @@
 <?php
 
-namespace MattyG\Framework\Core;
+namespace MattyG\Framework\Core\View;
 
 class View
 {
@@ -10,14 +10,14 @@ class View
     protected $fileName;
 
     /**
-     * @var ViewFactory
+     * @var Manager
      */
-    protected $viewFactory;
+    protected $viewManager;
 
     /**
      * @var array
      */
-    protected $childViews;
+    protected $children;
 
     /**
      * @var bool
@@ -30,17 +30,23 @@ class View
     protected $vars;
 
     /**
+     * @var array
+     */
+    protected $childViews;
+
+    /**
      * @param string $filename
-     * @param ViewFactory $viewFactory
+     * @param Manager $viewManager
      * @param array $children
      */
-    public function __construct($fileName, ViewFactory $viewFactory, array $children = array(), $directOutput = false)
+    public function __construct($fileName, Manager $viewManager, array $children = array(), $directOutput = false)
     {
         $this->fileName = $fileName;
-        $this->viewFactory = $viewFactory;
-        $this->childViews = $children;
+        $this->viewManager = $viewManager;
+        $this->children = $children;
         $this->directOutput = $directOutput;
         $this->vars = array();
+        $this->childViews = array();
     }
 
     /**
@@ -130,7 +136,7 @@ class View
     public function render()
     {
         if (file_exists($this->fileName) && is_readable($this->fileName)) {
-            extract($this->vars, EXTR_SKIP);
+            extract($this->getVars(), EXTR_SKIP);
             if (!$this->getDirectOutput()) {
                 ob_start();
             }
@@ -146,10 +152,13 @@ class View
      * @param string $name
      * @return View
      */
-    public function getChild($name)
+    public function getChild($name, $rememberChild = true)
     {
-        if (isset($this->childViews[$name])) {
-            return $this->viewFactory->newView($this->childViews[$name], false);
+        if (isset($this->children[$name])) {
+            if (!isset($this->childViews[$name])) {
+                $this->childViews[$name] = $this->viewManager->newView($this->children[$name], false);
+            }
+            return $this->childViews[$name];
         } else {
             return null;
         }

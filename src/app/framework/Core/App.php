@@ -2,6 +2,7 @@
 
 namespace MattyG\Framework\Core;
 
+use \MattyG\Framework\Core\View\Manager as ViewManager;
 use \MattyG\Http\Request as Request;
 use \MattyG\Http\Response as Response;
 
@@ -55,9 +56,9 @@ class App
     protected $db;
 
     /**
-     * @var ViewFactory
+     * @var MattyG\Framework\Core\View\Manager
      */
-    protected $viewFactory;
+    protected $viewManager;
 
     /**
      * @param string $baseDirectory The base directory of the application.
@@ -82,7 +83,7 @@ class App
             $this->setCache(new Cache($this->getVarDirectory(), true));
             $this->setConfig(new Config($this->getConfigDirectory(), $pools, $this->getCache(), true));
             if ($this->getConfig()->getConfig("layout")) {
-                $this->setViewFactory(new ViewFactory($this->getViewsDirectory(), $this->getConfig()));
+                $this->setViewManager(new ViewManager($this->getViewsDirectory(), $this->getConfig()));
             }
             if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
                 $this->setDB(DB::loader($dbConfig["type"], $dbConfig["database"], $dbConfig["hostname"], $dbConfig["username"], $dbConfig["password"]));
@@ -154,24 +155,24 @@ class App
     }
 
     /**
-     * Allows you to set the View Factory dependency after construction of the
+     * Allows you to set the View Manager dependency after construction of the
      * App object.
      *
-     * @param ViewFactory $viewFactory
+     * @param MattyG\Framework\Core\View\Manager $viewManager
      * @return App
      */
-    public function setViewFactory(ViewFactory $viewFactory)
+    public function setViewManager(ViewManager $viewManager)
     {
-        $this->viewFactory = $viewFactory;
+        $this->viewManager = $viewManager;
         return $this;
     }
 
     /**
-     * @return ViewFactory
+     * @return MattyG\Framework\Core\View\Manager
      */
-    public function getViewFactory()
+    public function getViewManager()
     {
-        return $this->viewFactory;
+        return $this->viewManager;
     }
 
     /**
@@ -223,7 +224,7 @@ class App
      */
     public function run(Request $request, Response $response)
     {
-        $handler = new \MattyG\Framework\Handler\Home($this->getConfig(), $this->getViewFactory(), $request, $response, "home.view");
+        $handler = new \MattyG\Framework\Handler\Home($this->getConfig(), $this->getViewManager(), $request, $response, "home.view");
         $handler->dispatch("view");
         $response->sendResponse();
     }

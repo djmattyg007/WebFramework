@@ -1,8 +1,10 @@
 <?php
 
-namespace MattyG\Framework\Core;
+namespace MattyG\Framework\Core\View;
 
-class ViewFactory
+use \MattyG\Framework\Core\Config as Config;
+
+class Manager
 {
     /**
      * The directory that contains all views in the application.
@@ -12,9 +14,14 @@ class ViewFactory
     protected $viewDirectory;
 
     /**
-     * @var Config
+     * @var MattyG\Framework\Core\Config
      */
     protected $config;
+
+    /**
+     * @var array
+     */
+    protected $globalVars;
 
     /**
      * @param string $viewDirectory
@@ -24,6 +31,36 @@ class ViewFactory
     {
         $this->viewDirectory = rtrim($viewDirectory, "/") . "/";
         $this->config = $config;
+        $this->globalVars = array();
+    }
+
+    /**
+     * @param array $vars
+     * @return Manager
+     */
+    public function setVars(array $vars)
+    {
+        $this->globalVars = $vars;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVars()
+    {
+        return $this->globalVars;
+    }
+
+    /**
+     * @param string $var
+     * @param mixed $value
+     * @return Manager
+     */
+    public function addVar($var, $value)
+    {
+        $this->globalVars[$var] = $value;
+        return $this;
     }
 
     /**
@@ -51,7 +88,9 @@ class ViewFactory
     {
         $viewFile = $this->getViewFileName($viewData["view"]);
         $children = $this->buildBlocks($viewData["children"]);
-        return new View($viewFile, $this, $children, $directOutput);
+        $view = new View($viewFile, $this, $children, $directOutput);
+        $view->setVars($this->getVars());
+        return $view;
     }
 
     /**
@@ -88,7 +127,9 @@ class ViewFactory
         }
         $pageLayout = $this->config->getConfig("layout/base/pages/*/name=" . $pageName);
         $rootBlocks = $this->buildRootBlocks($pageName, $routeName);
-        return new View($this->getViewFileName($pageLayout["view"]), $this, $rootBlocks, $directOutput);
+        $view = new View($this->getViewFileName($pageLayout["view"]), $this, $rootBlocks, $directOutput);
+        $view->setVars($this->getVars());
+        return $view;
     }
 
     /**

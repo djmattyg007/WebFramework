@@ -9,7 +9,7 @@ fi
 ROOT="`dirname $0`/.."
 ROOT=`readlink -m $ROOT`
 echo $ROOT
-cd $ROOT/src/public/skin/
+cd $ROOT/src/public/assets/
 
 FILES=`find sass/ -maxdepth 1 -name '*.scss'`
 echo $FILES

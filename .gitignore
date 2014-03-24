@@ -9,7 +9,7 @@
 /vendor/
 /src/vendor/
 /src/public/bootstrapper.php
-/src/public/skin/css/*.css
+/src/public/assets/css/*.css
 /src/var/*
 !/src/var/.gitkeep
 

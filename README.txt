@@ -19,9 +19,8 @@ as such is currently just at v0.1.0. The following is a list of things that are
 still missing or still need work:
 - Routing. Currently, it will always load the "homepage" regardless of which
   URL you visit. The plan is to utilise the AuraPHP Router module.
-- A base design. There is a script to bring in the Zurb Foundation JS and SASS
-  into the repository, but the frontend framework is not currently used, as I
-  have not yet had time to create a base design.
+- A base design. It is still incredibly basic, and won't be fully functional
+  until routing is added to the framework.
 - Documentation. I have not had time to write any yet. The first focus will be
   to ensure all functions in all core classes have proper PHPDoc.
 - The model layer has not yet been implemented in any way, shape or form, and

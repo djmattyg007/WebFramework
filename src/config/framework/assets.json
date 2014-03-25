@@ -1,0 +1,27 @@
+{
+    "assets" : {
+        "cssHeader" : [
+            { "filename" : "css/normalize.css" },
+            { "filename" : "css/foundation.css" },
+            { "filename" : "css/app.css" }
+        ],
+        "jsHeader" : [
+        ],
+        "jsFooter" : [
+            { "filename" : "js/jquery-2.1.0.min.js" },
+            { "filename" : "js/foundation/foundation.js" },
+            { "filename" : "js/foundation/foundation.abide.js" },
+            { "filename" : "js/foundation/foundation.accordion.js" },
+            { "filename" : "js/foundation/foundation.alert.js" },
+            { "filename" : "js/foundation/foundation.clearing.js" },
+            { "filename" : "js/foundation/foundation.dropdown.js" },
+            { "filename" : "js/foundation/foundation.equalizer.js" },
+            { "filename" : "js/foundation/foundation.reveal.js" },
+            { "filename" : "js/foundation/foundation.slider.js" },
+            { "filename" : "js/foundation/foundation.tab.js" },
+            { "filename" : "js/foundation/foundation.tooltip.js" },
+            { "filename" : "js/foundation/foundation.topbar.js" }
+        ]
+    }
+}
+

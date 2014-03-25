@@ -17,7 +17,7 @@ class App
      */
     protected $version = array(
         "major" => 0,
-        "minor" => 1,
+        "minor" => 2,
         "patch" => 0,
     );
 

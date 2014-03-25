@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b9584af702340c9a0b17796615acbb42",
+    "hash": "5edc97f4e896da96a0953edd8269aaa2",
     "packages": [
         {
             "name": "aura/sql-query",
@@ -113,6 +113,53 @@
                 "server"
             ],
             "time": "2014-03-16 00:00:00"
+        },
+        {
+            "name": "mattyg/meta",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/djmattyg007/meta.git",
+                "reference": "00fea7f18d4d2e2cb241be250dbdeb4a5aa2a69a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/djmattyg007/meta/zipball/00fea7f18d4d2e2cb241be250dbdeb4a5aa2a69a",
+                "reference": "00fea7f18d4d2e2cb241be250dbdeb4a5aa2a69a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "RyanNielson\\Meta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Nielson",
+                    "email": "ryan.nielson@gmail.com",
+                    "homepage": "http://nielson.io"
+                },
+                {
+                    "name": "Matthew Gamble",
+                    "homepage": "http://www.matthewgamble.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package that makes it easy to add meta tags to your views.",
+            "homepage": "https://github.com/djmattyg007/meta",
+            "keywords": [
+                "meta",
+                "view"
+            ],
+            "time": "2014-03-23 09:32:00"
         }
     ],
     "packages-dev": [

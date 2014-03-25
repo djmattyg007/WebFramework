@@ -9,14 +9,22 @@
                         {
                             "name" : "meta",
                             "view" : "base.blocks.head.meta",
-                            "children" : []
+                            "children" : [],
+                            "helpers" : [
+                                { "name" : "meta" }
+                            ]
                         },
                         {
                             "name" : "includes",
                             "view" : "base.blocks.head.includes",
-                            "children" : []
+                            "children" : [],
+                            "helpers" : [
+                                { "name" : "cssHeader" },
+                                { "name" : "jsHeader" }
+                            ]
                         }
-                    ]
+                    ],
+                    "helpers" : []
                 },
                 {
                     "name" : "header",
@@ -25,9 +33,13 @@
                         {
                             "name" : "navbar",
                             "view" : "base.blocks.header.navbar",
-                            "children" : []
+                            "children" : [],
+                            "helpers" : [
+                                { "name" : "url" }
+                            ]
                         }
-                    ]
+                    ],
+                    "helpers" : []
                 },
                 {
                     "name" : "footer",
@@ -36,9 +48,13 @@
                         {
                             "name" : "includes",
                             "view" : "base.blocks.footer.includes",
-                            "children" : []
+                            "children" : [],
+                            "helpers" : [
+                                { "name" : "jsFooter" }
+                            ]
                         }
-                    ]
+                    ],
+                    "helpers" : []
                 }
             ],
             "pages" : [
@@ -118,12 +134,14 @@
                     {
                         "name" : "page-header",
                         "view" : "core.404.page-header",
-                        "children" : []
+                        "children" : [],
+                        "helpers" : []
                     },
                     {
                         "name" : "page-content-main",
                         "view" : "core.404.page-content-main",
-                        "children" : []
+                        "children" : [],
+                        "helpers" : []
                     }
                 ]
             }

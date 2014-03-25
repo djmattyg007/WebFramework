@@ -4,6 +4,8 @@ namespace MattyG\Framework\Core\View;
 
 use \MattyG\Framework\Core\Config as Config;
 
+use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
+
 class Manager
 {
     /**
@@ -24,6 +26,11 @@ class Manager
     protected $globalVars;
 
     /**
+     * @var array
+     */
+    protected $viewHelpers;
+
+    /**
      * @param string $viewDirectory
      * @param Config $config
      */
@@ -32,6 +39,7 @@ class Manager
         $this->viewDirectory = rtrim($viewDirectory, "/") . "/";
         $this->config = $config;
         $this->globalVars = array();
+        $this->viewHelpers = array();
     }
 
     /**
@@ -64,6 +72,29 @@ class Manager
     }
 
     /**
+     * @param string
+     */
+    public function getHelper($name)
+    {
+        if (!isset($this->viewHelpers[$name])) {
+            $helper = $this->config->getConfig("helpers/view/*/name=$name");
+            if (!$helper) {
+                $helper = $this->config->getConfig("helpers/core/*/name=$name");
+            }
+            $helperClass = $helper["class"];
+            $this->viewHelpers[$name] = new $helperClass($this->config, $helper["name"]);
+            if ($this->viewHelpers[$name] instanceof HelperExtra) {
+                $requirements = array();
+                foreach ($helper["require"] as $requirement) {
+                    $requirements[$requirement["name"]] = $this->getHelper($requirement["name"]);
+                }
+                $this->viewHelpers[$name]->giveHelpers($requirements);
+            }
+        }
+        return $this->viewHelpers[$name];
+    }
+
+    /**
      * Convert a view name of the format "path.to.view" to a filename with an
      * absolute path.
      *
@@ -89,7 +120,8 @@ class Manager
         $viewFile = $this->getViewFileName($viewData["view"]);
         $children = $this->buildBlocks($viewData["children"]);
         $view = new View($viewFile, $this, $children, $directOutput);
-        $view->setVars($this->getVars());
+        $helpers = $this->getViewHelpers($viewData["helpers"]);
+        $view->setVars(array_merge($helpers, $this->getVars()));
         return $view;
     }
 
@@ -107,6 +139,20 @@ class Manager
             $returnBlocks[$block["name"]] = $block;
         }
         return $returnBlocks;
+    }
+
+    /**
+     * @param array $helpers
+     * @return array
+     */
+    public function getViewHelpers(array $helpers)
+    {
+        $return = array();
+        foreach ($helpers as $helper) {
+            $helperName = "helper" . ucfirst($helper["name"]);
+            $return[$helperName] = $this->getHelper($helper["name"]);
+        }
+        return $return;
     }
 
     /**

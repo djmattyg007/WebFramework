@@ -1,7 +1,8 @@
 {
     "require": {
         "mattyg/http": "1.0.0",
-        "aura/sql-query": "2.*@dev"
+        "aura/sql-query": "2.*@dev",
+        "mattyg/meta": "2.1.1"
     }
 }
 

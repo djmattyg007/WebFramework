@@ -1,0 +1,48 @@
+{
+    "helpers" : {
+        "core" : [
+            {
+                "name" : "url",
+                "class" : "\\MattyG\\Framework\\Helper\\Core\\Url"
+            },
+            {
+                "name" : "canonical",
+                "class" : "\\MattyG\\Framework\\Helper\\Core\\Canonical",
+                "require" : [
+                    { "name" : "url" }
+                ]
+            }
+        ],
+        "view" : [
+            {
+                "name" : "meta",
+                "class" : "\\MattyG\\Framework\\Helper\\View\\Meta",
+                "require" : [
+                    { "name" : "canonical" }
+                ]
+            },
+            {
+                "name" : "cssHeader",
+                "class" : "\\MattyG\\Framework\\Helper\\View\\AssetManager",
+                "require" : [
+                    { "name" : "url" }
+                ]
+            },
+            {
+                "name" : "jsHeader",
+                "class" : "\\MattyG\\Framework\\Helper\\View\\AssetManager",
+                "require" : [
+                    { "name" : "url" }
+                ]
+            },
+            {
+                "name" : "jsFooter",
+                "class" : "\\MattyG\\Framework\\Helper\\View\\AssetManager",
+                "require" : [
+                    { "name" : "url" }
+                ]
+            }
+        ]
+    }
+}
+

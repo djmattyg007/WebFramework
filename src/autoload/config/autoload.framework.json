@@ -19,6 +19,11 @@
             "name" : "Aura.Sql_Query",
             "directory" : "vendor/aura/sql-query/src",
             "prefix" : "Aura\\Sql_Query"
+        },
+        {
+            "name" : "MattyG.Meta",
+            "directory" : "vendor/mattyg/meta/src/RyanNielson/Meta",
+            "prefix" : "RyanNielson\\Meta"
         }
     ]
 }

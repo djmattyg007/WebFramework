@@ -8,7 +8,8 @@
                     {
                         "name" : "page-header",
                         "view" : "home.page-header",
-                        "children" : []
+                        "children" : [],
+                        "helpers" : []
                     },
                     {
                         "name" : "page-content-main",
@@ -17,9 +18,11 @@
                             {
                                 "name" : "welcome",
                                 "view" : "home.welcome",
-                                "children" : []
+                                "children" : [],
+                                "helpers" : []
                             }
-                        ]
+                        ],
+                        "helpers" : []
                     }
                 ]
             }

@@ -15,7 +15,7 @@ definitely true of the code, and is almost completely true of the configuration
 system. Unfortunately, this is not perfect yet, and still requires some work.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.1.0. The following is a list of things that are
+as such is currently just at v0.2.0. The following is a list of things that are
 still missing or still need work:
 - Routing. Currently, it will always load the "homepage" regardless of which
   URL you visit. The plan is to utilise the AuraPHP Router module.
@@ -43,6 +43,6 @@ License
 
 The entirety of this code base is released into the public domain. You are free
 to do whatever you want with the code and use it for whatever purpose you see
-fit. Please see LICENSE.txt for more details.
+fit, without attribution. Please see LICENSE.txt for more details.
 Dependencies each have their own individual licenses. Please see each
 repository for information about its license.

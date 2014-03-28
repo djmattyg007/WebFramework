@@ -4,9 +4,11 @@
 </head>
 <body>
 <?php echo $this->renderChild("header"); ?>
-<?php echo $this->renderChild("page-header"); ?>
-<?php echo $this->renderChild("page-content-main"); ?>
-<?php echo $this->renderChild("page-footer"); ?>
+<div class="container">
+    <?php echo $this->renderChild("page-header"); ?>
+    <?php echo $this->renderChild("page-content-main"); ?>
+    <?php echo $this->renderChild("page-footer"); ?>
+</div>
 <?php echo $this->renderChild("footer"); ?>
 </body>
 </html>

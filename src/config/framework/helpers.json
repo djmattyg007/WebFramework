@@ -11,6 +11,10 @@
                 "require" : [
                     { "name" : "url" }
                 ]
+            },
+            {
+                "name" : "translate",
+                "class" : "\\MattyG\\Framework\\Helper\\Core\\Translate"
             }
         ],
         "view" : [

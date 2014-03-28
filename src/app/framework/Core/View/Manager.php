@@ -42,6 +42,7 @@ class Manager
         $this->config = $config;
         $this->globalVars = array();
         $this->viewHelpers = array();
+        $this->initialiseGlobalHelpers();
     }
 
     /**
@@ -94,6 +95,19 @@ class Manager
             }
         }
         return $this->viewHelpers[$name];
+    }
+
+    /**
+     * Initialises helper objects for all objects listed in the
+     * layout/global_helpers config node and sets them as global variables for
+     * all views.
+     */
+    public function initialiseGlobalHelpers()
+    {
+        $globalHelpers = $this->config->getConfig("layout/global_helpers");
+        foreach ($globalHelpers as $helper) {
+            $this->addVar("helper" . ucfirst($helper["name"]), $this->getHelper($helper["name"]));
+        }
     }
 
     /**

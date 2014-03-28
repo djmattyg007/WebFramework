@@ -1,3 +1,3 @@
 <p>
-Welcome to the MattyG Framework.
+<?php echo $helperTranslate->__("Welcome to the MattyG Framework."); ?>
 </p>

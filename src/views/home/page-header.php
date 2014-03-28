@@ -1,1 +1,1 @@
-<h1>This is the page header!</h1>
+<h1><?php echo $helperTranslate->__("This is the page header!"); ?></h1>

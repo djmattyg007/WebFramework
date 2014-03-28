@@ -6,7 +6,8 @@
             "title" : "MattyG Framework",
             "separator" : " - ",
             "reverse" : true
-        }
+        },
+        "locale" : "en_AU"
     }
 }
 

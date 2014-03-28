@@ -28,8 +28,11 @@ still missing or still need work:
   present.
 - Cache. Currently there is no way to programmatically evict entries from the
   cache, and expiry times for cache entries are not actually used.
-- Translation. Currently all strings are hard-coded to English.
 
+Notes:
+- I've made the decision to only make translation available within views. I
+  realised that this isn't exactly functionality I need for myself anyway, so
+  I don't think it's that big of a deal.
 
 Contributions
 

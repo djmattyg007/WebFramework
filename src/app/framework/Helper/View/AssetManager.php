@@ -8,7 +8,7 @@ use \MattyG\Framework\Helper\Core\Url as UrlHelper;
 
 class AssetManager implements HelperExtra
 {
-    const DEFAULT_ASSETS_DIR = "assets";
+    const DIR_ASSETS = "assets";
 
     /**
      * @var Config
@@ -28,7 +28,7 @@ class AssetManager implements HelperExtra
     /**
      * @var string
      */
-    protected $assetsDir = self::DEFAULT_ASSETS_DIR;
+    protected $assetsDir = self::DIR_ASSETS;
 
     /**
      * @param Config $config

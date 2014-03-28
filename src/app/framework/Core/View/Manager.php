@@ -8,6 +8,8 @@ use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
 
 class Manager
 {
+    const DIR_VIEW = "views";
+
     /**
      * The directory that contains all views in the application.
      *
@@ -31,12 +33,12 @@ class Manager
     protected $viewHelpers;
 
     /**
-     * @param string $viewDirectory
+     * @param string $baseDirectory
      * @param Config $config
      */
-    public function __construct($viewDirectory, Config $config)
+    public function __construct($baseDirectory, Config $config)
     {
-        $this->viewDirectory = rtrim($viewDirectory, "/") . "/";
+        $this->viewDirectory = rtrim($baseDirectory, "/") . "/" . self::DIR_VIEW . "/";
         $this->config = $config;
         $this->globalVars = array();
         $this->viewHelpers = array();

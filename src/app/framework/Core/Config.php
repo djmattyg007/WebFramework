@@ -6,6 +6,13 @@ class Config
 {
     const CONFIG_CACHE_ENTRY_NAME = "config";
 
+    const DIR_CONFIG = "config";
+
+    /**
+     * @var string
+     */
+    protected $baseDirectory;
+
     /**
      * @var string
      */
@@ -27,15 +34,17 @@ class Config
     protected $configTree;
 
     /**
-     * @param string $configDirectory
+     * @param string $baseDirectory
      * @param array $pools
      * @param Cache $cache
      * @param bool $strict
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function __construct($configDirectory, array $pools, Cache $cache = null, $strict = false)
+    public function __construct($baseDirectory, array $pools, Cache $cache = null, $strict = false)
     {
+        $this->baseDirectory = rtrim($baseDirectory, "/") . "/";
+        $configDirectory = $this->baseDirectory . self::DIR_CONFIG;
         if (!is_string($configDirectory)) {
             throw new \InvalidArgumentException("Invalid parameter supplied for where to find configuration.");
         }
@@ -113,6 +122,15 @@ class Config
         return $currentConfig;
     }
 
+    /**
+     * Returns the main directory containing all of the application files.
+     *
+     * @return string
+     */
+    public function getBaseDirectory()
+    {
+        return $this->baseDirectory;
+    }
     /**
      * Returns the main directory that all configuration files must be
      * contained within.

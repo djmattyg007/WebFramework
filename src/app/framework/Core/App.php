@@ -81,9 +81,9 @@ class App
         $this->pools = $pools;
         if ($initialise === true) {
             $this->setCache(new Cache($this->getVarDirectory(), true));
-            $this->setConfig(new Config($this->getConfigDirectory(), $pools, $this->getCache(), true));
+            $this->setConfig(new Config($this->getBaseDirectory(), $pools, $this->getCache(), true));
             if ($this->getConfig()->getConfig("layout")) {
-                $this->setViewManager(new ViewManager($this->getViewsDirectory(), $this->getConfig()));
+                $this->setViewManager(new ViewManager($this->getBaseDirectory(), $this->getConfig()));
             }
             if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
                 $this->setDB(DB::loader($dbConfig["type"], $dbConfig["database"], $dbConfig["hostname"], $dbConfig["username"], $dbConfig["password"]));
@@ -183,26 +183,6 @@ class App
     public function getBaseDirectory()
     {
         return $this->baseDirectory;
-    }
-
-    /**
-     * Returns the directory containing all configuration for the application.
-     *
-     * @return string
-     */
-    public function getConfigDirectory()
-    {
-        return $this->getBaseDirectory() . self::DIRECTORY_CONFIG . "/";
-    }
-
-    /**
-     * Returns the directory containing all views in the application.
-     *
-     * @return string
-     */
-    public function getViewsDirectory()
-    {
-        return $this->getBaseDirectory() . self::DIRECTORY_VIEWS . "/";
     }
 
     /**

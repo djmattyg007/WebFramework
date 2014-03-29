@@ -3,20 +3,70 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5edc97f4e896da96a0953edd8269aaa2",
+    "hash": "8899e22963edf24dea509df3cbe18bb8",
     "packages": [
+        {
+            "name": "aura/router",
+            "version": "dev-develop-2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Router.git",
+                "reference": "0d30048f4b9f0845e0f6c7eeb3ac74b829bd8df9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/0d30048f4b9f0845e0f6c7eeb3ac74b829bd8df9",
+                "reference": "0d30048f4b9f0845e0f6c7eeb3ac74b829bd8df9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library"
+                },
+                "branch-alias": {
+                    "dev-develop-2": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Router\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Router Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Router/contributors"
+                }
+            ],
+            "description": "A web router implementation; given a URI path and a copy of $_SERVER, it will extract path-info parameter values for a specific route.",
+            "homepage": "https://github.com/auraphp/Aura.Router/releases",
+            "keywords": [
+                "route",
+                "router",
+                "routing"
+            ],
+            "time": "2014-03-23 08:33:19"
+        },
         {
             "name": "aura/sql-query",
             "version": "dev-develop-2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Sql_Query.git",
-                "reference": "4b805eee4b55eef181f52af00273c11239c79f43"
+                "reference": "15dc57afec0299bd51bfc7301041c9020af3308b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/4b805eee4b55eef181f52af00273c11239c79f43",
-                "reference": "4b805eee4b55eef181f52af00273c11239c79f43",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/15dc57afec0299bd51bfc7301041c9020af3308b",
+                "reference": "15dc57afec0299bd51bfc7301041c9020af3308b",
                 "shasum": ""
             },
             "require": {
@@ -39,7 +89,7 @@
                     "Aura\\Sql_Query\\": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-2-Clause"
             ],
@@ -66,7 +116,7 @@
                 "sqlserver",
                 "update"
             ],
-            "time": "2014-01-31 20:55:54"
+            "time": "2014-03-28 16:47:18"
         },
         {
             "name": "mattyg/http",
@@ -170,7 +220,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "aura/sql-query": 20
+        "aura/sql-query": 20,
+        "aura/router": 20
     },
     "platform": [
 

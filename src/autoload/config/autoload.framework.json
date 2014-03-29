@@ -16,6 +16,11 @@
             "prefix" : "MattyG\\Http"
         },
         {
+            "name" : "Aura.Router",
+            "directory" : "vendor/aura/router/src",
+            "prefix" : "Aura\\Router"
+        },
+        {
             "name" : "Aura.Sql_Query",
             "directory" : "vendor/aura/sql-query/src",
             "prefix" : "Aura\\Sql_Query"

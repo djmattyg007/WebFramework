@@ -8,9 +8,7 @@ use \MattyG\Http\Response as Response;
 
 class App
 {
-    const DIRECTORY_CONFIG = "config";
-    const DIRECTORY_VIEWS = "views";
-    const DIRECTORY_VAR = "var";
+    const DIR_VAR = "var";
 
     /**
      * @var array
@@ -193,7 +191,7 @@ class App
      */
     public function getVarDirectory()
     {
-        return $this->getBaseDirectory() . self::DIRECTORY_VAR . "/";
+        return $this->getBaseDirectory() . self::DIR_VAR . "/";
     }
 
     /**

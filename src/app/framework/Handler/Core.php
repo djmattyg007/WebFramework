@@ -4,15 +4,16 @@ namespace MattyG\Framework\Handler;
 
 use \MattyG\Framework\Core\Handler as AbstractHandler;
 
-class Home extends AbstractHandler
+class Core extends AbstractHandler
 {
     /**
      * @return bool
      */
-    public function indexAction()
+    public function four04Action()
     {
-        $page = $this->prepareLayout();
-        $this->response->setBody($page->render());
+        $this->response->setResponseCode(404);
+        $this->response->setBody("404 not found");
         return true;
     }
 }
+

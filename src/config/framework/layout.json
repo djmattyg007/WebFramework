@@ -127,7 +127,7 @@
         },
         "routes" : [
             {
-                "name" : "404",
+                "name" : "core.four04",
                 "view" : "core.404",
                 "page" : "one-column",
                 "blocks" : [

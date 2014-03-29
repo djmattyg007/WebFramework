@@ -2,7 +2,7 @@
     "layout" : {
         "routes" : [
             {
-                "name" : "home.view",
+                "name" : "home.index",
                 "page" : "one-column",
                 "blocks" : [
                     {

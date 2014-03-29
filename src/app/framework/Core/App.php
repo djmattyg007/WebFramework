@@ -5,6 +5,8 @@ namespace MattyG\Framework\Core;
 use \MattyG\Framework\Core\View\Manager as ViewManager;
 use \MattyG\Http\Request as Request;
 use \MattyG\Http\Response as Response;
+use \Aura\Router\Router as Router;
+use \Aura\Router\Route as Route;
 
 class App
 {
@@ -199,11 +201,76 @@ class App
      *
      * @param Request $request
      * @param Response $response
+     * @param Router $router
      */
-    public function run(Request $request, Response $response)
+    public function run(Request $request, Response $response, Router $router)
     {
-        $handler = new \MattyG\Framework\Handler\Home($this->getConfig(), $this->getViewManager(), $request, $response, "home.view");
-        $handler->dispatch("view");
+        $route = $this->route($router, $request);
+        $this->dispatch($request, $response, $route);
         $response->sendResponse();
+    }
+
+    /**
+     * @param Router $router
+     * @param Request $request
+     * @return Route|false
+     */
+    protected function route(Router $router, Request $request)
+    {
+        $this->applyRoutes($router);
+        $uriPath = "/" . trim(parse_url($request->getRequestUri(), PHP_URL_PATH), "/");
+        return $router->match($uriPath, $request->getServerVar());
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $resonse
+     * @param Route|false $route
+     * @return bool
+     */
+    protected function dispatch(Request $request, Response $response, $route)
+    {
+        if ($route instanceof Route) {
+            $routeName = $route->name;
+            $handlerName = $this->prepareHandlerName($route->params["controller"]);
+            $actionName = $route->params["action"];
+            $params = $route->params;
+        } else {
+            $routeName = "core.404";
+            $handlerName = $this->prepareHandlerName("core");
+            $actionName = "four04";
+            $params = array();
+        }
+        $handler = new $handlerName($this->getConfig(), $this->getViewManager(), $request, $response, $routeName, $params);
+        $return = $handler->dispatch($actionName);
+        if ($return === false) {
+            $this->dispatch($request, $response, false);
+        }
+        return $return;
+    }
+
+    /**
+     * TODO: cache the routes on the router
+     *
+     * @param Router $router
+     */
+    protected function applyRoutes(Router $router)
+    {
+        $routesFile = $this->getBaseDirectory() . "app/routes.php";
+        if (!file_exists($routesFile)) {
+            throw new \RuntimeException("Cannot run application. No routes available.");
+        }
+        include($this->getBaseDirectory() . "app/routes.php");
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    protected function prepareHandlerName($name)
+    {
+        $name = str_replace(".", " ", $name);
+        $name = ucwords($name);
+        return "\\MattyG\\Framework\\Handler\\" . str_replace(" ", "\\", $name);
     }
 }

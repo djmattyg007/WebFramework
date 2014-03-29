@@ -9,8 +9,12 @@ if (file_exists($bootstrapper)) {
     $app = require(dirname(__DIR__) . "/bootstrap.php");
 }
 
+use \MattyG\Http as Http;
+use \Aura\Router as Router;
+
 $app->run(
-    new \MattyG\Http\Request($_SERVER, $_GET, $_POST),
-    new \MattyG\Http\Response()
+    new Http\Request($_SERVER, $_GET, $_POST),
+    new Http\Response(),
+    new Router\Router(new Router\RouteCollection(new Router\RouteFactory()))
 );
 

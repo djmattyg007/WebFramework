@@ -1,9 +1,9 @@
 {
     "routes" : [
         {
-            "name" : "home",
-            "path" : "/",
-            "method" : "get"
+            "name" : "home.index",
+            "method" : "get",
+            "path" : "/"
         }
     ]
 }

@@ -34,39 +34,51 @@ abstract class Handler
     protected $routeName;
 
     /**
+     * @var array
+     */
+    protected $params;
+
+    /**
+     * @var string
+     */
+    protected $actionName;
+
+    /**
      * @param Config $config
      * @param MattyG\Framework\Core\View\Manager $viewManager
      * @param Request $request
      * @param Response $response
      * @param string $routeName
+     * @param array $params
      */
-    public function __construct(Config $config, ViewManager $viewManager, Request $request, Response $response, $routeName)
+    public function __construct(Config $config, ViewManager $viewManager, Request $request, Response $response, $routeName, array $params)
     {
         $this->config = $config;
         $this->viewManager = $viewManager;
         $this->request = $request;
         $this->response = $response;
         $this->routeName = $routeName;
+        $this->params = $params;
     }
 
     /**
      * Perform a task or tasks before the controller action is dispatched.
      *
-     * @return Handler
+     * @return bool
      */
     protected function preDispatch()
     {
-        return $this;
+        return true;
     }
 
     /**
      * Perform a task or tasks after the controller action has been dispatched.
      *
-     * @return Handler
+     * @return bool
      */
     protected function postDispatch()
     {
-        return $this;
+        return true;
     }
 
     /**
@@ -74,13 +86,21 @@ abstract class Handler
      */
     public function dispatch($action)
     {
-        $this->preDispatch();
+        $this->actionName = $action . "Action";
 
-        if (method_exists($this, $action)) {
-            $this->$action();
+        if (!$this->preDispatch()) {
+            return false;
         }
 
-        $this->postDispatch();
+        if (!method_exists($this, $this->actionName)) {
+            return false;
+        }
+
+        if (!$this->{$this->actionName}()) {
+            return false;
+        }
+
+        return $this->postDispatch();
     }
 
     /**

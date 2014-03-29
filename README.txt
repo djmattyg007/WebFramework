@@ -15,20 +15,20 @@ definitely true of the code, and is almost completely true of the configuration
 system. Unfortunately, this is not perfect yet, and still requires some work.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.2.0. The following is a list of things that are
+as such is currently just at v0.3.0. The following is a list of things that are
 still missing or still need work:
-- Routing. Currently, it will always load the "homepage" regardless of which
-  URL you visit. The plan is to utilise the AuraPHP Router module.
-- A base design. It is still incredibly basic, and won't be fully functional
-  until routing is added to the framework.
+- A base design. It is still incredibly basic. The top priorities are a design
+  for the 404 page, and getting the top nav bar working correctly.
 - Documentation. I have not had time to write any yet. The first focus will be
   to ensure all functions in all core classes have proper PHPDoc.
 - The model layer has not yet been implemented in any way, shape or form, and
   there is no way to perform any sort of database access in user-based code at
   present.
+- URL generation. The plan is to hook into the Aura.Router module's URL
+  generation features.
 - Cache. Currently there is no way to programmatically evict entries from the
   cache, and expiry times for cache entries are not actually used.
-- Translation files need to be cached.
+- Translation files and routes need to be cached.
 
 Notes:
 - I've made the decision to only make translation available within views. I

@@ -12,7 +12,8 @@
                             "children" : [],
                             "helpers" : [
                                 { "name" : "meta" }
-                            ]
+                            ],
+                            "vars" : []
                         },
                         {
                             "name" : "includes",
@@ -21,10 +22,12 @@
                             "helpers" : [
                                 { "name" : "cssHeader" },
                                 { "name" : "jsHeader" }
-                            ]
+                            ],
+                            "vars" : []
                         }
                     ],
-                    "helpers" : []
+                    "helpers" : [],
+                    "vars" : []
                 },
                 {
                     "name" : "header",
@@ -34,10 +37,17 @@
                             "name" : "navbar",
                             "view" : "base.blocks.header.navbar",
                             "children" : [],
-                            "helpers" : []
+                            "helpers" : [],
+                            "vars" : [
+                                {
+                                    "name" : "sitename",
+                                    "path" : "site/name"
+                                }
+                            ]
                         }
                     ],
-                    "helpers" : []
+                    "helpers" : [],
+                    "vars" : []
                 },
                 {
                     "name" : "footer",
@@ -49,10 +59,12 @@
                             "children" : [],
                             "helpers" : [
                                 { "name" : "jsFooter" }
-                            ]
+                            ],
+                            "vars" : []
                         }
                     ],
-                    "helpers" : []
+                    "helpers" : [],
+                    "vars" : []
                 }
             ],
             "pages" : [
@@ -133,13 +145,15 @@
                         "name" : "page-header",
                         "view" : "core.404.page-header",
                         "children" : [],
-                        "helpers" : []
+                        "helpers" : [],
+                        "vars" : []
                     },
                     {
                         "name" : "page-content-main",
                         "view" : "core.404.page-content-main",
                         "children" : [],
-                        "helpers" : []
+                        "helpers" : [],
+                        "vars" : []
                     }
                 ]
             }

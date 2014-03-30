@@ -9,7 +9,8 @@
                         "name" : "page-header",
                         "view" : "home.page-header",
                         "children" : [],
-                        "helpers" : []
+                        "helpers" : [],
+                        "vars" : []
                     },
                     {
                         "name" : "page-content-main",
@@ -19,10 +20,12 @@
                                 "name" : "welcome",
                                 "view" : "home.welcome",
                                 "children" : [],
-                                "helpers" : []
+                                "helpers" : [],
+                                "vars" : []
                             }
                         ],
-                        "helpers" : []
+                        "helpers" : [],
+                        "vars" : []
                     }
                 ]
             }

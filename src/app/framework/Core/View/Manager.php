@@ -138,7 +138,8 @@ class Manager
         $children = $this->buildBlocks($viewData["children"]);
         $view = new View($viewFile, $this, $children, $directOutput);
         $helpers = $this->getViewHelpers($viewData["helpers"]);
-        $view->setVars(array_merge($helpers, $this->getVars()));
+        $vars = $this->getViewVars($viewData["vars"]);
+        $view->setVars(array_merge($helpers, $vars, $this->getVars()));
         return $view;
     }
 
@@ -168,6 +169,19 @@ class Manager
         foreach ($helpers as $helper) {
             $helperName = "helper" . ucfirst($helper["name"]);
             $return[$helperName] = $this->getHelper($helper["name"]);
+        }
+        return $return;
+    }
+
+    /**
+     * @param array $vars
+     * @return array
+     */
+    public function getViewVars(array $vars)
+    {
+        $return = array();
+        foreach ($vars as $var) {
+            $return[$var["name"]] = $this->config->getConfig($var["path"]);
         }
         return $return;
     }

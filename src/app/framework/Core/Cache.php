@@ -237,12 +237,16 @@ class Cache
         }
 
         if (isset($this->cacheInfo["objects"][$objectId])) {
-            $hash = sha1($objectId);
-            //TODO: check expiry of cache object
+            if ($this->cacheInfo["objects"][$objectId]["expiry"] < time()) {
+                //TODO: actually evict the object from the cache
+                return $default;
+            }
+            $hash = $this->cacheInfo["objects"][$objectId]["store"];
+            //$hash = sha1($objectId);
             if (isset($this->cacheObjects[$hash])) {
                 return $this->cacheObjects[$hash];
             } else {
-                return $this->loadCacheObject($this->cacheInfo["objects"][$objectId]["store"]);
+                return $this->loadCacheObject($hash);
             }
         } else {
             return $default;

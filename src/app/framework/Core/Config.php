@@ -19,6 +19,11 @@ class Config
     protected $configDirectory;
 
     /**
+     * @var Cache
+     */
+    protected $cache;
+
+    /**
      * @var array
      */
     protected $pools;
@@ -65,6 +70,22 @@ class Config
         $this->pools = $pools;
         $this->cache = $cache;
         $this->initialiseConfigTree();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPools()
+    {
+        return $this->pools;
+    }
+
+    /**
+     * @return Cache
+     */
+    public function getCacheObject()
+    {
+        return $this->cache;
     }
 
     /**
@@ -158,7 +179,7 @@ class Config
     /**
      * Attempt to grab the configuration tree from the cache.
      *
-     * @return mixed|null
+     * @return array|null
      */
     protected function getConfigCache()
     {

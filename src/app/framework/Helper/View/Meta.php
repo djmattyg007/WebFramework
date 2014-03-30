@@ -75,7 +75,7 @@ class Meta implements Helper
         }
         $pageTitleString = implode($pageTitleSeparator, $pageTitle);
         if ($includeContainer === true) {
-            $pageTitleString = "<title>$pageTitle</title>";
+            $pageTitleString = "<title>$pageTitleString</title>";
         }
         return $pageTitleString;
     }

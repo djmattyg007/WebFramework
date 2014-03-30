@@ -11,6 +11,8 @@ class Home extends AbstractHandler
      */
     public function indexAction()
     {
+        $meta = $this->viewManager->getHelper("meta");
+        $meta->addPageTitleSegment("Home");
         $page = $this->prepareLayout();
         $this->response->setBody($page->render());
         return true;

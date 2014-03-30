@@ -34,9 +34,7 @@
                             "name" : "navbar",
                             "view" : "base.blocks.header.navbar",
                             "children" : [],
-                            "helpers" : [
-                                { "name" : "url" }
-                            ]
+                            "helpers" : []
                         }
                     ],
                     "helpers" : []
@@ -147,6 +145,7 @@
             }
         ],
         "global_helpers" : [
+            { "name" : "url" },
             { "name" : "translate" }
         ]
     }

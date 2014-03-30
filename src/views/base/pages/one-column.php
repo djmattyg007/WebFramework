@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <?php echo $this->renderChild("head"); ?>

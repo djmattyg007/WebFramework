@@ -4,7 +4,7 @@ namespace MattyG\Framework\Core;
 
 class Config
 {
-    const CONFIG_CACHE_ENTRY_NAME = "config";
+    const CONFIG_CACHE_ENTRY_NAME = "core_config";
 
     const DIR_CONFIG = "config";
 
@@ -152,7 +152,7 @@ class Config
         if (!$this->cache) {
             return;
         }
-        $this->cache->saveData(self::CONFIG_CACHE_ENTRY_NAME, json_encode($this->configTree), (time() + 300));
+        $this->cache->saveData(self::CONFIG_CACHE_ENTRY_NAME, json_encode($this->configTree), (time() + 3600));
     }
 
     /**

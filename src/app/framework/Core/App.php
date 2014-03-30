@@ -10,6 +10,8 @@ use \Aura\Router\Route as Route;
 
 class App
 {
+    const ROUTE_CACHE_ENTRY_NAME = "core_routes";
+
     const DIR_VAR = "var";
 
     /**
@@ -255,17 +257,25 @@ class App
 
     /**
      * Gets the list of routes and adds them to the supplied Router object.
-     * TODO: cache the routes on the router
      *
      * @param Router $router
+     * @return void
      */
     protected function applyRoutes(Router $router)
     {
+        $cachedRoutes = $this->getCache()->loadData(self::ROUTE_CACHE_ENTRY_NAME, null);
+        if ($cachedRoutes) {
+            $router->setRoutes($cachedRoutes);
+            return;
+        }
+
         $routesFile = $this->getBaseDirectory() . "app/routes.php";
         if (!file_exists($routesFile)) {
             throw new \RuntimeException("Cannot run application. No routes available.");
         }
         include($this->getBaseDirectory() . "app/routes.php");
+
+        $this->cache->saveData(self::ROUTE_CACHE_ENTRY_NAME, $router->getRoutes(), time() + 3600);
     }
 
     /**

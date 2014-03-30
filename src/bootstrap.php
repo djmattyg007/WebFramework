@@ -15,9 +15,11 @@ foreach ($pools as $pool) {
 unset($pool);
 unset($functionsFile);
 
-require(__DIR__ . "/autoload/Autoloader.php");
+if (!defined("MATTYG_FRAMEWORK_AUTOLOADER_NOREGISTER")) {
+    require(__DIR__ . "/autoload/Autoloader.php");
 
-$autoloader = new \MattyG\Framework\Autoload\Autoloader(__DIR__, $pools, true);
+    $autoloader = new \MattyG\Framework\Autoload\Autoloader(__DIR__, $pools, true);
+}
 
 $app = new \MattyG\Framework\Core\App(__DIR__, $pools, true);
 

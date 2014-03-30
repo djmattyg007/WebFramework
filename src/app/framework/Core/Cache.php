@@ -4,8 +4,8 @@ namespace MattyG\Framework\Core;
 
 class Cache
 {
-    const DIRECTORY_CACHE = "cache";
-    const DIRECTORY_OBJECTS = "objects";
+    const DIR_CACHE = "cache";
+    const DIR_OBJECTS = "objects";
     const CACHE_INFO_FILENAME = "cacheinfo.json";
 
     /**
@@ -54,7 +54,7 @@ class Cache
         if (!is_writeable($varDirectory)) {
             throw new \RuntimeException("Unable to write to cache directory.");
         }
-        $this->cacheDirectory = rtrim($varDirectory, "/") . "/" . self::DIRECTORY_CACHE . "/";
+        $this->cacheDirectory = rtrim($varDirectory, "/") . "/" . self::DIR_CACHE . "/";
 
         $this->strict = $strict;
 
@@ -120,7 +120,7 @@ class Cache
      */
     protected function getObjectsDirectory()
     {
-        return $this->cacheDirectory . self::DIRECTORY_OBJECTS . "/";
+        return $this->cacheDirectory . self::DIR_OBJECTS . "/";
     }
 
     /**

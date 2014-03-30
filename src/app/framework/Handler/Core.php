@@ -12,7 +12,8 @@ class Core extends AbstractHandler
     public function four04Action()
     {
         $this->response->setResponseCode(404);
-        $this->response->setBody("404 not found");
+        $page = $this->prepareLayout();
+        $this->response->setBody($page->render());
         return true;
     }
 }

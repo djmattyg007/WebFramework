@@ -15,10 +15,10 @@ definitely true of the code, and is almost completely true of the configuration
 system. Unfortunately, this is not perfect yet, and still requires some work.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.3.0. The following is a list of things that are
+as such is currently just at v0.3.1. The following is a list of things that are
 still missing or still need work:
-- A base design. It is still incredibly basic. The top priorities are a design
-  for the 404 page, and getting the top nav bar working correctly.
+- A base design. It is still incredibly basic. The top priority is getting the
+  top nav bar working correctly.
 - Documentation. I have not had time to write any yet. The first focus will be
   to ensure all functions in all core classes have proper PHPDoc.
 - The model layer has not yet been implemented in any way, shape or form, and
@@ -28,12 +28,13 @@ still missing or still need work:
   generation features.
 - Cache. Currently there is no way to programmatically evict entries from the
   cache, and expiry times for cache entries are not actually used.
-- Translation files and routes need to be cached.
+- Translation files need to be cached.
 
 Notes:
 - I've made the decision to only make translation available within views. I
   realised that this isn't exactly functionality I need for myself anyway, so
   I don't think it's that big of a deal.
+
 
 Contributions
 

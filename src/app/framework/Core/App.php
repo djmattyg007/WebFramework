@@ -211,6 +211,8 @@ class App
     }
 
     /**
+     * Route!
+     *
      * @param Router $router
      * @param Request $request
      * @return Route|false
@@ -223,6 +225,8 @@ class App
     }
 
     /**
+     * Dispatch!
+     *
      * @param Request $request
      * @param Response $resonse
      * @param Route|false $route
@@ -250,6 +254,7 @@ class App
     }
 
     /**
+     * Gets the list of routes and adds them to the supplied Router object.
      * TODO: cache the routes on the router
      *
      * @param Router $router
@@ -264,6 +269,11 @@ class App
     }
 
     /**
+     * Takes a handler name of the form "group1.group2.handler" and returns
+     * the fully-qualified class name of the handler.
+     * The fully qualified class name of "group1.group2.handler" would be
+     * \MattyG\Framework\Handler\Group1\Group2\Handler
+     *
      * @param string $name
      * @return string
      */

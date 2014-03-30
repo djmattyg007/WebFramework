@@ -128,7 +128,8 @@ class Manager
      * information about its child views.
      *
      * @param array $pageName
-     * @param bool $directOutput
+     * @param bool $directOutput Controls the use of output buffering when
+     *      rendering the View object.
      * @return View
      */
     public function newView($viewData, $directOutput = false)

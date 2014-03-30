@@ -82,6 +82,11 @@ abstract class Handler
     }
 
     /**
+     * Dispatch the desired action on this controller object.
+     * Action methods must end in "Action". This is to avoid conflicts with
+     * other functions in the controller.
+     * Returning false from this function implies a "not found".
+     *
      * @param string $action
      */
     public function dispatch($action)
@@ -105,7 +110,7 @@ abstract class Handler
 
     /**
      * Prepare the layout for the current controller action, and return a View
-     * object for the root page for the loaded layout.
+     * object for the root page defined for the loaded layout.
      *
      * @return View
      */

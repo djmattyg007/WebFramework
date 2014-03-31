@@ -203,6 +203,8 @@ class Cache
      * its contents must be (re-)written to disk.
      *
      * @param string $objectId
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     protected function markAsChanged($objectId)
     {
@@ -228,7 +230,6 @@ class Cache
      *      return this value instead.
      * @return mixed
      * @throws \InvalidArgumentException
-     * @throws \RuntimeException
      */
     public function loadData($objectId, $default = null)
     {
@@ -238,7 +239,7 @@ class Cache
 
         if (isset($this->cacheInfo["objects"][$objectId])) {
             if ($this->cacheInfo["objects"][$objectId]["expiry"] < time()) {
-                //TODO: actually evict the object from the cache
+                $this->evictData($objectId);
                 return $default;
             }
             $hash = $this->cacheInfo["objects"][$objectId]["store"];
@@ -288,7 +289,12 @@ class Cache
         }
     }
 
-    protected function evictData($objectId)
+    /**
+     * @param string $objectId
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function evictData($objectId)
     {
         if (!is_string($objectId)) {
             throw new \InvalidArgumentException("Invalid object ID supplied.");
@@ -296,7 +302,40 @@ class Cache
         if (!isset($this->cacheInfo["objects"][$objectId])) {
             throw new \RuntimeException("Cannot evict non-existent cache object.");
         }
-        //TODO: finish this
+
+        $hash = $this->cacheInfo["objects"][$objectId]["store"];
+        unset($this->cacheInfo["objects"][$objectId]);
+        unset($this->cacheObjects[$hash]);
+        $this->evictDataObject($hash);
+    }
+
+    /**
+     * @param string $hash
+     * @return bool Whether or not the cache object was actually removed from
+     *      the cache storage.
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    protected function evictDataObject($hash)
+    {
+        if (!is_string($hash)) {
+            throw new \InvalidArgumentException("Invalid object ID hash supplied.");
+        }
+        $fileName = $this->getObjectsDirectory() . $hash;
+        if (file_exists($fileName)) {
+            if (!is_writeable($fileName)) {
+                throw new \RuntimeException("Unable to evict cache object for ID hash $hash.");
+            }
+            $check = unlink($fileName);
+            if ($check === false && $this->strict) {
+                throw new \RuntimeException("Unable to evict cache object for ID hash $hash.");
+            }
+            return $check;
+        } else {
+            if ($this->strict) {
+                throw new \RuntimeException("Requested cache object does not exist.");
+            }
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ definitely true of the code, and is almost completely true of the configuration
 system. Unfortunately, this is not perfect yet, and still requires some work.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.3.3. The following is a list of things that are
+as such is currently just at v0.4.0. The following is a list of things that are
 still missing or still need work:
 - A base design. It is still incredibly basic. The top priority is getting the
   top nav bar working correctly.
@@ -26,8 +26,6 @@ still missing or still need work:
   present.
 - URL generation. The plan is to hook into the Aura.Router module's URL
   generation features.
-- Cache. Currently there is no way to programmatically evict entries from the
-  cache, and expiry times for cache entries are not actually used.
 
 Notes:
 - I've made the decision to only make translation available within views. I

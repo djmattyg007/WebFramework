@@ -238,7 +238,8 @@ class Cache
         }
 
         if (isset($this->cacheInfo["objects"][$objectId])) {
-            if ($this->cacheInfo["objects"][$objectId]["expiry"] < time()) {
+            $expireTime = $this->cacheInfo["objects"][$objectId]["expiry"];
+            if ($expireTime != null && $expireTime < time()) {
                 $this->evictData($objectId);
                 return $default;
             }

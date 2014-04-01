@@ -3,7 +3,7 @@
         "cssHeader" : [
             { "filename" : "css/normalize.css" },
             { "filename" : "css/foundation.css" },
-            { "filename" : "css/app.css" }
+            { "filename" : "css/core.css" }
         ],
         "jsHeader" : [
         ],

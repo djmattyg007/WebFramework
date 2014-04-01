@@ -270,11 +270,16 @@ class App
             return;
         }
 
-        $routesFile = $this->getBaseDirectory() . "app/routes.php";
-        if (!file_exists($routesFile)) {
+        foreach ($this->pools as $pool) {
+            $routesFile = $this->getBaseDirectory() . "app/$pool/routes.php";
+            if (!file_exists($routesFile)) {
+                continue;
+            }
+            include($routesFile);
+        }
+        if ($router->count() == 0) {
             throw new \RuntimeException("Cannot run application. No routes available.");
         }
-        include($this->getBaseDirectory() . "app/routes.php");
 
         $this->cache->saveData(self::ROUTE_CACHE_ENTRY_NAME, $router->getRoutes(), time() + 3600);
     }

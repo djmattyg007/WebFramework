@@ -18,6 +18,11 @@ class Manager
     protected $viewDirectory;
 
     /**
+     * @var array
+     */
+    protected $pools;
+
+    /**
      * @var MattyG\Framework\Core\Config
      */
     protected $config;
@@ -34,11 +39,13 @@ class Manager
 
     /**
      * @param string $baseDirectory
+     * @param array $pools
      * @param Config $config
      */
-    public function __construct($baseDirectory, Config $config)
+    public function __construct($baseDirectory, array $pools, Config $config)
     {
         $this->viewDirectory = rtrim($baseDirectory, "/") . "/" . self::DIR_VIEW . "/";
+        $this->pools = $pools;
         $this->config = $config;
         $this->globalVars = array();
         $this->viewHelpers = array();
@@ -109,12 +116,18 @@ class Manager
      * absolute path.
      *
      * @param string $pageView
-     * @return string
+     * @return string|null
      */
     public function getViewFileName($pageView)
     {
         $path = str_replace(".", "/", $pageView);
-        return $this->viewDirectory . $path . ".php";
+        foreach ($this->pools as $pool) {
+            $fileName = $this->viewDirectory . $pool . "/" . $path . ".php";
+            if (file_exists($fileName)) {
+                return $fileName;
+            }
+        }
+        return null;
     }
 
     /**

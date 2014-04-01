@@ -11,6 +11,9 @@
 /src/config/user/*
 !/src/config/user/.gitkeep
 
+/src/views/user/*
+!/src/views/user/.gitkeep
+
 /vendor/
 /src/vendor/
 /src/public/bootstrapper.php

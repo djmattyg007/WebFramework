@@ -85,7 +85,7 @@ class App
             $this->setCache(new Cache($this->getVarDirectory(), true));
             $this->setConfig(new Config($this->getBaseDirectory(), $pools, $this->getCache(), true));
             if ($this->getConfig()->getConfig("layout")) {
-                $this->setViewManager(new ViewManager($this->getBaseDirectory(), $this->getConfig()));
+                $this->setViewManager(new ViewManager($this->getBaseDirectory(), array_reverse($pools), $this->getConfig()));
             }
             if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
                 $this->setDB(DB::loader($dbConfig["type"], $dbConfig["database"], $dbConfig["hostname"], $dbConfig["username"], $dbConfig["password"]));

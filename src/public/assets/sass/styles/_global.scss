@@ -2,3 +2,9 @@ div.container {
     @include grid-row();
 }
 
+div.side-nav-container {
+    ul {
+        @include side-nav();
+    }
+}
+

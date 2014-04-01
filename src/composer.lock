@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ff7dee026bd1dd303b62227f414ddc6c",
+    "hash": "4718a08a36f4467c46f51ba9be4796d5",
     "packages": [
         {
             "name": "aura/router",
@@ -166,16 +166,16 @@
         },
         {
             "name": "mattyg/meta",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/djmattyg007/meta.git",
-                "reference": "00fea7f18d4d2e2cb241be250dbdeb4a5aa2a69a"
+                "reference": "c53d226b85dfee59a3c1d02dec5021579be3ec77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djmattyg007/meta/zipball/00fea7f18d4d2e2cb241be250dbdeb4a5aa2a69a",
-                "reference": "00fea7f18d4d2e2cb241be250dbdeb4a5aa2a69a",
+                "url": "https://api.github.com/repos/djmattyg007/meta/zipball/c53d226b85dfee59a3c1d02dec5021579be3ec77",
+                "reference": "c53d226b85dfee59a3c1d02dec5021579be3ec77",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +209,7 @@
                 "meta",
                 "view"
             ],
-            "time": "2014-03-23 09:32:00"
+            "time": "2014-04-01 11:40:28"
         }
     ],
     "packages-dev": [

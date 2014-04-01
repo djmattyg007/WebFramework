@@ -208,6 +208,7 @@ class App
     public function run(Request $request, Response $response, Router $router)
     {
         $route = $this->route($router, $request);
+        $this->getConfig()->setRouterObject($router);
         $this->dispatch($request, $response, $route);
         $response->sendResponse();
     }

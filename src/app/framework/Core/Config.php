@@ -3,6 +3,7 @@
 namespace MattyG\Framework\Core;
 
 use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
+use \Aura\Router\Router as Router;
 
 class Config
 {
@@ -24,6 +25,11 @@ class Config
      * @var Cache
      */
     protected $cache;
+
+    /**
+     * @var \Aura\Router\Router
+     */
+    protected $router = null;
 
     /**
      * @var array
@@ -94,6 +100,24 @@ class Config
     public function getCacheObject()
     {
         return $this->cache;
+    }
+
+    /**
+     * @param \Aura\Router\Router $router
+     */
+    public function setRouterObject(Router $router)
+    {
+        $this->router = $router;
+        $this->getHelper("url")->setRouterObject($router);
+        return $this;
+    }
+
+    /**
+     * @return \Aura\Router\Router
+     */
+    public function getRouterObject()
+    {
+        return $this->router;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace MattyG\Framework\Helper\Core;
 
 use \MattyG\Framework\Core\Helper\HelperInterface as Helper;
 use \MattyG\Framework\Core\Config as Config;
+use \Aura\Router\Router as Router;
 
 class Url implements Helper
 {
@@ -11,6 +12,11 @@ class Url implements Helper
      * @var MattyG\Framework\Core\Config
      */
     protected $config;
+
+    /**
+     * @var \Aura\Router\Router
+     */
+    protected $router;
 
     /**
      * @var string
@@ -25,6 +31,16 @@ class Url implements Helper
     {
         $this->config = $config;
         $this->baseUrl = $this->config->getConfig("site/base_url");
+    }
+
+    /**
+     * @param \Aura\Router\Router $router
+     * @return Url
+     */
+    public function setRouterObject(Router $router)
+    {
+        $this->router = $router;
+        return $this;
     }
 
     /**
@@ -45,6 +61,19 @@ class Url implements Helper
         $url = rtrim($this->getBaseUrl() . $path, "/") . "/";
         $url .= http_build_query($params);
         return $url;
+    }
+
+    /**
+     * @param string $routeName
+     * @param array $params
+     * @return string
+     */
+    public function getRouteUrl($routeName, array $params = array())
+    {
+        if (!$this->router) {
+            return null;
+        }
+        return $this->router->generate($routeName, $params);
     }
 }
 

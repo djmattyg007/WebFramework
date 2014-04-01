@@ -53,13 +53,13 @@ class Url implements Helper
 
     /**
      * @param string $path
-     * @param array $params
+     * @param array $queryParams
      * @return string
      */
-    public function getUrl($path, array $params = array())
+    public function getUrl($path, array $queryParams = array())
     {
         $url = rtrim($this->getBaseUrl() . $path, "/") . "/";
-        $url .= http_build_query($params);
+        $url .= http_build_query($queryParams);
         return $url;
     }
 

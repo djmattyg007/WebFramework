@@ -2,6 +2,8 @@
 
 namespace MattyG\Framework\Core;
 
+use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
+
 class Config
 {
     const CONFIG_CACHE_ENTRY_NAME = "core_config";
@@ -39,6 +41,11 @@ class Config
     protected $configTree;
 
     /**
+     * @var array
+     */
+    protected $helpers;
+
+    /**
      * @param string $baseDirectory
      * @param array $pools
      * @param Cache $cache
@@ -69,6 +76,7 @@ class Config
 
         $this->pools = $pools;
         $this->cache = $cache;
+        $this->helpers = array();
         $this->initialiseConfigTree();
     }
 
@@ -144,6 +152,38 @@ class Config
     }
 
     /**
+     * @param string $name
+     * @param string $group
+     * @return MattyG\Framework\Core\Helper\HelperInterface
+     */
+    public function getHelper($name, $group = "core")
+    {
+        if (!isset($this->helpers[$group][$name])) {
+            $helper = $this->getConfig("helpers/$group/*/name=$name");
+            if (!$helper) {
+                return null;
+            }
+            if (!isset($this->helpers[$group])) {
+                $this->helpers[$group] = array();
+            }
+            $helperClass = $helper["class"];
+            $this->helpers[$group][$name] = new $helperClass($this, $helper["name"]);
+            if ($this->helpers[$group][$name] instanceof HelperExtra) {
+                $requirements = array();
+                foreach ($helper["require"] as $requirement) {
+                    $helper = $this->getHelper($requirement["name"], $group);
+                    if (!$helper && $group != "core") {
+                        $helper = $this->getHelper($requirement["name"], "core");
+                    }
+                    $requirements[$requirement["name"]] = $helper;
+                }
+                $this->helpers[$group][$name]->giveHelpers($requirements);
+            }
+        }
+        return $this->helpers[$group][$name];
+    }
+
+    /**
      * Returns the main directory containing all of the application files.
      *
      * @return string
@@ -152,6 +192,7 @@ class Config
     {
         return $this->baseDirectory;
     }
+
     /**
      * Returns the main directory that all configuration files must be
      * contained within.

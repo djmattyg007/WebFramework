@@ -75,23 +75,17 @@ class Manager
     }
 
     /**
-     * @param string
+     * @param string $name
+     * @return MattyG\Framework\Core\Helper\HelperInterface
      */
     public function getHelper($name)
     {
         if (!isset($this->viewHelpers[$name])) {
-            $helper = $this->config->getConfig("helpers/view/*/name=$name");
-            if (!$helper) {
-                $helper = $this->config->getConfig("helpers/core/*/name=$name");
-            }
-            $helperClass = $helper["class"];
-            $this->viewHelpers[$name] = new $helperClass($this->config, $helper["name"]);
-            if ($this->viewHelpers[$name] instanceof HelperExtra) {
-                $requirements = array();
-                foreach ($helper["require"] as $requirement) {
-                    $requirements[$requirement["name"]] = $this->getHelper($requirement["name"]);
-                }
-                $this->viewHelpers[$name]->giveHelpers($requirements);
+            $helper = $this->config->getHelper($name, "view");
+            if ($helper) {
+                $this->viewHelpers[$name] = $helper;
+            } else {
+                $this->viewHelpers[$name] = $this->config->getHelper($name, "core");
             }
         }
         return $this->viewHelpers[$name];

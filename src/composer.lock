@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1a89f8ba1ab035354a073ef565165287",
+    "hash": "ff7dee026bd1dd303b62227f414ddc6c",
     "packages": [
         {
             "name": "aura/router",
@@ -120,16 +120,16 @@
         },
         {
             "name": "mattyg/http",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/djmattyg007/MattyG.Http.git",
-                "reference": "54b35d703d1e62376fecb78b6279627878ccf745"
+                "reference": "337add95623a11347b935059680af761b4e725b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djmattyg007/MattyG.Http/zipball/54b35d703d1e62376fecb78b6279627878ccf745",
-                "reference": "54b35d703d1e62376fecb78b6279627878ccf745",
+                "url": "https://api.github.com/repos/djmattyg007/MattyG.Http/zipball/337add95623a11347b935059680af761b4e725b0",
+                "reference": "337add95623a11347b935059680af761b4e725b0",
                 "shasum": ""
             },
             "require": {

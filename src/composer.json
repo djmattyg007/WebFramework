@@ -1,6 +1,6 @@
 {
     "require": {
-        "mattyg/http": "2.0.1",
+        "mattyg/http": "2.1.0",
         "aura/sql-query": "2.*@dev",
         "mattyg/meta": "2.1.1",
         "aura/router": "2.*@dev"

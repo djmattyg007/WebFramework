@@ -69,6 +69,16 @@
             ],
             "pages" : [
                 {
+                    "name" : "empty",
+                    "view" : "base.pages.empty",
+                    "blocks" : [
+                        { "name" : "head" },
+                        { "name" : "header" },
+                        { "name" : "page-content" },
+                        { "name" : "footer" }
+                    ]
+                },
+                {
                     "name" : "one-column",
                     "view" : "base.pages.one-column",
                     "blocks" : [

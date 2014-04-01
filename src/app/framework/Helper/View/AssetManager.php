@@ -31,6 +31,11 @@ class AssetManager implements HelperExtra
     protected $assetsDir = self::DIR_ASSETS;
 
     /**
+     * @var string
+     */
+    protected $assetsBaseUrl = null;
+
+    /**
      * @param Config $config
      * @param string $helperName
      */
@@ -137,7 +142,10 @@ class AssetManager implements HelperExtra
      */
     public function getAssetsBaseUrl()
     {
-        return $this->urlHelper->getBaseUrl() . $this->assetsDir . "/";
+        if ($this->assetsBaseUrl === null) {
+            $this->assetsBaseUrl = $this->urlHelper->getBaseUrl() . $this->assetsDir . "/";
+        }
+        return $this->assetsBaseUrl;
     }
 }
 

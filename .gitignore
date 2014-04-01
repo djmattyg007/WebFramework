@@ -5,6 +5,8 @@
 !/src/app/user/Entity/.gitkeep
 /src/app/user/Handler/*
 !/src/app/user/Handler/.gitkeep
+/src/app/user/Helper/*
+!/src/app/user/Helper/.gitkeep
 /src/config/user/*.json
 /vendor/
 /src/vendor/

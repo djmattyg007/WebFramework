@@ -107,8 +107,20 @@ class Manager
     {
         $globalHelpers = $this->config->getConfig("layout/global_helpers");
         foreach ($globalHelpers as $helper) {
-            $this->addVar("helper" . ucfirst($helper["name"]), $this->getHelper($helper["name"]));
+            $this->addVar($this->prepareHelperName($helper["name"]), $this->getHelper($helper["name"]));
         }
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    protected function prepareHelperName($name)
+    {
+        $helperName = preg_replace_callback("/_[a-z]/", function($matches) {
+            return strtoupper(ltrim($matches[0], "_"));
+        }, $name);
+        return "helper" . ucfirst($helperName);
     }
 
     /**
@@ -174,7 +186,7 @@ class Manager
     {
         $return = array();
         foreach ($helpers as $helper) {
-            $helperName = "helper" . ucfirst($helper["name"]);
+            $helperName = $this->prepareHelperName($helper["name"]);
             $return[$helperName] = $this->getHelper($helper["name"]);
         }
         return $return;

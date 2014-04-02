@@ -73,7 +73,7 @@ class Url implements Helper
         if (!$this->router) {
             return null;
         }
-        return $this->router->generate($routeName, $params);
+        return rtrim($this->getBaseUrl(), "/") . $this->router->generate($routeName, $params);
     }
 }
 

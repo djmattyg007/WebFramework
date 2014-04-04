@@ -1,8 +1,31 @@
 {
     "menus" : {
         "navbar" : {
-            "left" : [],
-            "right" : []
+            "left" : {
+                "settings" : [
+                    {
+                        "name" : "separator",
+                        "value" : false
+                    }
+                ],
+                "nodes" : [
+                    {
+                        "name" : "home",
+                        "label" : "Home",
+                        "route" : "home.index",
+                        "children" : []
+                    }
+                ]
+            },
+            "right" : {
+                "settings" : [
+                    {
+                        "name" : "separator",
+                        "value" : true
+                    }
+                ],
+                "nodes" : []
+            }
         }
     }
 }

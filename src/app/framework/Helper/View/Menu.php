@@ -20,7 +20,12 @@ class Menu implements HelperExtra
     /**
      * @var array
      */
-    protected $menuConfig;
+    protected $settings;
+
+    /**
+     * @var array
+     */
+    protected $nodes;
 
     /**
      * @param Config $config
@@ -56,7 +61,9 @@ class Menu implements HelperExtra
             throw new \InvalidArgumentException("Invalid menu type.");
         }
         $menuName = str_replace("_", "/", $menuName);
-        $this->menuConfig = $this->config->getConfig("menus/$menuName");
+        $menuConfig = $this->config->getConfig("menus/$menuName");
+        $this->settings = $menuConfig["settings"];
+        $this->nodes = $menuConfig["nodes"];
     }
 
     /**
@@ -64,7 +71,19 @@ class Menu implements HelperExtra
      */
     public function getMenuItems()
     {
-        return $this->menuConfig;
+        return $this->nodes;
+    }
+
+    /**
+     * @param string $key
+     * @return array|mixed|null
+     */
+    public function getMenuSetting($key = null)
+    {
+        if ($key === null) {
+            return $this->settings;
+        }
+        return $this->config->getConfig("*/name=$key/value", $this->settings);
     }
 
     /**

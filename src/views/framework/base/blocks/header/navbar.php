@@ -10,7 +10,11 @@
 
     <section class="top-bar-section">
         <ul class="left">
-            <?php foreach ($helperNavbarLeft->getMenuItems() as $menuItem): ?>
+            <?php $leftNavbarSeparator = $helperNavbarLeft->getMenuSetting("separator"); ?>
+            <?php $leftNavbarItems = $helperNavbarLeft->getMenuItems(); ?>
+            <?php $leftNavbarCount = count($leftNavbarItems); ?>
+            <?php $x = 0; ?>
+            <?php foreach ($leftNavbarItems as $menuItem): ?>
             <?php if ($helperNavbarLeft->isActiveRoute($menuItem["route"])): ?>
             <li class="active">
             <?php else: ?>
@@ -18,12 +22,18 @@
             <?php endif; ?>
                 <a href="<?php echo $helperUrl->getRouteUrl($menuItem["route"]); ?>"><?php echo $helperTranslate->__($menuItem["label"]); ?></a>
             </li>
+            <?php if ($leftNavbarSeparator === true && $x < $leftNavbarCount): ?>
+            <li class="divider"></li>
+            <?php endif; ?>
             <?php endforeach; ?>
         </ul>
 
         <ul class="right">
-            <li class="active"><a href="#">Right Button Active</a></li>
+            <?php $rightNavbarSeparator = $helperNavbarRight->getMenuSetting("separator"); ?>
             <?php foreach ($helperNavbarRight->getMenuItems() as $menuItem): ?>
+            <?php if ($rightNavbarSeparator === true): ?>
+            <li class="divider"></li>
+            <?php endif; ?>
             <?php if ($helperNavbarLeft->isActiveRoute($menuItem["route"])): ?>
             <li class="active">
             <?php else: ?>

@@ -38,6 +38,11 @@ class Manager
     protected $viewHelpers;
 
     /**
+     * @var bool
+     */
+    protected $globalHelpersInitialised;
+
+    /**
      * @param string $baseDirectory
      * @param array $pools
      * @param Config $config
@@ -49,7 +54,7 @@ class Manager
         $this->config = $config;
         $this->globalVars = array();
         $this->viewHelpers = array();
-        $this->initialiseGlobalHelpers();
+        $this->globalHelpersInitialised = false;
     }
 
     /**
@@ -67,6 +72,9 @@ class Manager
      */
     public function getVars()
     {
+        if ($this->globalHelpersInitialised === false) {
+            $this->initialiseGlobalHelpers();
+        }
         return $this->globalVars;
     }
 
@@ -109,6 +117,7 @@ class Manager
         foreach ($globalHelpers as $helper) {
             $this->addVar($this->prepareHelperName($helper["name"]), $this->getHelper($helper["name"]));
         }
+        $this->globalHelpersInitialised = true;
     }
 
     /**
@@ -158,7 +167,7 @@ class Manager
         $view = new View($viewFile, $this, $children, $directOutput);
         $helpers = $this->getViewHelpers($viewData["helpers"]);
         $vars = $this->getViewVars($viewData["vars"]);
-        $view->setVars(array_merge($helpers, $vars, $this->getVars()));
+        $view->setVars(array_merge($helpers, $this->getVars(), $vars));
         return $view;
     }
 

@@ -108,7 +108,7 @@ class Config
     public function setRouterObject(Router $router)
     {
         $this->router = $router;
-        $this->getHelper("url")->setRouterObject($router);
+        $this->helpers["core"]["router"] = $router;
         return $this;
     }
 

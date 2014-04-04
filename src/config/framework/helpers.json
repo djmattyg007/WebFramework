@@ -3,7 +3,10 @@
         "core" : [
             {
                 "name" : "url",
-                "class" : "\\MattyG\\Framework\\Helper\\Core\\Url"
+                "class" : "\\MattyG\\Framework\\Helper\\Core\\Url",
+                "require" : [
+                    { "name" : "router" }
+                ]
             },
             {
                 "name" : "canonical",

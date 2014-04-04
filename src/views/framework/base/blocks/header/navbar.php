@@ -11,7 +11,11 @@
     <section class="top-bar-section">
         <ul class="left">
             <?php foreach ($helperNavbarLeft->getMenuItems() as $menuItem): ?>
+            <?php if ($helperNavbarLeft->isActiveRoute($menuItem["route"])): ?>
+            <li class="active">
+            <?php else: ?>
             <li>
+            <?php endif; ?>
                 <a href="<?php echo $helperUrl->getRouteUrl($menuItem["route"]); ?>"><?php echo $helperTranslate->__($menuItem["label"]); ?></a>
             </li>
             <?php endforeach; ?>
@@ -20,7 +24,11 @@
         <ul class="right">
             <li class="active"><a href="#">Right Button Active</a></li>
             <?php foreach ($helperNavbarRight->getMenuItems() as $menuItem): ?>
+            <?php if ($helperNavbarLeft->isActiveRoute($menuItem["route"])): ?>
+            <li class="active">
+            <?php else: ?>
             <li>
+            <?php endif; ?>
                 <a href="<?php echo $helperUrl->getRouteUrl($menuItem["route"]); ?>"><?php echo $helperTranslate->__($menuItem["label"]); ?></a>
             </li>
             <?php endforeach; ?>

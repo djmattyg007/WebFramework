@@ -107,6 +107,8 @@ class App
     }
 
     /**
+     * Returns the cache object contained by the App object.
+     *
      * @return Cache
      */
     public function getCache()
@@ -128,6 +130,8 @@ class App
     }
 
     /**
+     * Returns the Config object contained by the App object.
+     *
      * @return Config
      */
     public function getConfig()
@@ -149,6 +153,8 @@ class App
     }
 
     /**
+     * Returns the database object contained by the App object.
+     *
      * @return DB
      */
     public function getDB()

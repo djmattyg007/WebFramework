@@ -10,17 +10,26 @@
 
     <section class="top-bar-section">
         <ul class="left">
-            <li><a href="#">Left Nav Button</a></li>
+            <?php foreach ($helperNavbarLeft->getMenuItems() as $menuItem): ?>
+            <li>
+                <a href="<?php echo $helperUrl->getRouteUrl($menuItem["route"]); ?>"><?php echo $helperTranslate->__($menuItem["label"]); ?></a>
+            </li>
+            <?php endforeach; ?>
         </ul>
 
         <ul class="right">
             <li class="active"><a href="#">Right Button Active</a></li>
-            <li class="has-dropdown">
+            <?php foreach ($helperNavbarRight->getMenuItems() as $menuItem): ?>
+            <li>
+                <a href="<?php echo $helperUrl->getRouteUrl($menuItem["route"]); ?>"><?php echo $helperTranslate->__($menuItem["label"]); ?></a>
+            </li>
+            <?php endforeach; ?>
+            <!--li class="has-dropdown">
                 <a href="#">Right Button Dropdown</a>
                 <ul class="dropdown">
                     <li><a href="#">First link in dropdown</a></li>
                 </ul>
-            </li>
+            </li-->
         </ul>
     </section>
 </nav>

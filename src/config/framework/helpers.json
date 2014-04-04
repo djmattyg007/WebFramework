@@ -48,6 +48,20 @@
                 "require" : [
                     { "name" : "url" }
                 ]
+            },
+            {
+                "name" : "navbar_left",
+                "class" : "\\MattyG\\Framework\\Helper\\View\\Menu",
+                "require" : [
+                    { "name" : "router" }
+                ]
+            },
+            {
+                "name" : "navbar_right",
+                "class" : "\\MattyG\\Framework\\Helper\\View\\Menu",
+                "require" : [
+                    { "name" : "router" }
+                ]
             }
         ]
     }

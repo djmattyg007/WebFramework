@@ -37,7 +37,10 @@
                             "name" : "navbar",
                             "view" : "base.blocks.header.navbar",
                             "children" : [],
-                            "helpers" : [],
+                            "helpers" : [
+                                { "name" : "navbar_left" },
+                                { "name" : "navbar_right" }
+                            ],
                             "vars" : [
                                 {
                                     "name" : "sitename",

@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Router.git",
-                "reference": "0955383d8073aada7fd201303128b2e9e81306dc"
+                "reference": "91d5980b1bbcc7dd4a5b5b756102fc39bddb2d1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/0955383d8073aada7fd201303128b2e9e81306dc",
-                "reference": "0955383d8073aada7fd201303128b2e9e81306dc",
+                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/91d5980b1bbcc7dd4a5b5b756102fc39bddb2d1f",
+                "reference": "91d5980b1bbcc7dd4a5b5b756102fc39bddb2d1f",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2014-04-03 00:21:25"
+            "time": "2014-04-03 14:01:35"
         },
         {
             "name": "aura/sql-query",

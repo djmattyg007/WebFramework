@@ -97,7 +97,7 @@ class DB
      */
     public static function loaderMysql($dbname, $hostname, $username, $password, array $driverOptions = array())
     {
-        return new DB("mysql:dbname=" . $dbname . ";host=" . $hostname, $username, $password, $driverOptions);
+        return new DB("mysql:dbname=" . $dbname . ";host=" . $hostname . ";charset=utf8", $username, $password, $driverOptions);
     }
 
     /**

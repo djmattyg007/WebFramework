@@ -96,11 +96,14 @@ class Cache
      */
     protected function prepareCache()
     {
-        mkdir($this->cacheDirectory);
-        mkdir($this->getObjectsDirectory());
+        $oldUmask = umask(0);
+        mkdir($this->cacheDirectory, 0777);
+        mkdir($this->getObjectsDirectory(), 0777);
 
         $this->cacheInfo = array("objects" => array());
         file_put_contents($this->cacheDirectory . self::CACHE_INFO_FILENAME, json_encode(array("cache" => $this->cacheInfo)));
+        @chmod($this->cacheDirectory . self::CACHE_INFO_FILENAME, 0666);
+        umask($oldUmask);
     }
 
     /**
@@ -192,10 +195,14 @@ class Cache
         if (file_exists($fileName) && !is_writeable($fileName)) {
             throw new \RuntimeException("Unable to overwrite existing cache data for object $objectId.");
         }
+        $oldUmask = umask(0);
         $check = file_put_contents($fileName, serialize($this->cacheObjects[$hash]), LOCK_EX);
         if ($check === false && $this->strict) {
+            umask($oldUmask);
             throw new \RuntimeException("Unable to save cache object $objectId.");
         }
+        @chmod($fileName, 0666);
+        umask($oldUmask);
     }
 
     /**
@@ -348,6 +355,9 @@ class Cache
         foreach ($this->changed as $change) {
             $this->saveCacheObject($this->cacheInfo["objects"][$change]["store"]);
         }
+        $oldUmask = umask(0);
         file_put_contents($this->cacheDirectory . self::CACHE_INFO_FILENAME, json_encode(array("cache" => $this->cacheInfo)));
+        @chmod($this->cacheDirectory . self::CACHE_INFO_FILENAME, 0666);
+        umask($oldUmask);
     }
 }

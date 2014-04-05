@@ -93,6 +93,11 @@ class Menu implements HelperExtra
      */
     public function isActiveRoute($routeName, array $params = array())
     {
+        if (!$this->router) {
+            // If we don't have a Router object, we have no way of knowing.
+            // Don't lie!
+            return false;
+        }
         $matchedRoute = $this->router->getMatchedRoute();
         if (!$matchedRoute) {
             // This means that either matching hasn't taken place, or that no

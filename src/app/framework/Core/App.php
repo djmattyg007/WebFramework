@@ -88,7 +88,7 @@ class App
                 $this->setViewManager(new ViewManager($this->getBaseDirectory(), array_reverse($pools), $this->getConfig()));
             }
             if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
-                $this->setDB(DB::loader($dbConfig["type"], $dbConfig["database"], $dbConfig["hostname"], $dbConfig["username"], $dbConfig["password"]));
+                $this->setDB(DB::loader($dbConfig["adapter"], $dbConfig["name"], $dbConfig["host"], $dbConfig["user"], $dbConfig["pass"]));
             }
         }
     }

@@ -11,6 +11,9 @@
 /src/config/user/*
 !/src/config/user/.gitkeep
 
+/src/db/*
+!/src/db/.gitkeep
+
 /src/views/user/*
 !/src/views/user/.gitkeep
 

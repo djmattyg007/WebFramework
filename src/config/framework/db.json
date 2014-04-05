@@ -1,10 +1,11 @@
 {
     "db" : {
         "active" : false,
-        "type" : "mysql",
-        "database" : "mydb",
-        "hostname" : "host",
-        "username" : "user",
-        "password" : "pass"
+        "adapter" : "mysql",
+        "host" : "localhost",
+        "name" : "mydb",
+        "user" : "user",
+        "pass" : "pass"
     }
 }
+

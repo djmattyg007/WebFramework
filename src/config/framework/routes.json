@@ -1,9 +1,0 @@
-{
-    "routes" : [
-        {
-            "name" : "home.index",
-            "method" : "get",
-            "path" : "/"
-        }
-    ]
-}

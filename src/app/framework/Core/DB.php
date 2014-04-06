@@ -176,7 +176,7 @@ class DB
      * if it wasn't.
      *
      * @param string $query
-     * @return PDOStatement
+     * @return \PDOStatement
      */
     public function newStatement($query)
     {

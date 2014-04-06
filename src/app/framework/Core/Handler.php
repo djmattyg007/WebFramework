@@ -19,12 +19,12 @@ abstract class Handler
     protected $viewManager;
 
     /**
-     * @var Request
+     * @var \MattyG\Http\Request
      */
     protected $request;
 
     /**
-     * @var Response
+     * @var \MattyG\Http\Response
      */
     protected $response;
 

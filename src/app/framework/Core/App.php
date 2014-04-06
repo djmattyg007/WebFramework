@@ -82,14 +82,21 @@ class App
 
         $this->pools = $pools;
         if ($initialise === true) {
-            $this->setCache(new Cache($this->getVarDirectory(), true));
-            $this->setConfig(new Config($this->getBaseDirectory(), $pools, $this->getCache(), true));
-            if ($this->getConfig()->getConfig("layout")) {
-                $this->setViewManager(new ViewManager($this->getBaseDirectory(), array_reverse($pools), $this->getConfig()));
-            }
-            if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
-                $this->setDB(DB::loader($dbConfig["adapter"], $dbConfig["name"], $dbConfig["host"], $dbConfig["user"], $dbConfig["pass"]));
-            }
+            $this->initialise();
+        }
+    }
+
+    public function initialise()
+    {
+        $this->setCache(new Cache($this->getVarDirectory(), true));
+        $this->setConfig(new Config($this->getBaseDirectory(), $this->pools, $this->getCache(), true));
+
+        if ($this->getConfig()->getConfig("layout")) {
+            $this->setViewManager(new ViewManager($this->getBaseDirectory(), array_reverse($this->pools), $this->getConfig()));
+        }
+
+        if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
+            $this->setDB(DB::loader($dbConfig["adapter"], $dbConfig["name"], $dbConfig["host"], $dbConfig["user"], $dbConfig["pass"]));
         }
     }
 

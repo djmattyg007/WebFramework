@@ -343,8 +343,17 @@ class Config
     {
         foreach ($config as $key => $value) {
             if (is_numeric($key)) {
-                $tree[] = array();
-                $actualKey = count($tree) - 1;
+                $searchIndex = false;
+                if (isset($value["name"])) {
+                    $column = array_column($tree, "name");
+                    $searchIndex = array_search($value["name"], $column);
+                }
+                if ($searchIndex === false) {
+                    $tree[] = array();
+                    $actualKey = count($tree) - 1;
+                } else {
+                    $actualKey = $searchIndex;
+                }
             } else {
                 $actualKey = $key;
             }

@@ -7,15 +7,16 @@ work up to you. It requires at least PHP 5.5.
 This framework is designed to be heavily driven by JSON configuration files.
 Everything from database connection details to basic site information is
 designed to be stored in JSON files and read through a central configuration
-object. It also utilises a JSON-based layout system to help determine what
-content is rendered on each page.
+object. It also utilises a configuration-based layout system to help determine
+what content is rendered on each page.
 
 Everything is designed to be overridden by the user of the framework. This is
-definitely true of the code, and is almost completely true of the configuration
-system. Unfortunately, this is not perfect yet, and still requires some work.
+definitely true of the code and the configuration. Large parts of the
+framework will be usable without writing any code, purely because the
+configuration is completely exstensible.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.5.4. The following is a list of things that are
+as such is currently just at v0.5.5. The following is a list of things that are
 still missing or still need work:
 - A base design. It is still incredibly basic. The top priority is getting the
   top nav bar working correctly. Dropdown menus need to be supported, for

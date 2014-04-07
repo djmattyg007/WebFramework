@@ -11,6 +11,8 @@ class DB
     const DB_TYPE_SQLITE = "sqlite";
     const DB_TYPE_SQLSRV = "sqlsrv";
 
+    const DB_CACHE_PREFIX = "core_db";
+
     /**
      * @var PDO
      */
@@ -20,6 +22,11 @@ class DB
      * @var bool
      */
     protected $transactionActive = false;
+
+    /**
+     * @var Cache
+     */
+    protected $cache;
 
     /**
      * @param string $dsn
@@ -98,6 +105,16 @@ class DB
     public static function loaderMysql($dbname, $hostname, $username, $password, array $driverOptions = array())
     {
         return new DB("mysql:dbname=" . $dbname . ";host=" . $hostname . ";charset=utf8", $username, $password, $driverOptions);
+    }
+
+    /**
+     * @param Cache $cache
+     * @return DB
+     */
+    public function setCache(Cache $cache)
+    {
+        $this->cache = $cache;
+        return $this;
     }
 
     /**
@@ -218,5 +235,32 @@ class DB
     public function newDeleteQuery()
     {
         return $this->queryFactory->newDelete();
+    }
+
+    /**
+     * @param string $query
+     * @param mixed $result
+     * @return void
+     */
+    public function saveQueryCache($query, $result)
+    {
+        if (!$this->cache) {
+            return;
+        }
+        $cacheId = self::DB_CACHE_PREFIX . "_query_" . sha1($query);
+        $this->cache->saveCache($cacheId, $result, time() + 3600);
+    }
+
+    /**
+     * @param string $query
+     * @return mixed
+     */
+    public function getQueryCache($query)
+    {
+        if (!$this->cache) {
+            return null;
+        }
+        $cacheId = self::DB_CACHE_PREFIX . "_query_" . sha1($query);
+        $this->cache->loadCache($cacheId, null);
     }
 }

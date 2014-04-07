@@ -7,9 +7,6 @@ use \Aura\Sql_Query\QueryFactory as QueryFactory;
 class DB
 {
     const DB_TYPE_MYSQL = "mysql";
-    const DB_TYPE_PGSQL = "pgsql";
-    const DB_TYPE_SQLITE = "sqlite";
-    const DB_TYPE_SQLSRV = "sqlsrv";
 
     const DB_CACHE_PREFIX = "core_db";
 
@@ -38,39 +35,10 @@ class DB
     {
         try {
             $this->db = new \PDO($dsn, $username, $password, $driverOptions);
-            $this->checkDSN($dsn);
+            $this->queryFactory = new QueryFactory(self::DB_TYPE_MYSQL, false);
             return $this;
         } catch (PDOException $e) {
             throw new Exception("Unable to connect to the database with the details supplied.");
-        }
-    }
-
-    /**
-     * Parse the DSN supplied to the constructor and perform any necessary
-     * tasks based on what's found.
-     * At the moment, the only thing that happens is initialising an Aura
-     * SQL_Query Query Factory object for those database drivers that can use
-     * it.
-     *
-     * @param string $dsn
-     */
-    protected function checkDSN($dsn)
-    {
-        $driver = substr($dsn, 0, 6);
-        switch ($driver)
-        {
-            case "mysql:":
-                $this->queryFactory = new QueryFactory(self::DB_TYPE_MYSQL, false);
-                break;
-            case "pgsql:":
-                $this->queryFactory = new QueryFactory(self::DB_TYPE_PGSQL, false);
-                break;
-            case "sqlite":
-                $this->queryFactory = new QueryFactory(self::DB_TYPE_SQLITE, false);
-                break;
-            case "sqlsrv":
-                $this->queryFactory = new QueryFactory(self::DB_TYPE_SQLSRV, false);
-                break;
         }
     }
 

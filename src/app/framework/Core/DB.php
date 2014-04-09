@@ -2,6 +2,7 @@
 
 namespace MattyG\Framework\Core;
 
+use \MattyG\Framework\Core\DB\Adapter as Adapter;
 use \Aura\Sql_Query\QueryFactory as QueryFactory;
 
 class DB
@@ -21,6 +22,16 @@ class DB
     protected $transactionActive = false;
 
     /**
+     * @var \Aura\Sql_Query\QueryFactory
+     */
+    protected $queryFactory;
+
+    /**
+     * @var MattyG\Framework\Core\DB\Adapter
+     */
+    protected $adapter;
+
+    /**
      * @var Cache
      */
     protected $cache;
@@ -35,11 +46,40 @@ class DB
     {
         try {
             $this->db = new \PDO($dsn, $username, $password, $driverOptions);
-            $this->queryFactory = new QueryFactory(self::DB_TYPE_MYSQL, false);
             return $this;
         } catch (PDOException $e) {
             throw new Exception("Unable to connect to the database with the details supplied.");
         }
+    }
+
+    /**
+     * @param \Aura\Sql_Query\QueryFactory
+     * @return DB
+     */
+    public function setQueryFactory(QueryFactory $factory)
+    {
+        $this->queryFactory = $factory;
+        return $this;
+    }
+
+    /**
+     * @param MattyG\Framework\Core\DB\Adapter
+     * @return DB
+     */
+    public function setAdapter(Adapter $adapter)
+    {
+        $this->adapter = $adapter;
+        return $this;
+    }
+
+    /**
+     * @param Cache $cache
+     * @return DB
+     */
+    public function setCache(Cache $cache)
+    {
+        $this->cache = $cache;
+        return $this;
     }
 
     /**
@@ -53,13 +93,19 @@ class DB
      */
     public static function loader($type, $dbname, $hostname, $username, $password, array $driverOptions = array())
     {
+        $db = null;
         switch ($type)
         {
             case self::DB_TYPE_MYSQL:
-                return self::loaderMysql($dbname, $hostname, $username, $password, $driverOptions);
+                $db = self::loaderMysql($dbname, $hostname, $username, $password, $driverOptions);
+                break;
             default:
                 return null;
         }
+
+        $db->setQueryFactory(new QueryFactory($type, false));
+        $db->setAdapter(Adapter::loader($type, $db));
+        return $db;
     }
 
     /**
@@ -73,16 +119,6 @@ class DB
     public static function loaderMysql($dbname, $hostname, $username, $password, array $driverOptions = array())
     {
         return new DB("mysql:dbname=" . $dbname . ";host=" . $hostname . ";charset=utf8", $username, $password, $driverOptions);
-    }
-
-    /**
-     * @param Cache $cache
-     * @return DB
-     */
-    public function setCache(Cache $cache)
-    {
-        $this->cache = $cache;
-        return $this;
     }
 
     /**
@@ -230,5 +266,23 @@ class DB
         }
         $cacheId = self::DB_CACHE_PREFIX . "_query_" . sha1($query);
         $this->cache->loadCache($cacheId, null);
+    }
+
+    /**
+     * Act as a proxy for the adapter attached to the DB object.
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        if (!$this->adapter) {
+            throw new \BadMethodCallException();
+        }
+        if (!method_exists($this->adapter, $method)) {
+            throw new \BadMethodCallException();
+        }
+        return call_user_func_array(array($this->adapter, $method), $args);
     }
 }

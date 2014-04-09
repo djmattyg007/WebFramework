@@ -265,7 +265,7 @@ class DB
             return null;
         }
         $cacheId = self::DB_CACHE_PREFIX . "_query_" . sha1($query);
-        $this->cache->loadCache($cacheId, null);
+        return $this->cache->loadCache($cacheId, null);
     }
 
     /**

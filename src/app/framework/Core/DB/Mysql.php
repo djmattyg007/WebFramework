@@ -15,6 +15,9 @@ class Mysql extends Adapter
         if (is_string($column)) {
             $describeQuery .= " $column";
         }
+        if ($cachedResult = $this->db->getQueryCache($describeQuery)) {
+            return $cachedResult;
+        }
         $statement = $this->newStatement($describeQuery);
         $statement->execute();
         $columns = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -39,7 +42,8 @@ class Mysql extends Adapter
             $array["default"] = $column["Default"];
             $returnColumns[] = $array;
         }
-        return $arrayColumns;
+        $this->db->saveQueryCache($describeQuery, $returnColumns);
+        return $returnColumns;
     }
 }
 

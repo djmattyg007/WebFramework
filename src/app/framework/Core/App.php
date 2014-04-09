@@ -96,7 +96,11 @@ class App
         }
 
         if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
-            $this->setDB(DB::loader($dbConfig["adapter"], $dbConfig["name"], $dbConfig["host"], $dbConfig["user"], $dbConfig["pass"]));
+            $db = DB::loader($dbConfig["adapter"], $dbConfig["name"], $dbConfig["host"], $dbConfig["user"], $dbConfig["pass"]);
+            if ($db) {
+                $db->setCache($this->getCache());
+                $this->setDB($db);
+            }
         }
     }
 

@@ -210,6 +210,19 @@ class DB
     }
 
     /**
+     * @return int|string
+     */
+    public function lastInsertId()
+    {
+        try {
+            $id = $this->db->lastInsertId();
+        } catch (PDOException $e) {
+            $id = null;
+        }
+        return $id;
+    }
+
+    /**
      * @return \Aura\Sql_Query\Common\SelectInterface
      */
     public function newSelectQuery()

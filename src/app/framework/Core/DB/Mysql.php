@@ -15,12 +15,18 @@ class Mysql extends Adapter
         if (is_string($column)) {
             $describeQuery .= " $column";
         }
-        if ($cachedResult = $this->db->getQueryCache($describeQuery)) {
+        if ($cachedResult = $this->db->getQueryCache("describe_{$tableName}_processed")) {
             return $cachedResult;
         }
-        $statement = $this->newStatement($describeQuery);
-        $statement->execute();
-        $columns = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if ($cachedResult = $this->db->getQueryCache($describeQuery)) {
+            $columns = $cachedResult;
+        } else {
+            $statement = $this->newStatement($describeQuery);
+            $statement->execute();
+            $columns = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $this->db->saveQueryCache($describeQuery, $columns);
+        }
+
         $returnColumns = array();
         foreach ($columns as $column) {
             $array = array();
@@ -42,7 +48,7 @@ class Mysql extends Adapter
             $array["default"] = $column["Default"];
             $returnColumns[] = $array;
         }
-        $this->db->saveQueryCache($describeQuery, $returnColumns);
+        $this->db->saveQueryCache("describe_{$tableName}_processed", $returnColumns);
         return $returnColumns;
     }
 }

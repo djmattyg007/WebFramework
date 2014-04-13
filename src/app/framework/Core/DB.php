@@ -5,6 +5,9 @@ namespace MattyG\Framework\Core;
 use \MattyG\Framework\Core\DB\Adapter as Adapter;
 use \Aura\Sql_Query\QueryFactory as QueryFactory;
 
+use \PDO;
+use \PDOException;
+
 class DB
 {
     const DB_TYPE_MYSQL = "mysql";
@@ -45,7 +48,7 @@ class DB
     public function __construct($dsn, $username = null, $password = null, array $driverOptions = array())
     {
         try {
-            $this->db = new \PDO($dsn, $username, $password, $driverOptions);
+            $this->db = new PDO($dsn, $username, $password, $driverOptions);
             return $this;
         } catch (PDOException $e) {
             throw new Exception("Unable to connect to the database with the details supplied.");

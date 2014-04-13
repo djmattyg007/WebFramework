@@ -104,5 +104,13 @@ trait DatabaseLoad
     {
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function afterLoad()
+    {
+        return $this->_afterLoad();
+    }
 }
 

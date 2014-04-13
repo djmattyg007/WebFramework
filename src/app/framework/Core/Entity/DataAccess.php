@@ -45,7 +45,11 @@ trait DataAccess
      */
     public function getIdFieldName()
     {
-        return $this->_idFieldName;
+        if ($this->_idFieldName === null) {
+            return "id";
+        } else {
+            return $this->_idFieldName;
+        }
     }
 
     /**

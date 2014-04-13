@@ -9,12 +9,12 @@ trait Database
     /**
      * @var string
      */
-    protected $tableName = null;
+    protected $_tableName = null;
 
     /**
      * @var bool
      */
-    protected $useQueryBuilder = false;
+    protected $_useQueryBuilder = false;
 
     /**
      * @var MattyG\Framework\Core\DB

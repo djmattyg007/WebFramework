@@ -46,7 +46,7 @@ trait DatabaseLoad
         if (!$this->db) {
             throw new \RuntimeException("No database object available.");
         }
-        if ($this->useQueryBuilder === true) {
+        if ($this->_useQueryBuilder === true) {
             list($statement, $params) = $this->_getLoadStatementBuilder($id, $fieldName);
         } else {
             list($statement, $params) = $this->_getLoadStatementSql($id, $fieldName);
@@ -72,7 +72,7 @@ trait DatabaseLoad
         if (!$this->db) {
             throw new \RuntimeException("No database object available.");
         }
-        $query = "SELECT * FROM `{$this->tableName}` WHERE `{$this->tableName}`.`$fieldName` = ?";
+        $query = "SELECT * FROM `{$this->_tableName}` WHERE `{$this->_tableName}`.`$fieldName` = ?";
         $statement = $db->newStatement($query);
         $params = array(1 => $id);
         return array($statement, $params);
@@ -89,9 +89,9 @@ trait DatabaseLoad
             throw new \RuntimeException("No database object available.");
         }
         $query = $this->db->newSelectQuery();
-        $query->from($this->tableName)
+        $query->from($this->_tableName)
             ->cols(array("*"))
-            ->where($this->tableName . "." . $fieldName . " = ?");
+            ->where($this->_tableName . "." . $fieldName . " = ?");
         $statement = $db->newStatement((string) $query);
         $params = array(1 => $id);
         return array($statement, $params);

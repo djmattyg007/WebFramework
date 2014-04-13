@@ -35,5 +35,23 @@ trait Database
         $this->db = $db;
         return $this;
     }
+
+    /**
+     * @param bool $isNew
+     * @return $this
+     */
+    public function setNewObject($isNew)
+    {
+        $this->newObject = $isNew;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getNewObject()
+    {
+        return $this->newObject;
+    }
 }
 

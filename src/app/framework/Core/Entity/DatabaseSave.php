@@ -4,9 +4,6 @@ namespace MattyG\Framework\Core\Entity;
 
 trait DatabaseSave
 {
-    use DataAccess;
-    use Database;
-
     /**
      * @var bool
      */
@@ -23,7 +20,7 @@ trait DatabaseSave
             $this->_saveData();
             $this->_afterSave();
             $this->db->finishTransaction();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->db->cancelTransaction();
             throw $e;
         }

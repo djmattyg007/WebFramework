@@ -4,9 +4,6 @@ namespace MattyG\Framework\Core\Entity;
 
 trait DatabaseLoad
 {
-    use DataAccess;
-    use Database;
-
     /**
      * @param int|string $id
      * @param string $fieldName
@@ -54,7 +51,7 @@ trait DatabaseLoad
         /** @var $statement \PDOStatement */
         /** @var $params array */
         $statement->execute($params);
-        $data = $statement->fetch(PDO::FETCH_ASSOC);
+        $data = $statement->fetch(\PDO::FETCH_ASSOC);
         if ($data) {
             $this->setData($data);
 			$this->newObject = false;
@@ -67,14 +64,14 @@ trait DatabaseLoad
      * @param string $fieldName
      * @return \PDOStatement, array
      */
-    protected function _getLoadStatement($id, $fieldName)
+    protected function _getLoadStatementSql($id, $fieldName)
     {
         if (!$this->db) {
             throw new \RuntimeException("No database object available.");
         }
         $query = "SELECT * FROM `{$this->_tableName}` WHERE `{$this->_tableName}`.`$fieldName` = ?";
-        $statement = $db->newStatement($query);
-        $params = array(1 => $id);
+        $statement = $this->db->newStatement($query);
+        $params = array(0 => $id);
         return array($statement, $params);
     }
 
@@ -92,7 +89,7 @@ trait DatabaseLoad
         $query->from($this->_tableName)
             ->cols(array("*"))
             ->where($this->_tableName . "." . $fieldName . " = ?");
-        $statement = $db->newStatement((string) $query);
+        $statement = $this->db->newStatement((string) $query);
         $params = array(1 => $id);
         return array($statement, $params);
     }

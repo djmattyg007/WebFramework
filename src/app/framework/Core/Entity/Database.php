@@ -21,10 +21,10 @@ trait Database
      */
     protected $db;
 
-	/**
-	 * @var bool
-	 */
-	protected $newObject = true;
+    /**
+     * @var bool
+     */
+    protected $newObject = true;
 
     /**
      * @param MattyG\Framework\Core\DB $db

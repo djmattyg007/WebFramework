@@ -5,12 +5,12 @@ namespace MattyG\Framework\Core\Entity;
 trait DatabaseCollection
 {
     use Collection {
-        Collection::clear as parentClear,
-        Collection::getIterator as parentIterator,
-        Collection::count as parentCount,
-        Collection::getFirstItem as parentFirstItem,
-        Collection::getAllIds as parentAllIds
-    };
+        Collection::clear as parentClear;
+        Collection::getIterator as parentIterator;
+        Collection::count as parentCount;
+        Collection::getFirstItem as parentFirstItem;
+        Collection::getAllIds as parentAllIds;
+    }
     use Database;
 
     // Constants really shouldn't be in traits.
@@ -62,10 +62,11 @@ trait DatabaseCollection
      */
     public function getNewObjectInstance()
     {
-        if (is_callable($this->object)) {
-            return call_user_func($this->object);
+        $object = $this->object;
+        if (is_callable($object)) {
+            return call_user_func($object);
         } else {
-            return new {$this->object}();
+            return new $object();
         }
     }
 

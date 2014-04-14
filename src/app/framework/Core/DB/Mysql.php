@@ -12,10 +12,12 @@ class Mysql extends Adapter
     public function describeTable($table, $column = null)
     {
         $describeQuery = "DESCRIBE $table";
+        $cacheId = "$table";
         if (is_string($column)) {
             $describeQuery .= " $column";
+            $cacheId .= "_$column";
         }
-        if ($cachedResult = $this->db->getQueryCache("describe_{$tableName}_processed")) {
+        if ($cachedResult = $this->db->getQueryCache("describe_processed_$cacheId")) {
             return $cachedResult;
         }
         if ($cachedResult = $this->db->getQueryCache($describeQuery)) {
@@ -48,7 +50,7 @@ class Mysql extends Adapter
             $array["default"] = $column["Default"];
             $returnColumns[] = $array;
         }
-        $this->db->saveQueryCache("describe_{$tableName}_processed", $returnColumns);
+        $this->db->saveQueryCache("describe_processed_$cacheId", $returnColumns);
         return $returnColumns;
     }
 }

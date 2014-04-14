@@ -2,6 +2,17 @@
 
 namespace MattyG\Framework\Core\Entity;
 
+// Constants really shouldn't be in traits.
+// Once PHP 5.6 is released, these will be moved into
+// a namespace.
+// It turns out traits simply cannot have constants at all.
+// This is now a super-hack until PHP 5.6 is released.
+define("FILTER_FLAG_NULL", null);
+define("FILTER_FLAG_AND", "and");
+define("FILTER_FLAG_NOT", "not");
+define("FILTER_FLAG_GT", "gt");
+define("FILTER_FLAG_LT", "lt");
+
 trait DatabaseCollection
 {
     use Collection {
@@ -13,14 +24,6 @@ trait DatabaseCollection
     }
     use Database;
 
-    // Constants really shouldn't be in traits.
-    // Once PHP 5.6 is released, these will be moved into
-    // a namespace.
-    const FILTER_FLAG_NULL  = null;
-    const FILTER_FLAG_AND   = "and";
-    const FILTER_FLAG_NOT   = "not";
-    const FILTER_FLAG_GT    = "gt";
-    const FILTER_FLAG_LT    = "lt";
 
     /**
      * @var string|callable
@@ -197,7 +200,7 @@ trait DatabaseCollection
     {
         $part = " {$filter["column"]} ";
         if ($filter["value"] === null) {
-            if ($filter["flag"] === self::FILTER_FLAG_NOT) {
+            if ($filter["flag"] === FILTER_FLAG_NOT) {
                 $part .= "IS NOT NULL";
             } else {
                 $part .= "IS NULL";
@@ -209,21 +212,21 @@ trait DatabaseCollection
                 foreach ($filter["value"] as $subFilter) {
                     $processed[] = $this->_processFilter($subFilter, $params);
                 }
-                if ($filter["flag"] === self::FILTER_FLAG_AND) {
+                if ($filter["flag"] === FILTER_FLAG_AND) {
                     $join = "AND";
                 } else {
                     $join = "OR";
                 }
                 $part = "(" . implode(") $join (", $processed) . ")";
             } else {
-                if ($filter["flag"] === self::FILTER_FLAG_NOT) {
+                if ($filter["flag"] === FILTER_FLAG_NOT) {
                     $part .= "NOT ";
                 }
                 $part .= "IN (" . substr(str_repeat(",?", count($filter["value"])), 1) . ")";
                 $params = array_merge($params, $filter["value"]);
             }
         } elseif (is_string($filter["value"]) && strpos($filter["value"], "%")) {
-            if ($filter["flag"] === self::FILTER_FLAG_NOT) {
+            if ($filter["flag"] === FILTER_FLAG_NOT) {
                 $part .= "NOT ";
             }
             $part .= "LIKE ?";
@@ -231,13 +234,13 @@ trait DatabaseCollection
         } else {
             switch ($filter["flag"])
             {
-                case self::FILTER_FLAG_NOT:
+                case FILTER_FLAG_NOT:
                     $part .= "!= ?";
                     break;
-                case self::FILTER_FLAG_GT:
+                case FILTER_FLAG_GT:
                     $part .= ">= ?";
                     break;
-                case self::FILTER_FLAG_LT:
+                case FILTER_FLAG_LT:
                     $part .= "<= ?";
                     break;
                 default:
@@ -298,7 +301,7 @@ trait DatabaseCollection
      * @param bool $flag
      * @return $this
      */
-    public function addFilter($column, $value, $flag = self::FILTER_FLAG_NULL)
+    public function addFilter($column, $value, $flag = FILTER_FLAG_NULL)
     {
         $this->filters[] = array(
             "column" => (string) $column,

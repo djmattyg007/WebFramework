@@ -1,5 +1,6 @@
 /nbproject/
 /src/app/user/routes.php
+/src/app/user/di.php
 /src/app/user/Core/*
 !/src/app/user/Core/.gitkeep
 /src/app/user/Entity/*

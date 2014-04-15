@@ -29,6 +29,11 @@
             "name" : "MattyG.Meta",
             "directory" : "vendor/mattyg/meta/src/RyanNielson/Meta",
             "prefix" : "RyanNielson\\Meta"
+        },
+        {
+            "name" : "Aura.Di",
+            "directory" : "vendor/aura/di/src",
+            "prefix" : "Aura\\Di"
         }
     ]
 }

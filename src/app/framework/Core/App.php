@@ -3,6 +3,8 @@
 namespace MattyG\Framework\Core;
 
 use \MattyG\Framework\Core\View\Manager as ViewManager;
+use \Aura\Di\Container as DIContainer;
+use \Aura\Di\Factory as DIFactory;
 use \MattyG\Http\Request as Request;
 use \MattyG\Http\Response as Response;
 use \Aura\Router\Router as Router;
@@ -38,6 +40,11 @@ class App
      * @var array
      */
     protected $pools;
+
+    /**
+     * @var \Aura\Di\Container
+     */
+    protected $diContainer;
 
     /**
      * Contains the App object's reference to an instance of the Cache class.
@@ -86,13 +93,25 @@ class App
         }
     }
 
-    public function initialise()
+    /**
+     * @param bool $initialiseDIContainer
+     */
+    public function initialise($initialiseDIContainer = true)
     {
-        $this->setCache(new Cache($this->getVarDirectory(), true));
-        $this->setConfig(new Config($this->getBaseDirectory(), $this->pools, $this->getCache(), true));
+        $diContainer = new DIContainer(new DIFactory());
+
+        $cache = new Cache($this->getVarDirectory(), true);
+        $this->setCache($cache);
+        $diContainer->set("cache", $cache);
+
+        $config = new Config($this->getBaseDirectory(), $this->pools, $cache, true);
+        $this->setConfig($config);
+        $diContainer->set("config", $config);
 
         if ($this->getConfig()->getConfig("layout")) {
-            $this->setViewManager(new ViewManager($this->getBaseDirectory(), array_reverse($this->pools), $this->getConfig()));
+            $viewManager = new ViewManager($this->getBaseDirectory(), array_reverse($this->pools), $config);
+            $this->setViewManager($viewManager);
+            $diContainer->set("viewManager", $viewManager);
         }
 
         if (($dbConfig = $this->getConfig()->getConfig("db")) && $dbConfig["active"] === true) {
@@ -100,8 +119,48 @@ class App
             if ($db) {
                 $db->setCache($this->getCache());
                 $this->setDB($db);
+                $diContainer->set("db", $db);
             }
         }
+
+        if ($initialiseDIContainer === true) {
+            $this->initialiseDIContainer($diContainer);
+        }
+        $this->setDIContainer($diContainer);
+    }
+
+    /**
+     * @param \Aura\Di\Container $di
+     * @return App
+     */
+    public function setDIContainer(DIContainer $di)
+    {
+        $this->diContainer = $di;
+        return $this;
+    }
+
+    /**
+     * @return \Aura\Di\Container $di
+     */
+    public function getDIContainer()
+    {
+        return $this->diContainer;
+    }
+
+    /**
+     * @param \Aura\Di\Container $di
+     * @return App
+     */
+    public function initialiseDIContainer(DIContainer $di)
+    {
+        foreach ($this->pools as $pool) {
+            $routesFile = $this->getBaseDirectory() . "app/$pool/di.php";
+            if (!file_exists($routesFile)) {
+                continue;
+            }
+            include($routesFile);
+        }
+        return $this;
     }
 
     /**
@@ -265,7 +324,7 @@ class App
             $actionName = "four04";
             $params = array();
         }
-        $handler = new $handlerName($this->getConfig(), $this->getViewManager(), $request, $response, $routeName, $params);
+        $handler = new $handlerName($this->getConfig(), $this->getViewManager(), $this->getDIContainer(), $request, $response, $routeName, $params);
         $return = $handler->dispatch($actionName);
         if ($return === false) {
             $this->dispatch($request, $response, false);

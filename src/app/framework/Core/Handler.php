@@ -3,6 +3,7 @@
 namespace MattyG\Framework\Core;
 
 use \MattyG\Framework\Core\View\Manager as ViewManager;
+use \Aura\Di\Container as DIContainer;
 use \MattyG\Http\Request as Request;
 use \MattyG\Http\Response as Response;
 
@@ -17,6 +18,11 @@ abstract class Handler
      * @var MattyG\Framework\Core\View\Manager
      */
     protected $viewManager;
+
+    /**
+     * @var \Aura\Di\Container
+     */
+    protected $di;
 
     /**
      * @var \MattyG\Http\Request
@@ -46,15 +52,17 @@ abstract class Handler
     /**
      * @param Config $config
      * @param MattyG\Framework\Core\View\Manager $viewManager
+     * @param \Aura\Di\Container $diContainer
      * @param Request $request
      * @param Response $response
      * @param string $routeName
      * @param array $params
      */
-    public function __construct(Config $config, ViewManager $viewManager, Request $request, Response $response, $routeName, array $params)
+    public function __construct(Config $config, ViewManager $viewManager, DIContainer $diContainer, Request $request, Response $response, $routeName, array $params)
     {
         $this->config = $config;
         $this->viewManager = $viewManager;
+        $this->di = $diContainer;
         $this->request = $request;
         $this->response = $response;
         $this->routeName = $routeName;

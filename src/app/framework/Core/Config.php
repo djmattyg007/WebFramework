@@ -360,7 +360,7 @@ class Config
 
             if (is_array($value)) {
                 if (!isset($tree[$actualKey])) {
-                    $tree[$key] = array();
+                    $tree[$actualKey] = array();
                 }
                 $this->fillTree($tree[$actualKey], $value);
             } else {

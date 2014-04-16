@@ -1,11 +1,13 @@
 <?php
 
 $app = include(__DIR__ . "/bootstrap.php");
+use \MattyG\Framework\Core\DB as DB;
+
 $dbConfig = $app->getConfig()->getConfig("db");
 if ($dbConfig["active"] === false) {
     return array();
 }
-if ($dbConfig["adapter"] === "mysql") {
+if ($dbConfig["adapter"] === DB::DB_TYPE_MYSQL) {
     $dbConfig["charset"] = "utf8";
 }
 

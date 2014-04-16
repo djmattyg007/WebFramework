@@ -21,7 +21,11 @@ if (!defined("MATTYG_FRAMEWORK_AUTOLOADER_NOREGISTER")) {
     $autoloader = new \MattyG\Framework\Autoload\Autoloader(__DIR__, $pools, true);
 }
 
-$app = new \MattyG\Framework\Core\App(__DIR__, $pools, true);
+if (!defined("MATTYG_FRAMEWORK_APP_INIT")) {
+    define("MATTYG_FRAMEWORK_APP_INIT", true);
+}
+
+$app = new \MattyG\Framework\Core\App(__DIR__, $pools, MATTYG_FRAMEWORK_APP_INIT);
 
 return $app;
 

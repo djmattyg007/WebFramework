@@ -325,6 +325,7 @@ class App
             $actionName = "four04";
             $params = array();
         }
+        /** @var $handler \MattyG\Framework\Core\Handler */
         $handler = new $handlerName($this->getConfig(), $this->getViewManager(), $this->getDIContainer(), $request, $response, $routeName, $params);
         $return = $handler->dispatch($actionName);
         if ($return === false) {

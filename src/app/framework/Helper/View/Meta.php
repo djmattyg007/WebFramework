@@ -14,7 +14,7 @@ class Meta implements Helper
     protected $config;
 
     /**
-     * @var RyanNielson\Meta\Meta
+     * @var \RyanNielson\Meta\Meta
      */
     protected $metaObject;
 

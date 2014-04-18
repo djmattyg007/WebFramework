@@ -89,7 +89,7 @@ class Manager
 
     /**
      * @param string $name
-     * @return MattyG\Framework\Core\Helper\HelperInterface
+     * @return \MattyG\Framework\Core\Helper\HelperInterface
      */
     public function getHelper($name)
     {

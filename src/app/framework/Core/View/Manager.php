@@ -4,8 +4,6 @@ namespace MattyG\Framework\Core\View;
 
 use \MattyG\Framework\Core\Config as Config;
 
-use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
-
 class Manager
 {
     const DIR_VIEW = "views";

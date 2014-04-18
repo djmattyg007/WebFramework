@@ -104,6 +104,7 @@ class Config
 
     /**
      * @param \Aura\Router\Router $router
+     * @return Config
      */
     public function setRouterObject(Router $router)
     {
@@ -178,7 +179,7 @@ class Config
     /**
      * @param string $name
      * @param string $group
-     * @return MattyG\Framework\Core\Helper\HelperInterface
+     * @return \MattyG\Framework\Core\Helper\HelperInterface
      */
     public function getHelper($name, $group = "core")
     {

@@ -12,7 +12,7 @@ class Translate implements Helper
     const DIR_LOCALE = "locale";
 
     /**
-     * @var MattyG\Framework\Core\Config
+     * @var \MattyG\Framework\Core\Config
      */
     protected $config;
 

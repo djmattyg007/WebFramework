@@ -30,7 +30,7 @@ class DB
     protected $queryFactory;
 
     /**
-     * @var MattyG\Framework\Core\DB\Adapter
+     * @var \MattyG\Framework\Core\DB\Adapter
      */
     protected $adapter;
 

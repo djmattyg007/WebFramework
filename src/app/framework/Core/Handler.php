@@ -15,7 +15,7 @@ abstract class Handler
     protected $config;
 
     /**
-     * @var MattyG\Framework\Core\View\Manager
+     * @var \MattyG\Framework\Core\View\Manager
      */
     protected $viewManager;
 

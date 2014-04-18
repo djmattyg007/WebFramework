@@ -17,7 +17,7 @@ trait Database
     protected $_useQueryBuilder = false;
 
     /**
-     * @var MattyG\Framework\Core\DB
+     * @var \MattyG\Framework\Core\DB
      */
     protected $db;
 

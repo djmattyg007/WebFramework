@@ -9,7 +9,7 @@ use \Aura\Router\Router as Router;
 class Url implements HelperExtra
 {
     /**
-     * @var MattyG\Framework\Core\Config
+     * @var \MattyG\Framework\Core\Config
      */
     protected $config;
 

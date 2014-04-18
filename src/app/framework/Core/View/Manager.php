@@ -21,7 +21,7 @@ class Manager
     protected $pools;
 
     /**
-     * @var MattyG\Framework\Core\Config
+     * @var \MattyG\Framework\Core\Config
      */
     protected $config;
 

@@ -65,7 +65,7 @@ class App
     protected $db;
 
     /**
-     * @var MattyG\Framework\Core\View\Manager
+     * @var \MattyG\Framework\Core\View\Manager
      */
     protected $viewManager;
 

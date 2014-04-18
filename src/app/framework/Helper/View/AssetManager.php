@@ -16,7 +16,7 @@ class AssetManager implements HelperExtra
     protected $config;
 
     /**
-     * @var MattyG\Framework\Helper\Core\Url
+     * @var \MattyG\Framework\Helper\Core\Url
      */
     protected $urlHelper;
 

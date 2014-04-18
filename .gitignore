@@ -1,4 +1,6 @@
+.idea/
 /nbproject/
+
 /src/app/user/routes.php
 /src/app/user/di.php
 /src/app/user/Core/*
@@ -9,6 +11,7 @@
 !/src/app/user/Handler/.gitkeep
 /src/app/user/Helper/*
 !/src/app/user/Helper/.gitkeep
+
 /src/config/user/*
 !/src/config/user/.gitkeep
 

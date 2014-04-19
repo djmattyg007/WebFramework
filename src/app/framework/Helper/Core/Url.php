@@ -24,7 +24,7 @@ class Url implements HelperExtra
     protected $baseUrl;
 
     /**
-     * @param Config $config
+     * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
      */
     public function __construct(Config $config, $helperName)

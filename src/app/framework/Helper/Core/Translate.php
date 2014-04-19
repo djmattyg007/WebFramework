@@ -37,7 +37,7 @@ class Translate implements Helper
     protected $strict;
 
     /**
-     * @param Config $config
+     * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
      * @param bool $strict
      */
@@ -53,7 +53,6 @@ class Translate implements Helper
     /**
      * Save all available translations into the cache.
      *
-     * @param string $locale
      * @return void
      */
     protected function saveLocaleCache()

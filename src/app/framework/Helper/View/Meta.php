@@ -9,7 +9,7 @@ use \RyanNielson\Meta\Meta as MetaObject;
 class Meta implements Helper
 {
     /**
-     * @var Config
+     * @var \MattyG\Framework\Core\Config
      */
     protected $config;
 
@@ -24,7 +24,7 @@ class Meta implements Helper
     protected $pageTitle;
 
     /**
-     * @param Config $config
+     * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
      */
     public function __construct(Config $config, $helperName)

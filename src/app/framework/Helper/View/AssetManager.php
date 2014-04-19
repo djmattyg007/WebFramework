@@ -11,7 +11,7 @@ class AssetManager implements HelperExtra
     const DIR_ASSETS = "assets";
 
     /**
-     * @var Config
+     * @var \MattyG\Framework\Core\Config
      */
     protected $config;
 
@@ -36,7 +36,7 @@ class AssetManager implements HelperExtra
     protected $assetsBaseUrl = null;
 
     /**
-     * @param Config $config
+     * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
      */
     public function __construct(Config $config, $helperName)
@@ -64,6 +64,7 @@ class AssetManager implements HelperExtra
     /**
      * @param string $assetLIst
      * @return void
+     * @throws \InvalidArgumentException
      */
     public function loadAssetList($assetList, $clearFirst = true)
     {
@@ -85,6 +86,7 @@ class AssetManager implements HelperExtra
     /**
      * @param string $asset
      * @return AssetManager
+     * @throws \InvalidArgumentException
      */
     public function addAsset($asset)
     {

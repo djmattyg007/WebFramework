@@ -8,7 +8,7 @@ use \MattyG\Framework\Core\Config as Config;
 class Menu implements HelperExtra
 {
     /**
-     * @var Config
+     * @var \MattyG\Framework\Core\Config
      */
     protected $config;
 
@@ -28,7 +28,7 @@ class Menu implements HelperExtra
     protected $nodes;
 
     /**
-     * @param Config $config
+     * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
      */
     public function __construct(Config $config, $helperName)
@@ -54,6 +54,7 @@ class Menu implements HelperExtra
 
     /**
      * @param string $menuName
+     * @throws \InvalidArgumentException
      */
     protected function loadMenuConfig($menuName)
     {
@@ -87,7 +88,7 @@ class Menu implements HelperExtra
     }
 
     /**
-     * @param string name
+     * @param string $routeName
      * @param array $params
      * @return bool
      */

@@ -43,7 +43,7 @@ class Manager
     /**
      * @param string $baseDirectory
      * @param array $pools
-     * @param Config $config
+     * @param \MattyG\Framework\Core\Config $config
      */
     public function __construct($baseDirectory, array $pools, Config $config)
     {
@@ -89,17 +89,12 @@ class Manager
 
     /**
      * @param string $name
-     * @return \MattyG\Framework\Core\Helper\HelperInterface
+     * @return \MattyG\Framework\Core\Helper
      */
     public function getHelper($name)
     {
         if (!isset($this->viewHelpers[$name])) {
-            $helper = $this->config->getHelper($name, "view");
-            if ($helper) {
-                $this->viewHelpers[$name] = $helper;
-            } else {
-                $this->viewHelpers[$name] = $this->config->getHelper($name, "core");
-            }
+            $this->viewHelpers[$name] = $this->config->getHelper($name);
         }
         return $this->viewHelpers[$name];
     }

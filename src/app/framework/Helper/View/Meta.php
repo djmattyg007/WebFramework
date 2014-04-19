@@ -2,7 +2,7 @@
 
 namespace MattyG\Framework\Helper\View;
 
-use \MattyG\Framework\Core\Helper\HelperInterface as Helper;
+use \MattyG\Framework\Core\Helper as Helper;
 use \MattyG\Framework\Core\Config as Config;
 use \RyanNielson\Meta\Meta as MetaObject;
 

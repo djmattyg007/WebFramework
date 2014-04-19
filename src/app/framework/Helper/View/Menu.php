@@ -2,10 +2,11 @@
 
 namespace MattyG\Framework\Helper\View;
 
-use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
+use \MattyG\Framework\Core\Helper as Helper;
 use \MattyG\Framework\Core\Config as Config;
+use \Aura\Router\Router as Router;
 
-class Menu implements HelperExtra
+class Menu implements Helper
 {
     /**
      * @var \MattyG\Framework\Core\Config
@@ -38,18 +39,13 @@ class Menu implements HelperExtra
     }
 
     /**
-     * @param array $helpers
+     * @param \Aura\Router\Router $router
+     * @return Menu
      */
-    public function giveHelpers(array $helpers)
+    public function setRouter(Router $router)
     {
-        foreach ($helpers as $helper => $instance) {
-            switch ($helper)
-            {
-                case "router":
-                    $this->router = $instance;
-                    break;
-            }
-        }
+        $this->router = $router;
+        return $this;
     }
 
     /**

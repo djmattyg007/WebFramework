@@ -2,11 +2,11 @@
 
 namespace MattyG\Framework\Helper\View;
 
-use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
+use \MattyG\Framework\Core\Helper as Helper;
 use \MattyG\Framework\Core\Config as Config;
 use \MattyG\Framework\Helper\Core\Url as UrlHelper;
 
-class AssetManager implements HelperExtra
+class AssetManager implements Helper
 {
     const DIR_ASSETS = "assets";
 
@@ -38,31 +38,19 @@ class AssetManager implements HelperExtra
     /**
      * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
+     * @param \MattyG\Framework\Helper\Core\Url $url
      */
-    public function __construct(Config $config, $helperName)
+    public function __construct(Config $config, $helperName, UrlHelper $url = null)
     {
         $this->config = $config;
+        $this->urlHelper = $url;
         $this->assets = array();
         $this->loadAssetList($helperName);
     }
 
     /**
-     * @param array $helpers
-     */
-    public function giveHelpers(array $helpers)
-    {
-        foreach ($helpers as $helper => $instance) {
-            switch ($helper)
-            {
-                case "url":
-                    $this->urlHelper = $instance;
-                    break;
-            }
-        }
-    }
-
-    /**
-     * @param string $assetLIst
+     * @param string $assetList
+     * @param bool $clearFirst
      * @return void
      * @throws \InvalidArgumentException
      */

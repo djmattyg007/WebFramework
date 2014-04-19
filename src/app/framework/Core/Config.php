@@ -2,8 +2,8 @@
 
 namespace MattyG\Framework\Core;
 
-use \MattyG\Framework\Core\Helper\HelperInterfaceExtra as HelperExtra;
 use \Aura\Router\Router as Router;
+use \Aura\Di\Container as DIContainer;
 
 class Config
 {
@@ -25,6 +25,11 @@ class Config
      * @var Cache
      */
     protected $cache;
+
+    /**
+     * @var \Aura\Di\Container
+     */
+    protected $diContainer;
 
     /**
      * @var \Aura\Router\Router
@@ -55,11 +60,12 @@ class Config
      * @param string $baseDirectory
      * @param array $pools
      * @param Cache $cache
+     * @param \Aura\Di\Container $diContainer
      * @param bool $strict
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function __construct($baseDirectory, array $pools, Cache $cache = null, $strict = false)
+    public function __construct($baseDirectory, array $pools, Cache $cache = null, DIContainer $diContainer, $strict = false)
     {
         $this->baseDirectory = rtrim($baseDirectory, "/") . "/";
         $configDirectory = $this->baseDirectory . self::DIR_CONFIG;
@@ -82,6 +88,7 @@ class Config
 
         $this->pools = $pools;
         $this->cache = $cache;
+        $this->diContainer = $diContainer;
         $this->helpers = array();
         $this->initialiseConfigTree();
     }
@@ -109,7 +116,7 @@ class Config
     public function setRouterObject(Router $router)
     {
         $this->router = $router;
-        $this->helpers["core"]["router"] = $router;
+        $this->helpers["router"] = $router;
         return $this;
     }
 
@@ -178,34 +185,15 @@ class Config
 
     /**
      * @param string $name
-     * @param string $group
-     * @return \MattyG\Framework\Core\Helper\HelperInterface
+     * @return \MattyG\Framework\Core\Helper
      */
-    public function getHelper($name, $group = "core")
+    public function getHelper($name)
     {
-        if (!isset($this->helpers[$group][$name])) {
-            $helper = $this->getConfig("helpers/$group/*/name=$name");
-            if (!$helper) {
-                return null;
-            }
-            if (!isset($this->helpers[$group])) {
-                $this->helpers[$group] = array();
-            }
-            $helperClass = $helper["class"];
-            $this->helpers[$group][$name] = new $helperClass($this, $helper["name"]);
-            if ($this->helpers[$group][$name] instanceof HelperExtra) {
-                $requirements = array();
-                foreach ($helper["require"] as $requirement) {
-                    $helper = $this->getHelper($requirement["name"], $group);
-                    if (!$helper && $group != "core") {
-                        $helper = $this->getHelper($requirement["name"], "core");
-                    }
-                    $requirements[$requirement["name"]] = $helper;
-                }
-                $this->helpers[$group][$name]->giveHelpers($requirements);
-            }
+        if ($this->diContainer->has($name)) {
+            return $this->diContainer->get($name);
+        } else {
+            return null;
         }
-        return $this->helpers[$group][$name];
     }
 
     /**

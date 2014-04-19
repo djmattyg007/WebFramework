@@ -4,7 +4,7 @@ namespace MattyG\Framework\Core;
 
 use \MattyG\Framework\Core\View\Manager as ViewManager;
 use \Aura\Di\Container as DIContainer;
-use \Aura\Di\Factory as DIFactory;
+use \MattyG\Framework\Core\DI\Factory as DIFactory;
 use \MattyG\Http\Request as Request;
 use \MattyG\Http\Response as Response;
 use \Aura\Router\Router as Router;
@@ -104,7 +104,7 @@ class App
         $this->setCache($cache);
         $diContainer->set("cache", $cache);
 
-        $config = new Config($this->getBaseDirectory(), $this->pools, $cache, true);
+        $config = new Config($this->getBaseDirectory(), $this->pools, $cache, $diContainer, true);
         $this->setConfig($config);
         $diContainer->set("config", $config);
 

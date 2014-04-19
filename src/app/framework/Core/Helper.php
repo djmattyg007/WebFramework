@@ -1,10 +1,8 @@
 <?php
 
-namespace MattyG\Framework\Core\Helper;
+namespace MattyG\Framework\Core;
 
-use \MattyG\Framework\Core\Config as Config;
-
-interface HelperInterface
+interface Helper
 {
     /**
      * @param Config $config

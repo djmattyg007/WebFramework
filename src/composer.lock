@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Di.git",
-                "reference": "8c7536d352dfbef11c5ed1308a4afdf194a595cc"
+                "reference": "7b906d31e5e1314d50085571c178f6ef4df8bc5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/8c7536d352dfbef11c5ed1308a4afdf194a595cc",
-                "reference": "8c7536d352dfbef11c5ed1308a4afdf194a595cc",
+                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/7b906d31e5e1314d50085571c178f6ef4df8bc5c",
+                "reference": "7b906d31e5e1314d50085571c178f6ef4df8bc5c",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "di",
                 "di container"
             ],
-            "time": "2014-04-10 17:19:42"
+            "time": "2014-04-18 20:27:45"
         },
         {
             "name": "aura/router",

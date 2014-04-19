@@ -148,12 +148,12 @@ class Manager
      * Construct a new View object based off of a view name and some
      * information about its child views.
      *
-     * @param array $pageName
+     * @param array $viewData
      * @param bool $directOutput Controls the use of output buffering when
      *      rendering the View object.
      * @return View
      */
-    public function newView($viewData, $directOutput = false)
+    public function newView(array $viewData, $directOutput = false)
     {
         $viewFile = $this->getViewFileName($viewData["view"]);
         $children = $this->buildBlocks($viewData["children"]);

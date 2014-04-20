@@ -246,7 +246,7 @@ class App
     }
 
     /**
-     * @return MattyG\Framework\Core\View\Manager
+     * @return \MattyG\Framework\Core\View\Manager
      */
     public function getViewManager()
     {

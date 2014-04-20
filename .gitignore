@@ -12,6 +12,8 @@
 /src/app/user/Helper/*
 !/src/app/user/Helper/.gitkeep
 
+/src/autoload/config/autoload.user.json
+
 /src/config/user/*
 !/src/config/user/.gitkeep
 

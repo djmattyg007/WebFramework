@@ -4,14 +4,22 @@ namespace MattyG\Framework\Helper\View;
 
 use \MattyG\Framework\Core\Helper as Helper;
 use \MattyG\Framework\Core\Config as Config;
+use \MattyG\Framework\Helper\Core\Url as UrlHelper;
 use \Aura\Router\Router as Router;
 
 class Menu implements Helper
 {
+    const CLASS_ACTIVE = "active";
+
     /**
      * @var \MattyG\Framework\Core\Config
      */
     protected $config;
+
+    /**
+     * @var \MattyG\Framework\Helper\Core\Url
+     */
+    protected $urlHelper;
 
     /**
      * @var \Aura\Router\Router
@@ -31,10 +39,12 @@ class Menu implements Helper
     /**
      * @param \MattyG\Framework\Core\Config $config
      * @param string $helperName
+     * @param \MattyG\Framework\Helper\Core\Url $url
      */
-    public function __construct(Config $config, $helperName)
+    public function __construct(Config $config, $helperName, UrlHelper $url = null)
     {
         $this->config = $config;
+        $this->urlHelper = $url;
         $this->loadMenuConfig($helperName);
     }
 

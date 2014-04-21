@@ -28,13 +28,13 @@ $di->set("navbar_left", function() use ($di) {
     if ($di->has("router")) {
         $di->setter["MattyG\\Framework\\Helper\\View\\Menu"]["setRouter"] = $di->get("router");
     }
-    return $di->newInstance("MattyG\\Framework\\Helper\\View\\Menu", array("helperName" => "navbar_left"));
+    return $di->newInstance("MattyG\\Framework\\Helper\\View\\Menu\\Navbar", array("helperName" => "navbar_left"));
 });
 $di->set("navbar_right", function() use ($di) {
     if ($di->has("router")) {
         $di->setter["MattyG\\Framework\\Helper\\View\\Menu"]["setRouter"] = $di->get("router");
     }
-    return $di->newInstance("MattyG\\Framework\\Helper\\View\\Menu", array("helperName" => "navbar_right"));
+    return $di->newInstance("MattyG\\Framework\\Helper\\View\\Menu\\Navbar", array("helperName" => "navbar_right"));
 });
 $di->params["MattyG\\Framework\\Helper\\View\\Menu"]["url"] = $di->lazyGet("url");
 

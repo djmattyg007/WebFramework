@@ -16,11 +16,10 @@ framework will be usable without writing any code, purely because the
 configuration is completely exstensible.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.6.0. The following is a list of things that are
+as such is currently just at v0.7.0. The following is a list of things that are
 still missing or still need work:
-- A base design. It is still incredibly basic. The top priority is getting the
-  top nav bar working correctly. Dropdown menus need to be supported, for
-  example. I'm probably going to have to re-work it to use recursive functions.
+- A base design. I think it's pretty much where I want it now, but I wouldn't
+  be surprised if I find a few little necessary touch-ups.
 - Documentation. I have not had time to write any yet. The first focus will be
   to ensure all functions in all core classes have proper PHPDoc.
 - The model layer still needs a bit of work. The DatabaseSave trait has not

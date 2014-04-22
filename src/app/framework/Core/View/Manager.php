@@ -9,13 +9,15 @@ class Manager
     const DIR_VIEW = "views";
 
     /**
-     * The directory that contains all views in the application.
+     * The directory that contains all view files in the application.
      *
      * @var string
      */
     protected $viewDirectory;
 
     /**
+     * The pools in use by the application.
+     *
      * @var array
      */
     protected $pools;
@@ -114,6 +116,8 @@ class Manager
     }
 
     /**
+     * Turns helper names of the form "helper_name" into "helperName".
+     *
      * @param string $name
      * @return string
      */

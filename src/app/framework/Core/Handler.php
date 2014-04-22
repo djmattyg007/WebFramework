@@ -70,7 +70,7 @@ abstract class Handler
     }
 
     /**
-     * Perform a task or tasks before the controller action is dispatched.
+     * Perform tasks before the controller action is dispatched.
      *
      * @return bool
      */
@@ -80,7 +80,7 @@ abstract class Handler
     }
 
     /**
-     * Perform a task or tasks after the controller action has been dispatched.
+     * Perform tasks after the controller action has been dispatched.
      *
      * @return bool
      */
@@ -120,7 +120,7 @@ abstract class Handler
      * Prepare the layout for the current controller action, and return a View
      * object for the root page defined for the loaded layout.
      *
-     * @return View
+     * @return \MattG\Framework\Core\View\View
      */
     protected function prepareLayout()
     {

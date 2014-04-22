@@ -165,6 +165,9 @@ class View
     }
 
     /**
+     * Convenience method so that view files don't need to manually check that
+     * a child exists themselves.
+     *
      * @param string $name
      * @return string
      */

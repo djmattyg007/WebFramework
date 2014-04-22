@@ -213,6 +213,10 @@ class DB
     }
 
     /**
+     * Calls lastInsertId() on the contained PDO object to retrieve the value
+     * of the primary key field in the last row to be inserted into the
+     * database.
+     *
      * @return int|string
      */
     public function lastInsertId()
@@ -226,6 +230,8 @@ class DB
     }
 
     /**
+     * Returns a new Select query builder object.
+     *
      * @return \Aura\Sql_Query\Common\SelectInterface
      */
     public function newSelectQuery()
@@ -234,6 +240,8 @@ class DB
     }
 
     /**
+     * Returns a new Insert query builder object.
+     *
      * @return \Aura\Sql_Query\Common\InsertInterface
      */
     public function newInsertQuery()
@@ -242,6 +250,8 @@ class DB
     }
 
     /**
+     * Returns a new Update query builder object.
+     *
      * @return \Aura\Sql_Query\Common\UpdateInterface
      */
     public function newUpdateQuery()
@@ -250,6 +260,8 @@ class DB
     }
 
     /**
+     * Returns a new Delete query builder object.
+     *
      * @return \Aura\Sql_Query\Common\DeleteInterface
      */
     public function newDeleteQuery()
@@ -258,6 +270,8 @@ class DB
     }
 
     /**
+     * Saves the result of a query into the cache.
+     *
      * @param string $query
      * @param mixed $result
      * @return void
@@ -272,6 +286,8 @@ class DB
     }
 
     /**
+     * Retrieves the result of a query from the cache.
+     *
      * @param string $query
      * @return mixed
      */

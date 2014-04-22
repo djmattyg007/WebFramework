@@ -12,46 +12,76 @@ class Config
     const DIR_CONFIG = "config";
 
     /**
+     * The base directory of the application, which should contain the config,
+     * public, var and views directories.
+     *
      * @var string
      */
     protected $baseDirectory;
 
     /**
+     * The config directory in the application. It contains all configuration
+     * for the application, with each set in a pool.
+     *
      * @var string
      */
     protected $configDirectory;
 
     /**
+     * A reference to the App's Cache object. It's primary use is to load the
+     * configuration from the cache.
+     *
      * @var Cache
      */
     protected $cache;
 
     /**
+     * A reference to the App's dependency injection container. It's primary
+     * use in the Config class is to supply helpers to the view manager.
+     * //TODO: look to see if this should be refactored.
+     *
      * @var \Aura\Di\Container
      */
     protected $diContainer;
 
     /**
+     * A reference to the App's Router object.
+     * //TODO: see if this reference is actually being used, especially since
+     * it's now inserted into the DI container.
+     *
      * @var \Aura\Router\Router
      */
     protected $router = null;
 
     /**
+     * The pools in use by the application. By default, this will contain
+     * "framework" and "user", and it should be in that order.
+     *
      * @var array
      */
     protected $pools;
 
     /**
+     * Whether or not strict mode is enabled. If it is, a RuntimeException
+     * will be thrown when a non-serious error occurs. If it is not, the error
+     * will be handled sensibly.
+     *
      * @var bool
      */
     protected $strict;
 
     /**
+     * The top-level configuration tree. Holds all configuration once it is
+     * read into memory.
+     *
      * @var array
      */
     protected $configTree;
 
     /**
+     * //TODO: see if this is still necessary. It seems completely unnecessary
+     * to cache objects grabbed from the DI container.
+     *
      * @var array
      */
     protected $helpers;
@@ -94,6 +124,8 @@ class Config
     }
 
     /**
+     * The pools in use by the application.
+     *
      * @return array
      */
     public function getPools()
@@ -102,6 +134,8 @@ class Config
     }
 
     /**
+     * Retrieves the Cache object in use by the App class.
+     *
      * @return Cache
      */
     public function getCacheObject()
@@ -129,6 +163,18 @@ class Config
     }
 
     /**
+     * Gets the value of a configuration setting defined within the
+     * application's config directory.
+     * Config paths take the form "path/to/config/value".
+     * To access a value in an array of values indexed numerically, provide a
+     * config path of the form "path/to/ * /name=myname/value". Note that the
+     * spaces around the asterisk are cosmetic, because of the nature of PHP
+     * comments. Do not uses spaces when actually writing code.
+     * If you omit the configPath parameter, the entire config tree will be
+     * returned.
+     * If you supply an array for the currentConfig parameter, that array will
+     * be searched instead of the global config tree.
+     *
      * @param string $configPath
      * @param array $currentConfig
      * @return array|mixed
@@ -184,6 +230,10 @@ class Config
     }
 
     /**
+     * Retrieves a helper.
+     * Currently this is just a proxy for the dependency injection container.
+     * //TODO: review how to better provide access to helpers.
+     *
      * @param string $name
      * @return \MattyG\Framework\Core\Helper
      */
@@ -249,7 +299,7 @@ class Config
     /**
      * Initialise the configuration tree.
      * Optionally checks to see if the configuration tree is in the cache
-     * first, and if so, uses that rather than regenerate the tree.
+     * first, and if so, uses that rather than regenerating the tree.
      *
      * @param bool $useCache
      * @return void

@@ -65,7 +65,7 @@ class Cache
 
     /**
      * Load the cache information from disk. Does not load the actual cache
-     * into memory, just details of the cache.
+     * into memory, just details of what's in the cache.
      *
      * @param bool $reload If the cache information is in memory and this is
      *      set to true, the cache information will be reloaded. If it is not

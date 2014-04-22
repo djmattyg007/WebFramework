@@ -34,7 +34,7 @@ class App
     protected $baseDirectory;
 
     /**
-     * The code pools in use by the application. By default, this will contain
+     * The pools in use by the application. By default, this will contain
      * "framework" and "user", and it should be in that order.
      *
      * @var array
@@ -42,13 +42,18 @@ class App
     protected $pools;
 
     /**
+     * Contains the App object's reference to the Dependency Injection
+     * container. Holds all other services (Cache, Config, DB, View Manager)
+     * as well as entity factories and helpers.
+     *
      * @var \Aura\Di\Container
      */
     protected $diContainer;
 
     /**
      * Contains the App object's reference to an instance of the Cache class.
-     * Typically, this will be to use the file-based cache in the Core package.
+     * Typically, this will be to use the file-based cache in the framework
+     * core.
      *
      * @var Cache
      */
@@ -65,13 +70,18 @@ class App
     protected $db;
 
     /**
+     * Contains the App object's reference to an instance of the View Manager
+     * class. Its primary function is to create and render views. It can be
+     * accessed from this object, and is passed to controllers upon
+     * instantiation.
+     *
      * @var \MattyG\Framework\Core\View\Manager
      */
     protected $viewManager;
 
     /**
      * @param string $baseDirectory The base directory of the application.
-     * @param array $pools The code pools in use by the application.
+     * @param array $pools The pools in use by the application.
      * @param bool $initialise Whether or not to initialise the dependencies
      *      automatically. If false, you can set them manually later.
      * @throws \InvalidArgumentException
@@ -94,7 +104,14 @@ class App
     }
 
     /**
-     * @param bool $initialiseDIContainer
+     * Initialises the primary services controlled by the App object.
+     * This is the DI container, the Cache and the Config. If App finds layout
+     * configuration, it will also instantiate a View Manager. If the App
+     * finds database configuration, it will also instantiate a PDO container.
+     * By default, it will also read the contents of di.php in all pools.
+     *
+     * @param bool $initialiseDIContainer Controls whether or not the contents
+     *      of di.php in all pools are read in automatically.
      */
     public function initialise($initialiseDIContainer = true)
     {
@@ -130,6 +147,8 @@ class App
     }
 
     /**
+     * Give the App object a different dependency injection container.
+     *
      * @param \Aura\Di\Container $di
      * @return App
      */
@@ -140,6 +159,8 @@ class App
     }
 
     /**
+     * Obtain the App object's current dependency injection container.
+     *
      * @return \Aura\Di\Container $di
      */
     public function getDIContainer()
@@ -148,6 +169,9 @@ class App
     }
 
     /**
+     * Read the contents of di.php in all pools with the aim of initialising
+     * the dependency injection container with various helpers and entities.
+     *
      * @param \Aura\Di\Container $di
      * @return App
      */
@@ -164,8 +188,7 @@ class App
     }
 
     /**
-     * Allows you to set the Cache dependency after construction of the App
-     * object.
+     * Give the App object a different Cache instance.
      *
      * @param Cache $cache
      * @return App
@@ -177,7 +200,7 @@ class App
     }
 
     /**
-     * Returns the cache object contained by the App object.
+     * Obtain the App object's current Cache object.
      *
      * @return Cache
      */
@@ -187,8 +210,7 @@ class App
     }
 
     /**
-     * Allows you to set the Config dependency after construction of the App
-     * object.
+     * Give the App object a different Config instance.
      *
      * @param Config $config
      * @return App
@@ -200,7 +222,7 @@ class App
     }
 
     /**
-     * Returns the Config object contained by the App object.
+     * Obtain the App object's current Config object.
      *
      * @return Config
      */
@@ -210,8 +232,7 @@ class App
     }
 
     /**
-     * Allows you to set the database dependency after construction of the App
-     * object.
+     * Give the App object a different PDO container.
      *
      * @param DB $db
      * @return App
@@ -223,7 +244,7 @@ class App
     }
 
     /**
-     * Returns the database object contained by the App object.
+     * Obtain the App object's current PDO container.
      *
      * @return DB
      */
@@ -233,8 +254,7 @@ class App
     }
 
     /**
-     * Allows you to set the View Manager dependency after construction of the
-     * App object.
+     * Give the App object a different view management class.
      *
      * @param MattyG\Framework\Core\View\Manager $viewManager
      * @return App
@@ -246,6 +266,8 @@ class App
     }
 
     /**
+     * Obtain the App object's current view manager.
+     *
      * @return \MattyG\Framework\Core\View\Manager
      */
     public function getViewManager()
@@ -335,7 +357,9 @@ class App
     }
 
     /**
-     * Gets the list of routes and adds them to the supplied Router object.
+     * Gets the list of routes defined in routes.php in all pools and adds
+     * them to the supplied Router object.
+     * The routes will be loaded from the cache if available.
      *
      * @param Router $router
      * @return void

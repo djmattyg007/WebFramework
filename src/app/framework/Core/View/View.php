@@ -137,11 +137,11 @@ class View
     {
         if (file_exists($this->fileName) && is_readable($this->fileName)) {
             extract($this->getVars(), EXTR_SKIP);
-            if (!$this->getDirectOutput()) {
+            if (!$this->directOutput) {
                 ob_start();
             }
             include($this->fileName);
-            if (!$this->getDirectOutput()) {
+            if (!$this->directOutput) {
                 return ob_get_clean();
             }
         }

@@ -55,16 +55,22 @@ class Url implements Helper
 
     /**
      * Generates a full URL with the application's base URL.
-     * It also supports automatic addition of query parameters.
+     * It also supports automatic addition of query parameters and an anchor.
      *
      * @param string $path
      * @param array $queryParams
+     * @param string $anchor
      * @return string
      */
-    public function getUrl($path, array $queryParams = array())
+    public function getUrl($path, array $queryParams = array(), $anchor = null)
     {
         $url = rtrim($this->getBaseUrl() . $path, "/") . "/";
-        $url .= http_build_query($queryParams);
+        if (!empty($queryParams)) {
+            $url .= "?" . http_build_query($queryParams);
+        }
+        if ($anchor !== null) {
+            $url .= "#" . $anchor;
+        }
         return $url;
     }
 

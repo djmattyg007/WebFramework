@@ -60,12 +60,19 @@ class Meta implements Helper
 
     /**
      * Remove all segments currently in the page title segment array.
+     * If the reinitialise parameter is true, the array will be initialised in
+     * the same way it was when the Meta object was constructed.
      *
+     * @param bool $reintialise
      * @return Meta
      */
-    public function clearPageTitle()
+    public function clearPageTitle($reinitialise = false)
     {
-        $this->pageTitle = array();
+        if ($reinitialise === true) {
+            $this->pageTitle = array($this->config->getConfig("site/page_title/title"));
+        } else {
+            $this->pageTitle = array();
+        }
         return $this;
     }
 

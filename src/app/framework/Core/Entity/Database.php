@@ -27,7 +27,7 @@ trait Database
     protected $newObject = true;
 
     /**
-     * @param MattyG\Framework\Core\DB $db
+     * @param \MattyG\Framework\Core\DB $db
      * @return $this
      */
     public function setDB(DB $db)

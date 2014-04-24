@@ -15,6 +15,8 @@ trait DataAccess
     protected $_idFieldName = null;
 
     /**
+     * Convenience wrapper for setData(idFieldName, value).
+     *
      * @param int|string $id
      * @return $this
      */
@@ -29,6 +31,8 @@ trait DataAccess
     }
 
     /**
+     * Convenience wrapper for getData(idFieldName).
+     *
      * @return mixed
      */
     public function getId()
@@ -41,6 +45,8 @@ trait DataAccess
     }
 
     /**
+     * Returns the name of the field used as the primary key for the object.
+     *
      * @return string
      */
     public function getIdFieldName()
@@ -53,6 +59,11 @@ trait DataAccess
     }
 
     /**
+     * Puts a value into the internal data array, overriding an old value if
+     * necessary.
+     * If a single paramter is supplied and that parameter is an array, it
+     * will completely replace the internal data array.
+     *
      * @param array|string|int $key
      * @param mixed $value
      * @return $this
@@ -68,6 +79,12 @@ trait DataAccess
     }
 
     /**
+     * Convenience wrapper for setData() that will instead call a function to
+     * set a value instead, if one exists.
+     * For example, if you have a piece of data for a field named "address",
+     * it will first check for the existence of a method named "setAddress" in
+     * the class. If it does, it will use that instead of setData().
+     *
      * @param string $key
      * @param mixed $value
      * @return $this
@@ -84,6 +101,10 @@ trait DataAccess
     }
 
     /**
+     * Gets a value from the internal data array.
+     * If no parameter is supplied, the internal data array is returned
+     * instead.
+     *
      * @param string|null $key
      * @return array|mixed|null
      */
@@ -101,6 +122,12 @@ trait DataAccess
     }
 
     /**
+     * Convenience wrapper for getData() that will instead call a function to
+     * retrieve a value instead, if one exists.
+     * For example, if you have a piece of data for a field named "address",
+     * it will first check for the existence of a method named "getAddress" in
+     * the class. If it does, it will use that instead of getData().
+     *
      * @param string $key
      * @return mixed|null
      */
@@ -115,6 +142,14 @@ trait DataAccess
     }
 
     /**
+     * Checks if there is a key in the internal data array that matches the
+     * key parameter passed to the function. It will return true if a key
+     * exists, even if the value for that key is null or something equating to
+     * null.
+     * If you pass an empty parameter (null, empty string, etc) to the
+     * function, it will instead tell if you if the internal data array has any
+     * data in it at all.
+     *
      * @param string $key
      * @return bool
      */
@@ -130,6 +165,8 @@ trait DataAccess
     }
 
     /**
+     * Delete an element from the internal data array.
+     *
      * @param mixed $key
      * @return $this
      */

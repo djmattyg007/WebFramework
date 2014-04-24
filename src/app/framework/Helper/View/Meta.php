@@ -108,5 +108,20 @@ class Meta implements Helper
         $html .= $this->getFormattedPageTitle(true) . "\n";
         return $html;
     }
+
+    /**
+     * Act as a proxy for the core Meta object.
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        if (!method_exists($this->metaObject, $method)) {
+            throw new \BadMethodCallException();
+        }
+        return call_user_func_array(array($this->metaObject, $method), $args);
+    }
 }
 

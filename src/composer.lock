@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "145cfe87c23a43dc623b4945a1818ee9",
+    "hash": "486dec4a0c30ac96368f529939bde5b3",
     "packages": [
         {
             "name": "aura/di",
@@ -222,16 +222,16 @@
         },
         {
             "name": "mattyg/meta",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/djmattyg007/meta.git",
-                "reference": "c53d226b85dfee59a3c1d02dec5021579be3ec77"
+                "reference": "27c1cc6195b766d5b7a4a6eabffda67898a8002f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djmattyg007/meta/zipball/c53d226b85dfee59a3c1d02dec5021579be3ec77",
-                "reference": "c53d226b85dfee59a3c1d02dec5021579be3ec77",
+                "url": "https://api.github.com/repos/djmattyg007/meta/zipball/27c1cc6195b766d5b7a4a6eabffda67898a8002f",
+                "reference": "27c1cc6195b766d5b7a4a6eabffda67898a8002f",
                 "shasum": ""
             },
             "require": {
@@ -265,7 +265,7 @@
                 "meta",
                 "view"
             ],
-            "time": "2014-04-01 11:40:28"
+            "time": "2014-04-24 10:57:16"
         }
     ],
     "packages-dev": [

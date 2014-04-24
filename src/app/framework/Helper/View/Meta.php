@@ -36,6 +36,9 @@ class Meta implements Helper
     }
 
     /**
+     * Add a segment to the end of the list of segments used to make up the
+     * page title.
+     *
      * @param string $segment
      * @return Meta
      */
@@ -46,6 +49,8 @@ class Meta implements Helper
     }
 
     /**
+     * Returns all segments currently in the page title segment array.
+     *
      * @return array
      */
     public function getPageTitle()
@@ -54,6 +59,8 @@ class Meta implements Helper
     }
 
     /**
+     * Remove all segments currently in the page title segment array.
+     *
      * @return Meta
      */
     public function clearPageTitle()
@@ -63,6 +70,8 @@ class Meta implements Helper
     }
 
     /**
+     * Render the markup for the page title.
+     *
      * @param bool $includeContainer
      * @return string
      */
@@ -81,6 +90,8 @@ class Meta implements Helper
     }
 
     /**
+     * Render all metadata tags for the <head> tag on a page.
+     *
      * @param array $defaults The default meta attributes
      * @return string The meta tags
      */

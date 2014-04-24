@@ -44,6 +44,8 @@ class Url implements Helper
     }
 
     /**
+     * Returns the "base_url" configuration setting.
+     *
      * @return string
      */
     public function getBaseUrl()
@@ -52,6 +54,9 @@ class Url implements Helper
     }
 
     /**
+     * Generates a full URL with the application's base URL.
+     * It also supports automatic addition of query parameters.
+     *
      * @param string $path
      * @param array $queryParams
      * @return string
@@ -64,6 +69,8 @@ class Url implements Helper
     }
 
     /**
+     * Generates a full URL for a specific route, as defined in routes.php.
+     *
      * @param string $routeName
      * @param array $params
      * @return string

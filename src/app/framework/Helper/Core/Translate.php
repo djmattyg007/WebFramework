@@ -139,6 +139,8 @@ class Translate implements Helper
     }
 
     /**
+     * Retrieve a translation and interpolate any variables if necessary.
+     *
      * @param string $key
      * @param array $tokens
      * @return string
@@ -153,7 +155,7 @@ class Translate implements Helper
     }
 
     /**
-     * Alias for getTranslation()
+     * Alias for getTranslation().
      *
      * @param string $key
      * @param array $tokens

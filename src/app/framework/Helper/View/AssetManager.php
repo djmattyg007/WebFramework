@@ -49,6 +49,8 @@ class AssetManager implements Helper
     }
 
     /**
+     * Loads filenames for a specific list of assets into memory.
+     *
      * @param string $assetList
      * @param bool $clearFirst
      * @return void
@@ -72,6 +74,8 @@ class AssetManager implements Helper
     }
 
     /**
+     * Manually add an asset to the list of assets handled by the manager.
+     *
      * @param string $asset
      * @return AssetManager
      * @throws \InvalidArgumentException
@@ -86,6 +90,8 @@ class AssetManager implements Helper
     }
 
     /**
+     * Remove all assets from the asset list in memory.
+     *
      * @return AssetManager
      */
     public function clearAssets()
@@ -95,6 +101,8 @@ class AssetManager implements Helper
     }
 
     /**
+     * Render the markup for all assets held by the manager.
+     *
      * @return string
      */
     public function display()
@@ -109,6 +117,8 @@ class AssetManager implements Helper
     }
 
     /**
+     * Render the markup for a single asset.
+     *
      * @param string $filename
      * @return string
      */
@@ -128,6 +138,8 @@ class AssetManager implements Helper
     }
 
     /**
+     * Retrieve the base URL for assets in the application.
+     *
      * @return string
      */
     public function getAssetsBaseUrl()

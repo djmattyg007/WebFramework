@@ -110,7 +110,7 @@ trait DataAccess
      */
     public function getData($key = null)
     {
-        if (is_null($key)) {
+        if ($key === null) {
             return $this->_data;
         } else {
             if (isset($this->_data[$key])) {
@@ -155,7 +155,7 @@ trait DataAccess
      */
     public function hasData($key)
     {
-        if (empty($key) || !is_string($key)) {
+        if (empty($key)) {
             return !empty($this->_data);
         } elseif (array_key_exists($key, $this->_data)) {
             return true;

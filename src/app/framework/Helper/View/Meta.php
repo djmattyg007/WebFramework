@@ -107,7 +107,7 @@ class Meta implements Helper
      */
     public function display(array $defaults = array())
     {
-        $html = $this->metaObject->display($defaults);
+        $html = $this->metaObject->display($defaults) . "\n";
         $html .= $this->getFormattedPageTitle(true) . "\n";
         return $html;
     }

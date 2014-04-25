@@ -61,12 +61,12 @@ class Navbar extends Menu
             }
 
             if (!empty($menuItem["children"]) && !isAssoc($menuItem["children"])) {
-                $tag .= '<ul class="' . self::CLASS_DROPDOWN . '">';
+                $tag .= "\n" . '<ul class="' . self::CLASS_DROPDOWN . '">';
                 $tag .= $this->renderMenuItems($menuItem["children"], false);
-                $tag .= '</ul>';
+                $tag .= '</ul>' . "\n";
             }
 
-            $tag .= '</li>';
+            $tag .= '</li>' . "\n";
 
             $items[] = $tag;
         }

@@ -11,6 +11,8 @@ namespace MattyG\Framework\Core\Entity;
  * @method string getIdFieldName()
  * @method $this setId(int|string $id)
  * @method mixed getId()
+ * @method array|mixed|null getData($key)
+ * @method bool hasData($key)
  */
 trait DatabaseSave
 {
@@ -154,4 +156,3 @@ trait DatabaseSave
         return $this;
     }
 }
-

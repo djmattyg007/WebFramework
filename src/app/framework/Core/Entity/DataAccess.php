@@ -150,7 +150,7 @@ trait DataAccess
      * function, it will instead tell if you if the internal data array has any
      * data in it at all.
      *
-     * @param string $key
+     * @param int|string $key
      * @return bool
      */
     public function hasData($key)

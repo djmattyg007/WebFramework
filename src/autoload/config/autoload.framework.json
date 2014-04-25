@@ -34,6 +34,11 @@
             "name" : "Aura.Di",
             "directory" : "vendor/aura/di/src",
             "prefix" : "Aura\\Di"
+        },
+        {
+            "name" : "Aura.Sql_Schema",
+            "directory" : "vendor/aura/sql-schema/src",
+            "prefix" : "Aura\\Sql_Schema"
         }
     ]
 }

@@ -2,15 +2,23 @@
 
 namespace MattyG\Framework\Core;
 
-use \MattyG\Framework\Core\DB\Adapter as Adapter;
 use \Aura\Sql_Query\QueryFactory as QueryFactory;
+use \Aura\Sql_Schema\AbstractSchema as SchemaFactory;
+use \Aura\Sql_Schema\SchemaInterface as SchemaFactoryInterface;
+use \Aura\Sql_Schema\ColumnFactory as SchemaColumnFactory;
 
 use \PDO;
 use \PDOException;
 
-class DB
+class DB implements SchemaFactoryInterface
 {
     const DB_TYPE_MYSQL = "mysql";
+    const DB_TYPE_PGSQL = "pgsql";
+    const DB_TYPE_SQLITE = "sqlite";
+    const DB_TYPE_SQLSRV = "sqlsrv";
+    const DB_TYPE_SQLSRV_SYBASE = "sybase";
+    const DB_TYPE_SQLSRV_MSSQL = "mssql";
+    const DB_TYPE_SQLSRV_DBLIB = "dblib";
 
     const DB_CACHE_PREFIX = "core_db";
 
@@ -30,9 +38,9 @@ class DB
     protected $queryFactory;
 
     /**
-     * @var \MattyG\Framework\Core\DB\Adapter
+     * @var \Aura\Sql_Schema\AbstractSchema
      */
-    protected $adapter;
+    protected $schemaFactory;
 
     /**
      * @var Cache
@@ -50,10 +58,45 @@ class DB
     {
         try {
             $this->db = new PDO($dsn, $username, $password, $driverOptions);
+            $this->checkDsn($dsn);
             return $this;
         } catch (PDOException $e) {
             throw new \Exception("Unable to connect to the database with the details supplied.");
         }
+    }
+
+    /**
+     * Check which database driver is being used, and perform actions based on
+     * said driver.
+     *
+     * @param string $dsn
+     * @return DB
+     */
+    protected function checkDsn($dsn)
+    {
+        $driver = substr($dsn, 0, 6);
+        switch ($driver)
+        {
+            case self::DB_TYPE_MYSQL . ":":
+                $this->setQueryFactory(new QueryFactory(self::DB_TYPE_MYSQL, false));
+                $this->setSchemaFactory(new \Aura\Sql_Schema\MysqlSchema($this->db, new SchemaColumnFactory()));
+                break;
+            case self::DB_TYPE_PGSQL . ":":
+                $this->setQueryFactory(new QueryFactory(self::DB_TYPE_PGSQL, false));
+                $this->setSchemaFactory(new \Aura\Sql_Schema\PgsqlSchema($this->db, new SchemaColumnFactory()));
+                break;
+            case self::DB_TYPE_SQLITE:
+                $this->setQueryFactory(new QueryFactory(self::DB_TYPE_SQLITE, false));
+                $this->setSchemaFactory(new \Aura\Sql_Schema\SqliteSchema($this->db, new SchemaColumnFactory()));
+                break;
+            case self::DB_TYPE_SQLSRV_SYBASE:
+            case self::DB_TYPE_SQLSRV_MSSQL . ":":
+            case self::DB_TYPE_SQLSRV_DBLIB . ":":
+                $this->setQueryFactory(new QueryFactory(self::DB_TYPE_SQLSRV, false));
+                $this->setSchemaFactory(new \Aura\Sql_Schema\SqlsrvSchema($this->db, new SchemaColumnFactory()));
+                break;
+        }
+        return $this;
     }
 
     /**
@@ -67,12 +110,12 @@ class DB
     }
 
     /**
-     * @param MattyG\Framework\Core\DB\Adapter
+     * @param \Aura\Sql_Schema\AbstractSchema $factory
      * @return DB
      */
-    public function setAdapter(Adapter $adapter)
+    public function setSchemaFactory(SchemaFactory $factory)
     {
-        $this->adapter = $adapter;
+        $this->schemaFactory = $factory;
         return $this;
     }
 
@@ -97,19 +140,13 @@ class DB
      */
     public static function loader($type, $dbname, $hostname, $username, $password, array $driverOptions = array())
     {
-        $db = null;
         switch ($type)
         {
             case self::DB_TYPE_MYSQL:
-                $db = self::loaderMysql($dbname, $hostname, $username, $password, $driverOptions);
-                break;
+                return self::loaderMysql($dbname, $hostname, $username, $password, $driverOptions);
             default:
                 return null;
         }
-
-        $db->setQueryFactory(new QueryFactory($type, false));
-        $db->setAdapter(Adapter::loader($type, $db));
-        return $db;
     }
 
     /**
@@ -302,20 +339,34 @@ class DB
     }
 
     /**
-     * Act as a proxy for the adapter attached to the DB object.
+     * Proxy for the schema factory's fetchTableList() function.
      *
-     * @param string $method
-     * @param array $args
-     * @return mixed
+     * @param string $schema
+     * @return array
      */
-    public function __call($method, $args)
+    public function fetchTableList($schema = null)
     {
-        if (!$this->adapter) {
-            throw new \BadMethodCallException();
-        }
-        if (!method_exists($this->adapter, $method)) {
-            throw new \BadMethodCallException();
-        }
-        return call_user_func_array(array($this->adapter, $method), $args);
+        return $this->schemaFactory->fetchTableList($schema);
+    }
+
+    /**
+     * Proxy for the schema factory's fetchTableCols() function.
+     *
+     * @param string $spec
+     * @return array
+     */
+    public function fetchTableCols($spec)
+    {
+        return $this->schemaFactory->fetchTableCols($spec);
+    }
+
+    /**
+     * Proxy for the schema factory's getColumnFactory() function.
+     *
+     * @return \Aura\Sql_Schema\ColumnFactory
+     */
+    public function getColumnFactory()
+    {
+        return $this->schemaFactory->getColumnFactory();
     }
 }

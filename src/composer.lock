@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9c814de19973fa19be01dfc0a6095bb9",
+    "hash": "fb0f868d684cd0797e64fb7bdff5d3c7",
     "packages": [
         {
             "name": "aura/di",
@@ -175,6 +175,63 @@
             "time": "2014-03-28 16:47:18"
         },
         {
+            "name": "aura/sql-schema",
+            "version": "dev-develop-2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Sql_Schema.git",
+                "reference": "2dd1a42212f80471f6bca9b9c87dfed2af6c00d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Schema/zipball/2dd1a42212f80471f6bca9b9c87dfed2af6c00d9",
+                "reference": "2dd1a42212f80471f6bca9b9c87dfed2af6c00d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library"
+                },
+                "branch-alias": {
+                    "dev-develop-2": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Sql_Schema\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Sql_Schema Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Sql_Schema/contributors"
+                }
+            ],
+            "description": "Provides facilities to read table names and table columns from a database using PDO.",
+            "homepage": "https://github.com/auraphp/Aura.Sql_Schema/releases",
+            "keywords": [
+                "mysql",
+                "pdo",
+                "pgsql",
+                "postgres",
+                "postgresql",
+                "schema",
+                "sql server",
+                "sqlite",
+                "sqlserver",
+                "sqlsrv"
+            ],
+            "time": "2014-04-18 20:52:28"
+        },
+        {
             "name": "mattyg/http",
             "version": "2.1.0",
             "source": {
@@ -278,7 +335,8 @@
     "stability-flags": {
         "aura/sql-query": 20,
         "aura/router": 20,
-        "aura/di": 20
+        "aura/di": 20,
+        "aura/sql-schema": 20
     },
     "platform": [
 

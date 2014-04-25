@@ -4,6 +4,7 @@
         "aura/sql-query": "2.*@dev",
         "mattyg/meta": "2.1.6",
         "aura/router": "2.*@dev",
-        "aura/di": "2.*@dev"
+        "aura/di": "2.*@dev",
+        "aura/sql-schema": "2.*@dev"
     }
 }

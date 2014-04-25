@@ -56,7 +56,7 @@ trait DatabaseSave
         if (!$this->db) {
             throw new \RuntimeException("No database object available.");
         }
-        $fields = $this->db->describeTable($this->_tableName);
+        $fields = $this->db->fetchTableCols($this->_tableName);
         $data = $this->_prepareDataForSave($fields);
         if ($this->autoIncPK === true) {
             unset($data[$this->getIdFieldName()]);
@@ -80,10 +80,10 @@ trait DatabaseSave
     protected function _prepareDataForSave($fields)
     {
         $data = array();
-        foreach (array_column($fields, "name") as $key => $field) {
-            if ($this->hasData($field)) {
+        foreach ($fields as $name => $field) {
+            if ($this->hasData($name)) {
                 $value = $this->getData($field);
-                if ($value === null && $fields[$key]["null"]) {
+                if ($value === null && $field->notnull) {
                     $data[] = null;
                     //$data[$field] = null;
                 } elseif ($value !== null) {

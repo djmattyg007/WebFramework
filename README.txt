@@ -16,15 +16,17 @@ framework will be usable without writing any code, purely because the
 configuration is completely exstensible.
 
 This framework is a work in progress. It is still missing a lot of things, and
-as such is currently just at v0.7.1. The following is a list of things that are
+as such is currently just at v0.7.2. The following is a list of things that are
 still missing or still need work:
 - A base design. I think it's pretty much where I want it now, but I wouldn't
-  be surprised if I find a few little necessary touch-ups.
+  be surprised if I find a few little necessary touch-ups. I still have to add
+  generic support for the important meta tags (robots, description, keywords).
 - Documentation. I have not had time to write any yet. The first focus will be
   to ensure all functions in all core classes have proper PHPDoc. I've made
   some progress on this, but still have a way to go.
-- The model layer still needs a bit of work. The DatabaseSave trait has not
-  been tested in any way.
+- The model layer. The DatabaseSave trait has not been tested in any way. I'm
+  also planning to refactor some code to make use of the Aura.Sql_Schema
+  package.
 
 Notes:
 - I've made the decision to only make translation available within views. I

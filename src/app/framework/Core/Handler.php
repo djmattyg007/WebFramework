@@ -51,7 +51,7 @@ abstract class Handler
 
     /**
      * @param Config $config
-     * @param MattyG\Framework\Core\View\Manager $viewManager
+     * @param \MattyG\Framework\Core\View\Manager $viewManager
      * @param \Aura\Di\Container $diContainer
      * @param Request $request
      * @param Response $response
@@ -96,6 +96,7 @@ abstract class Handler
      * Returning false from this function implies a "not found".
      *
      * @param string $action
+     * @return bool
      */
     public function dispatch($action)
     {
@@ -120,7 +121,7 @@ abstract class Handler
      * Prepare the layout for the current controller action, and return a View
      * object for the root page defined for the loaded layout.
      *
-     * @return \MattG\Framework\Core\View\View
+     * @return \MattyG\Framework\Core\View\View
      */
     protected function prepareLayout()
     {

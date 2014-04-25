@@ -283,7 +283,7 @@ class DB
             return;
         }
         $cacheId = self::DB_CACHE_PREFIX . "_query_" . sha1($query);
-        $this->cache->saveCache($cacheId, $result, time() + 3600);
+        $this->cache->saveData($cacheId, $result, time() + 3600);
     }
 
     /**
@@ -298,7 +298,7 @@ class DB
             return null;
         }
         $cacheId = self::DB_CACHE_PREFIX . "_query_" . sha1($query);
-        return $this->cache->loadCache($cacheId, null);
+        return $this->cache->loadData($cacheId, null);
     }
 
     /**

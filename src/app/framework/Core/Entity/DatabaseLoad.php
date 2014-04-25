@@ -3,7 +3,7 @@
 namespace MattyG\Framework\Core\Entity;
 
 /**
- * Designed for use with the Database trait.
+ * Designed for use with the DataAccess and Database traits.
  *
  * @property bool $newObject
  * @property \MattyG\Framework\Core\DB $db

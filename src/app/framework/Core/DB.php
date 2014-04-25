@@ -44,6 +44,7 @@ class DB
      * @param string $username
      * @param string $password
      * @param array $driverOptions
+     * @throws \Exception
      */
     public function __construct($dsn, $username = null, $password = null, array $driverOptions = array())
     {
@@ -51,7 +52,7 @@ class DB
             $this->db = new PDO($dsn, $username, $password, $driverOptions);
             return $this;
         } catch (PDOException $e) {
-            throw new Exception("Unable to connect to the database with the details supplied.");
+            throw new \Exception("Unable to connect to the database with the details supplied.");
         }
     }
 

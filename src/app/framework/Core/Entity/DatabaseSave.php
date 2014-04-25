@@ -9,6 +9,10 @@ trait DatabaseSave
      */
     protected $autoIncPK = true;
 
+    /**
+     * @throws \RuntimeException
+     * @throws \Exception
+     */
     public function save()
     {
         if (!$this->db) {
@@ -27,6 +31,9 @@ trait DatabaseSave
         $this->_afterSaveCommit();
     }
 
+    /**
+     * @return $this
+     */
     protected function _beforeSave()
     {
         return $this;
@@ -80,6 +87,7 @@ trait DatabaseSave
      * @param string $query
      * @param array $data
      * @return $this
+     * @throws \RuntimeException
      */
     protected function _saveDataDB($query, array $data)
     {
@@ -120,11 +128,17 @@ trait DatabaseSave
         return $query;
     }
 
+    /**
+     * @return $this
+     */
     protected function _afterSave()
     {
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     protected function _afterSaveCommit()
     {
         return $this;

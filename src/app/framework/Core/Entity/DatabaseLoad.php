@@ -8,6 +8,7 @@ trait DatabaseLoad
      * @param int|string $id
      * @param string $fieldName
      * @return $this
+     * @throws \RuntimeException
      */
     public function load($id, $fieldName = null)
     {
@@ -37,6 +38,7 @@ trait DatabaseLoad
      * @param int|string $id
      * @param string $fieldName
      * @return $this
+     * @throws \RuntimeException
      */
     protected function _loadData($id, $fieldName)
     {
@@ -63,6 +65,7 @@ trait DatabaseLoad
      * @param int|string $id
      * @param string $fieldName
      * @return \PDOStatement, array
+     * @throws \RuntimeException
      */
     protected function _getLoadStatementSql($id, $fieldName)
     {
@@ -79,6 +82,7 @@ trait DatabaseLoad
      * @param int|string $id
      * @param string $fieldName
      * @return \PDOStatement, array
+     * @throws \RuntimeException
      */
     protected function _getLoadStatementBuilder($id, $fieldName)
     {

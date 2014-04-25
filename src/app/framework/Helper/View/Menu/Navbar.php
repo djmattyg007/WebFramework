@@ -25,7 +25,7 @@ class Navbar extends Menu
 
         $items = array();
         foreach ($menuItems as $menuItem) {
-            if (isset($menuItem["divider"]) &&$menuItem["divider"] === true) {
+            if (isset($menuItem["divider"]) && $menuItem["divider"] === true) {
                 $items[] = '<li class="divider"></li>';
                 continue;
             }
@@ -48,9 +48,17 @@ class Navbar extends Menu
                 $tag .= '>';
             }
 
-            $tag .= '<a href="' . $this->urlHelper->getRouteUrl($menuItem["route"]) . '">';
+            if (isset($menuItem["route"])) {
+                $tag .= '<a href="' . $this->urlHelper->getRouteUrl($menuItem["route"]) . '">';
+            } else {
+                $tag .= '<label>';
+            }
             $tag .= $menuItem["label"];
-            $tag .= '</a>';
+            if (isset($menuItem["route"])) {
+                $tag .= '</a>';
+            } else {
+                $tag .= '</label>';
+            }
 
             if (!empty($menuItem["children"]) && !isAssoc($menuItem["children"])) {
                 $tag .= '<ul class="' . self::CLASS_DROPDOWN . '">';

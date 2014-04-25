@@ -31,7 +31,7 @@ class Navbar extends Menu
             }
 
             $classes = array();
-            if ($this->isActiveRoute($menuItem["route"])) {
+            if (isset($menuItem["route"]) && $this->isActiveRoute($menuItem["route"])) {
                 $classes[] = parent::CLASS_ACTIVE;
             }
             if (!empty($menuItem["children"])) {

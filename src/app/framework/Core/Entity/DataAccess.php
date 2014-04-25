@@ -105,7 +105,7 @@ trait DataAccess
      * If no parameter is supplied, the internal data array is returned
      * instead.
      *
-     * @param string|null $key
+     * @param string|int|null $key
      * @return array|mixed|null
      */
     public function getData($key = null)

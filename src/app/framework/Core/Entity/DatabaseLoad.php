@@ -2,6 +2,19 @@
 
 namespace MattyG\Framework\Core\Entity;
 
+/**
+ * Designed for use with the Database trait.
+ *
+ * @property bool $newObject
+ * @property \MattyG\Framework\Core\DB $db
+ * @property string $_tableName
+ * @property bool $_useQueryBuilder
+ * @method string getIdFieldName()
+ * @method $this setId(int|string $id)
+ * @method mixed getId()
+ * @method $this setData(array|string|int $key, mixed $value)
+ * @method array|mixed|null getData($key)
+ */
 trait DatabaseLoad
 {
     /**

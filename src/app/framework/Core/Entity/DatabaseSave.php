@@ -2,6 +2,16 @@
 
 namespace MattyG\Framework\Core\Entity;
 
+/**
+ * Designed for use with the Database trait.
+ *
+ * @property bool $newObject
+ * @property \MattyG\Framework\Core\DB $db
+ * @property string $_tableName
+ * @method string getIdFieldName()
+ * @method $this setId(int|string $id)
+ * @method mixed getId()
+ */
 trait DatabaseSave
 {
     /**
@@ -44,7 +54,7 @@ trait DatabaseSave
         if (!$this->db) {
             throw new \RuntimeException("No database object available.");
         }
-        $fields = $this->db->describeTable($this->tableName);
+        $fields = $this->db->describeTable($this->_tableName);
         $data = $this->_prepareDataForSave($fields);
         if ($this->autoIncPK === true) {
             unset($data[$this->getIdFieldName()]);
@@ -105,7 +115,7 @@ trait DatabaseSave
      */
     protected function _prepareSaveDataInsert(array $fields)
     {
-        $query = "INSERT INTO " . $this->tableName . " (";
+        $query = "INSERT INTO " . $this->_tableName . " (";
         foreach (array_column($fields, "name") as $field) {
             $query .= "`" . $field . "`,";
         }
@@ -120,7 +130,7 @@ trait DatabaseSave
      */
     protected function _prepareSaveDataUpdate(array $fields)
     {
-        $query = "UPDATE " . $this->tableName . " SET ";
+        $query = "UPDATE " . $this->_tableName . " SET ";
         foreach (array_column($fields, "name") as $field) {
             $query .= "`" . $field . "` = ?,";
         }

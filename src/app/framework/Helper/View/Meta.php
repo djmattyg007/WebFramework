@@ -6,6 +6,9 @@ use \MattyG\Framework\Core\Helper as Helper;
 use \MattyG\Framework\Core\Config as Config;
 use \RyanNielson\Meta\Meta as MetaObject;
 
+/**
+ * @method array set(array $attributes)
+ */
 class Meta implements Helper
 {
     /**
@@ -63,7 +66,7 @@ class Meta implements Helper
      * If the reinitialise parameter is true, the array will be initialised in
      * the same way it was when the Meta object was constructed.
      *
-     * @param bool $reintialise
+     * @param bool $reinitialise
      * @return Meta
      */
     public function clearPageTitle($reinitialise = false)
@@ -99,8 +102,8 @@ class Meta implements Helper
     /**
      * Render all metadata tags for the <head> tag on a page.
      *
-     * @param array $defaults The default meta attributes
-     * @return string The meta tags
+     * @param array $defaults The default meta attributes.
+     * @return string The meta tags.
      */
     public function display(array $defaults = array())
     {
@@ -115,6 +118,7 @@ class Meta implements Helper
      * @param string $method
      * @param array $args
      * @return mixed
+     * @throws \BadMethodCallException
      */
     public function __call($method, $args)
     {

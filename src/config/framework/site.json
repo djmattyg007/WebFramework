@@ -7,7 +7,12 @@
             "separator" : " - ",
             "reverse" : true
         },
-        "locale" : "en_AU"
+        "locale" : "en_AU",
+        "meta" : {
+            "description" : "The MattyG Framework is an awesome framework.",
+            "keywords" : "mattyg, framework, php",
+            "robots" : "INDEX,FOLLOW"
+        }
     }
 }
 

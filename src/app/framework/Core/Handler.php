@@ -127,5 +127,14 @@ abstract class Handler
     {
         return $this->viewManager->newRootView($this->routeName);
     }
-}
 
+    /**
+     * @return array
+     */
+    protected function getRouteMetaTags()
+    {
+        $defaults = $this->config->getConfig("site/meta");
+        $route = $this->config->getConfig("routes/*/name=" . $this->routeName . "/meta");
+        return array_merge($defaults, $route);
+    }
+}

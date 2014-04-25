@@ -1,0 +1,14 @@
+{
+    "routes" : [
+        {
+            "name" : "core.404",
+            "meta" : {
+                "robots" : "NOINDEX,FOLLOW"
+            }
+        },
+        {
+            "name" : "home.index",
+            "meta" : {}
+        }
+    ]
+}

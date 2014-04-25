@@ -11,7 +11,11 @@ class Core extends AbstractHandler
      */
     public function four04Action()
     {
-        $this->viewManager->getHelper("meta")->addPageTitleSegment("404");
+        /** @var $metaHelper \MattyG\Framework\Helper\View\Meta */
+        $metaHelper = $this->viewManager->getHelper("meta");
+        $metaHelper->addPageTitleSegment("404");
+        $metaHelper->set($this->getRouteMetaTags());
+
         $this->response->setResponseCode(404);
         $page = $this->prepareLayout();
         $this->response->setBody($page->render());

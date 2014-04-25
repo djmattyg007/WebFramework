@@ -11,8 +11,11 @@ class Home extends AbstractHandler
      */
     public function indexAction()
     {
-        $meta = $this->viewManager->getHelper("meta");
-        $meta->addPageTitleSegment("Home");
+        /** @var $metaHelper \MattyG\Framework\Helper\View\Meta */
+        $metaHelper = $this->viewManager->getHelper("meta");
+        $metaHelper->addPageTitleSegment("Home");
+        $metaHelper->set($this->getRouteMetaTags());
+
         $page = $this->prepareLayout();
         $this->response->setBody($page->render());
         return true;
